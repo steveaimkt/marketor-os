@@ -38,27 +38,16 @@ Claude Code가 없다면 먼저 설치하세요: https://docs.claude.com/claude-
 
 ---
 
-## 운영 시작 (자동화 가동)
+## 도구 연결 확인 (선택)
 
-빠른 시작이 끝났고 실제 24/7 자동화를 가동하려면:
+MCP 도구를 연결했다면 상태를 점검할 수 있습니다:
 
 ```bash
-# 1) MCP 12개 인증 상태 확인
-npm run healthcheck
-
-# 2) 운영 인프라 동작 확인 (10초)
-npm run smoke
-ls logs/runs/$(date +%F)/   # → smoke-test-*.jsonl 1개 적재 확인
-
-# 3) Discord 봇 슬래시 명령 등록 (1회만)
-npm run bot:register   # 길드 한정 = 즉시 반영
-
-# 4) 봇·cron 모두 launchd로 24/7 상주 가동
-npm run cron:setup     # 5개 launchd job 일괄 등록
-npm run cron:status    # 현재 상태 확인
+npm install          # mcp-server 등 의존성 설치 (최초 1회)
+npm run healthcheck  # 연결된 MCP 상태 확인
 ```
 
-가동 후 Discord에서 `/ping` 을 쳐서 봇 응답 확인. 매시간 0분에 `/check-ads` 자동 실행, 매일 08:00에 `/daily-briefing`, 매주 월 09:00에 `/weekly-report`, 매일 07:55에 MCP 헬스체크.
+> Discord 봇·자동 스케줄(cron) 같은 24/7 상주 운영은 별도 설정이 필요합니다. **"마케팅팀 구축하자"** 가 우리 회사에 그게 필요한지부터 진단해 안내합니다.
 
 ---
 
@@ -93,19 +82,12 @@ marketing-os/
 ```
 > `.claude/agents·skills·commands`는 위 폴더로의 **심링크**입니다 (Claude Code 규약 · 건드리지 마세요).
 
-### 🟡 로컬 전용 — 운영자 맥에만 (.gitignore로 배포 제외)
+### ⚙️ 런타임 — 실행 시 자동 생성
 ```
-├── strategy/  vps-bot/       ← 운영자 내부 자산 (전략 문서·VPS 봇)
-├── tools/  hyperframes/      ← 교육·영상 제작 (강의용)
-├── automation/  discord-bot/ ← 각 회사가 자체 구축 (mcp-setup 가이드로 안내)
-├── gbrain-vault/             ← 로컬 브레인 볼트
-└── (심링크) curriculum·강의·msk·운영전략·유튜브-이미지제작
+└── node_modules/ (npm install)  ·  outputs/ (산출물)  ·  logs/
 ```
 
-### ⚙️ 런타임 — 자동 생성 (커밋 안 함)
-```
-└── node_modules/  outputs/  logs/
-```
+> 이 배포판은 위 **배포 코어**만 포함합니다. 운영자 내부 자산·교육/영상 도구·봇·자동화 같은 로컬 전용 파일은 배포에서 제외됩니다.
 
 ---
 
