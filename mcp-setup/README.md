@@ -22,10 +22,11 @@
 | Meta/Google Ads | 광고 성과 | [ads/](ads/) |
 | Notion | 문서·아카이브 | [notion/](notion/) |
 | Discord | 봇·채널 | [discord/](discord/) |
+| **네이버** | 데이터랩(검색·쇼핑 트렌드) + 검색광고(ROAS) | [naver/](naver/) |
 | 영상 제작 | Hyperframes·ElevenLabs | [영상제작/](영상제작/) |
 | **전체 통합 설치** | 한 번에 | [전체/](전체/) |
 
-> 네이버(검색광고·데이터랩)는 `skills/mcp설치-네이버/`가 자체 완결로 안내한다.
+> 네이버 활용 파이프라인(시장 리포트·브랜드 vs 일반 ROAS 분리)은 `skills/mcp설치-네이버` 스킬이 5단계로 안내합니다.
 
 ## 배포 주의
 - 이 폴더는 **배포판에 포함**된다 (curriculum은 분리·제외).
