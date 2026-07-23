@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json.schemastore.org/mcp.json",
+  "_comment": "marketing-os MCP 설정 — 12개 골격. Part 2 진행 중 .env에 키를 채우면 자동 활성화. Claude.ai 통합(Notion, Higgsfield, Gmail, Calendar, Drive, Slack, Figma)은 Claude Code에서 OAuth로 자동 인증되므로 여기에는 명시하지 않아도 됩니다.",
+  "mcpServers": {
+    "google-sheets": {
+      "_part": "2 Ch1-2 스프레드시트 자동화 (자체 호스팅 MCP)",
+      "_comment": "자체 호스팅 OAuth2 MCP 서버 (mcp-server/index.js). 10 도구: get_spreadsheet_info, read_sheet, batch_read_sheet, write_sheet, append_sheet, clear_sheet, add_sheet, delete_sheet, create_spreadsheet, format_cells. 최초 1회 mcp-server/oauth_credentials.json 발급 후 첫 실행 시 브라우저 인증 자동. 설치: /mcp설치-google-sheets 스킬.",
+      "command": "node",
+      "args": [
+        "${CLAUDE_PROJECT_DIR}/mcp-server/index.js"
+      ]
+    },
+    "ga4": {
+      "_part": "2 Ch1-3 웹사이트 성과 자동 리포트",
+      "_comment": "mcp-server-ga4 (npm v1.0.2 · okamoto53515606). ADC 대응 버전. wmbb.kr Google Workspace 의 Service Account 키 발급 차단 정책 우회. gcloud auth application-default login 으로 발급된 ADC (~/.config/gcloud/application_default_credentials.json) 를 GOOGLE_APPLICATION_CREDENTIALS 에 명시. GA_PROPERTY_ID 는 .env(${GA4_PROPERTY_ID}) 참조 시 서브폴더 실행에서 치환 누락되어 평문 고정함 (속성 ID는 비밀값 아님). 현재=427641480 (WMBB 메일리). 다른 속성 보려면 이 값을 교체 후 재시작.",
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-server-ga4"
+      ],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "${HOME}/.config/gcloud/application_default_credentials.json",
+        "GA_PROPERTY_ID": "${GA4_PROPERTY_ID}"
+      }
+    },
+    "firecrawl": {
+      "_part": "2 Ch1-4",
+      "_comment": "키는 .env 를 bash source 로 주입(.mcp.json 에 평문 미노출). VSCode 확장 Claude Code 는 .zshrc export 미적용이라 ${FIRECRAWL_API_KEY} 직접 참조 시 빈 값 → Invalid token. buffer/heygen/elevenlabs 와 동일 패턴. 발급: https://firecrawl.dev/app/api-keys",
+      "command": "bash",
+      "args": [
+        "-c",
+        "set -a; source '${CLAUDE_PROJECT_DIR}/.env'; set +a; exec npx -y firecrawl-mcp"
+      ]
+    },
+    "youtube-data": {
+      "_part": "2 Ch2-2 유튜브 채널·영상 분석",
+      "_comment": "youtube-data-mcp-server (npm v1.0.16). Phase 1: Data API v3 (YOUTUBE_API_KEY, 공개 데이터). Phase 2: Analytics API v2 (YOUTUBE_OAUTH_*, 본인 채널 구독 변동·이탈·트래픽·인구통계). Phase 2 셋업: analytics-api-oauth.md STEP 1~6. 무료 한도: 일 10,000 unit. 키는 .env 를 bash source 로 주입(평문 미노출). VSCode 확장 Claude Code 는 .zshrc export 미적용이라 env 블록의 ${YOUTUBE_*} 직접 참조 시 빈 값 → 'Missing environment variables' 경고. firecrawl/buffer/heygen/elevenlabs/naver-datalab 와 동일 패턴으로 전환 (2026-06-19).",
+      "command": "bash",
+      "args": [
+        "-c",
+        "set -a; source '${CLAUDE_PROJECT_DIR}/.env'; set +a; exec npx -y youtube-data-mcp-server"
+      ]
+    },
+    "buffer": {
+      "_part": "2 Ch3-1 소셜 미디어 예약 발행",
+      "_comment": "@damusix/buffer-mcp (npm v0.2.1). Buffer 소셜 미디어 API 통합 (api.buffer.com). 키는 .env 를 bash source 로 주입(.mcp.json 에 평문 미노출). VSCode 확장 Claude Code 는 .zshrc export 미적용이라 ${BUFFER_ACCESS_TOKEN} 직접 참조 시 빈 값 전달 → Unauthorized. heygen/elevenlabs 와 동일 패턴으로 해결 (2026-06-15). 발급: buffer.com Settings → Access Tokens.",
+      "command": "bash",
+      "args": [
+        "-c",
+        "set -a; source '${CLAUDE_PROJECT_DIR}/.env'; set +a; exec npx -y @damusix/buffer-mcp"
+      ]
+    },
+    "_notes_meta_ads_moved_to_hosted": {
+      "_comment": "Meta 광고 MCP 는 Meta 공식 hosted MCP (https://mcp.facebook.com/ads · OAuth 2.1) 로 전환됨. claude mcp add --transport http --scope user meta-ads https://mcp.facebook.com/ads 로 등록. Claude Code 재시작 후 첫 사용 시 OAuth 자동 인증 (5 scope: ads_management, ads_read, catalog_management, business_management, pages_show_list). System User Token / META_ACCESS_TOKEN / META_AD_ACCOUNT_ID 불필요. 설치: /mcp설치-ads 스킬 의 Meta 섹션 (단순화됨).",
+      "command": "echo",
+      "args": [
+        "See claude mcp list — meta-ads"
+      ]
+    },
+    "google-ads": {
+      "_part": "2 Ch3-2 Google 광고 분석 (Google 공식 MCP)",
+      "_comment": "github.com/googleads/google-ads-mcp (Google 공식 · Python · FastMCP 3.3.1 · 86 패키지). 읽기 전용 강제. ADC 자동 인증 (gcloud auth application-default login). 도구 3개: list_accessible_customers, search (GAQL), get_resource_metadata. DEVELOPER_TOKEN(비밀)은 .env 를 bash source 로 주입(.mcp.json 평문 미노출). GOOGLE_PROJECT_ID 는 비밀 아님이라 inline export 유지.",
+      "command": "bash",
+      "args": [
+        "-c",
+        "set -a; source '${CLAUDE_PROJECT_DIR}/.env'; set +a; export GOOGLE_PROJECT_ID=${GOOGLE_PROJECT_ID}; exec uvx --from git+https://github.com/googleads/google-ads-mcp.git google-ads-mcp"
+      ]
+    },
+    "heygen": {
+      "_part": "2 Ch2-7b 아바타 영상 (자체 호스팅 MCP)",
+      "_comment": "텍스트 → 아바타 토킹헤드. 다국어 더빙·립싱크. 키는 .env 를 bash source 로 주입(.mcp.json 에 키 미노출). 발급: https://app.heygen.com/settings?nav=Subscriptions",
+      "command": "bash",
+      "args": [
+        "-c",
+        "set -a; source '${CLAUDE_PROJECT_DIR}/.env'; set +a; exec uvx heygen-mcp"
+      ]
+    },
+    "elevenlabs": {
+      "_part": "2 Ch2-7c 음성·오디오 레이어",
+      "_comment": "한국어 TTS·음성 클론(한성국 음원)·트랜스크립션. 키는 .env 를 bash source 로 주입(.mcp.json 에 키 미노출). 무료 한도 월 10k 크레딧.",
+      "command": "bash",
+      "args": [
+        "-c",
+        "set -a; source '${CLAUDE_PROJECT_DIR}/.env'; set +a; exec uvx elevenlabs-mcp"
+      ],
+      "env": {
+        "ELEVENLABS_MCP_BASE_PATH": "${CLAUDE_PROJECT_DIR}/hyperframes/assets/audio"
+      }
+    },
+    "TalkToFigma": {
+      "_part": "2 Ch2-1 Figma 디자인 자동 생성·수정 (cursor-talk-to-figma-mcp@latest)",
+      "_comment": "sonnybaker/cursor-talk-to-figma-mcp (npm @latest, bunx 매번 최신). Figma Community Plugin 'Cursor Talk to Figma MCP Plugin' 과 매칭. 작동: Claude ↔ MCP ↔ WebSocket(3055) ↔ Figma Desktop Plugin. 사용 전 (1) 'bunx cursor-talk-to-figma-mcp@latest --server' 또는 자체 'bun socket' 서버 기동 (2) Figma Plugin 실행 후 채널 연결 필요. 설치: /mcp설치-figma 스킬. _previous_server_name: 'figma' (2026-05-28 sonnybaker 공식 README 표기에 맞춰 'TalkToFigma' 로 변경). _previous_package: bun run ~/dev/claude-talk-to-figma-mcp/dist/talk_to_figma_mcp/server.js (자체 빌드 - 2026-05-26 plugin 버전 불일치로 cursor 공식 패키지로 교체).",
+      "command": "bunx",
+      "args": [
+        "cursor-talk-to-figma-mcp@latest"
+      ]
+    },
+    "naver-datalab": {
+      "_part": "Part 6 보강 — 네이버 데이터랩 (검색어 트렌드 + 쇼핑인사이트)",
+      "_comment": "icraft2170/naver-data-mcp-server (npm naver-datalab-mcp-server v1.1.2). developers.naver.com 의 데이터랩 API. SearchAd(검색광고)와 별개 인증: NAVER_CLIENT_ID·NAVER_CLIENT_SECRET. 도구: 검색어 트렌드(시계열·성별·연령·디바이스), 쇼핑인사이트(분야·키워드 트렌드). 광고 성과(ROAS)는 못 줌 — 그건 scripts/naver_searchad.py(SearchAd REST). 키는 .env 를 bash source 로 주입(평문 미노출, firecrawl/buffer 와 동일 패턴). 발급: developers.naver.com → Application → 애플리케이션 등록 → 사용 API '데이터랩(검색어트렌드)'+'데이터랩(쇼핑인사이트)' 선택.",
+      "command": "bash",
+      "args": [
+        "-c",
+        "set -a; source '${CLAUDE_PROJECT_DIR}/.env'; set +a; exec npx -y naver-datalab-mcp-server"
+      ]
+    },
+    "_notes_oauth_via_claude_ai": {
+      "_comment": "Claude.ai 통합으로 자동 인증되는 도구 (별도 등록 불필요): higgsfield (Ch2-3), notion (Ch4-1), gmail, google-calendar, google-drive. Claude Desktop/Web의 Settings → Integrations에서 Connect만 한 번 해두세요. (figma 는 위 자체 호스팅 talk-to-figma 로 전환 — rate limit 없음 + 디자인 생성 가능.)",
+      "command": "echo",
+      "args": [
+        "See Claude.ai Integrations"
+      ]
+    },
+    "_notes_hyperframes_local": {
+      "_comment": "Hyperframes (Part 2 Ch2-7a)는 MCP가 아닌 로컬 npm 프로젝트입니다. marketing-os/hyperframes/ 폴더에서 'npm run render' 명령으로 사용. 영상 자동화 트리오: 7a Hyperframes(그래픽) + 7b HeyGen(아바타) + 7c ElevenLabs(음성).",
+      "command": "echo",
+      "args": [
+        "See marketing-os/hyperframes/"
+      ]
+    },
+    "gbrain": {
+      "_part": "브레인 레이어 — 에이전트 장기기억 (GitHub 설치, 로컬 PGLite)",
+      "_comment": "gbrain serve (stdio MCP). 저장·검색·그래프·합성. DB=~/.gbrain/brain.pglite. 외부서버 없음. repo: ⓪ WMBB 4.0/ax project/gbrain (2026-07-20 경로 수정 · 폴더명 ⓪ 접두어 반영)",
+      "command": "bun",
+      "args": [
+        "run",
+        "${GBRAIN_DIR}/src/cli.ts",
+        "serve"
+      ]
+    }
+  }
+}

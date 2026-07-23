@@ -1,0 +1,15 @@
+{
+  "name": "marketor-os",
+  "description": "마케터를 위한 클로드코드 — 30개 에이전트로 24시간 가동되는 마케팅 자동화 OS. 패스트캠퍼스 강의 「24시간 Full 가동 마케팅 자동화」의 공식 실습 패키지.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Steve (wmbb)",
+    "email": "steve@wmbb.kr"
+  },
+  "homepage": "https://github.com/steveaimkt/marketor-os",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/steveaimkt/marketor-os.git"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,69 @@
+# 환경 변수
+.env
+.env.local
+*.env
+.env.bak*
+
+# 백업 파일 (.mcp.json.bak 등 평문 키가 남을 수 있음)
+*.bak
+.mcp.json.bak*
+
+# 인증 파일
+*.json.key
+service-account*.json
+**/credentials/
+mcp-server/oauth_credentials.json
+mcp-server/token.json
+
+# 산출물 (감사용으로 로컬 유지, 커밋은 하지 않음)
+outputs/
+logs/
+**/.DS_Store
+
+# 임시 파일
+tmp/
+*.tmp
+*.log
+
+# Node / Python (Remotion 등에서 사용)
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# 추가 민감·개인 파일 (2026-07-16 안정화)
+mcp-server/ga4_user_token.json
+.claude/settings.local.json
+hyperframes/renders/
+
+# ===== VPS git 대비 (2026-07-19) =====
+# 심링크 (맥 로컬 전용 · VPS clone 시 맥 경로라 깨짐 → 제외)
+/강의
+/유튜브-이미지제작
+/운영전략
+/msk
+# curriculum = 교육 자산 (2026-07-23 배포/강의 분리 · 밖으로 이동 후 심링크). 배포판은 mcp-setup/만 포함
+/curriculum
+# gbrain 로컬 브레인·볼트 (맥 전용·파생 복제)
+**/brain.pglite/
+**/.gbrain/
+gbrain-vault/
+# 실제 키 참조 .mcp.json (VPS는 vps-bot/.mcp.json 사용) — 필요시 주석 해제
+# /.mcp.json
+
+# ===== 배포 경계 (2026-07-23 배포/로컬 분리) =====
+# 배포판(남의 회사)에 가면 안 되는 것 · 로컬엔 유지. 배포 코어 = agents·skills·commands·mcp-setup·brand·commands
+# WMBB 전용 (내부 전략·봇 유출 방지)
+/strategy
+/vps-bot
+# 강의·영상 자산 (강의 중단 2026-07-23)
+/tools
+/hyperframes
+# 각 회사가 자체 구축/설치 (mcp-setup/ 가이드로 대체)
+/discord-bot
+/automation
+/sample-data

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마케팅 OS · 구조도 & 사용 여정</title>
+<style>
+/* ── WMBB Design System ── */
+:root {
+  --wmbb-ink:#2A2A28; --wmbb-ink-soft:#3C3633; --wmbb-ink-muted:#444444; --wmbb-ink-quiet:#4C4D59; --wmbb-ink-fade:#AFAFAC;
+  --wmbb-paper:#F3F3F2; --wmbb-paper-warm:#EEEDEB; --wmbb-card:#FFFFFF; --wmbb-line:#EBEBEB;
+  --wmbb-sand:#E0CCBE; --wmbb-olive:#747264; --wmbb-lilac-100:#E6E9FF; --wmbb-lilac-200:#C4C9E5; --wmbb-highlight:#EBFF2C;
+  --radius-xs:5px; --radius-sm:10px; --radius-md:13px; --radius-lg:20px;
+  --shadow-1:0 1px 2px rgba(0,0,0,0.04);
+  --font-sans:"Pretendard","Pretendard Variable","Manrope",ui-sans-serif,system-ui,-apple-system,"Helvetica Neue","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+::selection { background:var(--wmbb-ink); color:var(--wmbb-paper); }
+body { background:var(--wmbb-paper); color:var(--wmbb-ink); font-family:var(--font-sans); font-size:18px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+.wrap { max-width:1020px; margin:0 auto; padding:0 20px 100px; }
+header { padding:60px 0 16px; text-align:center; }
+header .eyebrow { color:var(--wmbb-ink-quiet); font-weight:700; font-size:15px; letter-spacing:.02em; }
+header h1 { font-weight:500; font-size:clamp(30px,4.6vw,50px); line-height:1.0; letter-spacing:-.005em; margin:14px 0 10px; }
+header .sub { color:var(--wmbb-ink-quiet); font-size:16px; }
+h2 { font-weight:500; font-size:30px; line-height:1.0; margin:70px 0 8px; }
+h2 .no { color:var(--wmbb-olive); margin-right:10px; }
+.desc { color:var(--wmbb-ink-muted); font-size:15px; margin-bottom:22px; max-width:760px; }
+.box { background:var(--wmbb-card); border:1px solid var(--wmbb-line); border-radius:var(--radius-md); padding:18px 20px; box-shadow:var(--shadow-1); }
+/* 조직도 */
+.org { text-align:center; }
+.org .node { display:inline-block; background:var(--wmbb-card); border:1px solid var(--wmbb-line); border-radius:var(--radius-sm); padding:12px 28px; font-weight:500; font-size:16px; box-shadow:var(--shadow-1); }
+.org .ceo { background:var(--wmbb-ink); color:var(--wmbb-paper); border-color:var(--wmbb-ink); }
+.org .orch { border-color:var(--wmbb-ink); }
+.org .node small { display:block; font-weight:400; font-size:12px; color:var(--wmbb-ink-quiet); margin-top:2px; }
+.org .ceo small { color:var(--wmbb-ink-fade); }
+.org .down { height:28px; position:relative; }
+.org .down::before { content:""; position:absolute; left:50%; top:3px; bottom:13px; width:1px; background:var(--wmbb-ink-fade); }
+.org .down::after { content:"▼"; color:var(--wmbb-olive); font-size:9px; position:absolute; left:50%; transform:translateX(-50%); bottom:1px; }
+.sec-label { display:flex; align-items:center; gap:12px; font-size:15px; color:var(--wmbb-ink); font-weight:500; margin:26px 0 10px; text-align:left; }
+.sec-label::after { content:""; flex:1; height:1px; background:var(--wmbb-line); }
+.grid5 { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
+.grid4 { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+.grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.grid2c { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+@media (max-width:860px){ .grid5,.grid4 { grid-template-columns:repeat(2,1fr); } .grid3,.grid2c { grid-template-columns:1fr; } }
+.chip { background:var(--wmbb-card); border:1px solid var(--wmbb-line); border-radius:var(--radius-sm); padding:11px 13px; font-size:14px; font-weight:500; text-align:left; box-shadow:var(--shadow-1); }
+.chip small { display:block; color:var(--wmbb-ink-quiet); font-weight:400; font-size:12px; margin-top:3px; line-height:1.5; }
+.chip.staff { background:var(--wmbb-paper-warm); border-color:var(--wmbb-sand); }
+.chip.ghost { background:transparent; border-style:dashed; border-color:var(--wmbb-ink-fade); }
+/* 흐름도 */
+.flow { position:relative; max-width:780px; margin:0 auto; display:flex; flex-direction:column; gap:14px; }
+.flow::before { content:""; position:absolute; left:19px; top:24px; bottom:24px; width:1px; background:var(--wmbb-ink-fade); }
+.step { position:relative; margin-left:58px; background:var(--wmbb-card); border:1px solid var(--wmbb-line); border-radius:var(--radius-md); padding:14px 18px; box-shadow:var(--shadow-1); }
+.step .n { position:absolute; left:-58px; top:12px; width:40px; height:40px; border-radius:50%; background:var(--wmbb-ink); color:var(--wmbb-paper); font-weight:500; font-size:16px; text-align:center; line-height:36px; border:2px solid var(--wmbb-paper); box-shadow:0 0 0 1px var(--wmbb-line); }
+.step b { font-size:16px; font-weight:500; }
+.step p { font-size:14px; color:var(--wmbb-ink-muted); margin-top:4px; }
+.step.pause { background:var(--wmbb-paper-warm); border-color:var(--wmbb-sand); }
+.step.pause .n { background:var(--wmbb-olive); }
+.ptag { display:inline-block; background:var(--wmbb-ink); color:var(--wmbb-highlight); border-radius:var(--radius-xs); padding:2px 10px; font-size:12px; font-weight:700; margin-left:9px; vertical-align:2px; }
+.branch { position:relative; margin-left:58px; padding:11px 15px 11px 36px; font-size:13.5px; color:var(--wmbb-ink-quiet); background:var(--wmbb-lilac-100); border:1px solid var(--wmbb-lilac-200); border-radius:var(--radius-sm); }
+.branch::before { content:"↳"; position:absolute; left:14px; top:10px; color:var(--wmbb-olive); font-weight:700; font-size:14px; }
+.branch b { color:var(--wmbb-ink); font-weight:500; }
+/* 말풍선 문장 */
+.say { display:block; background:var(--wmbb-card); border:1px solid var(--wmbb-line); border-radius:var(--radius-sm); padding:12px 15px; font-size:14.5px; box-shadow:var(--shadow-1); }
+.say b { font-weight:700; }
+.say small { display:block; color:var(--wmbb-ink-quiet); font-size:12.5px; margin-top:3px; }
+/* 업무 카드 상세 */
+.anatomy { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.anatomy .part { flex:1; min-width:150px; background:var(--wmbb-paper-warm); border:1px solid var(--wmbb-sand); border-radius:var(--radius-sm); padding:10px 12px; font-size:13px; }
+.anatomy .part b { display:block; font-size:14px; margin-bottom:2px; }
+.anatomy .part small { color:var(--wmbb-ink-quiet); font-size:12px; line-height:1.5; }
+.cat { background:var(--wmbb-card); border:1px solid var(--wmbb-line); border-radius:var(--radius-md); padding:14px 16px; box-shadow:var(--shadow-1); }
+.cat h3 { font-size:16px; font-weight:700; margin-bottom:8px; }
+.cat h3 small { font-weight:400; color:var(--wmbb-ink-quiet); font-size:12px; margin-left:6px; }
+.cat ul { list-style:none; }
+.cat li { font-size:13px; padding:2.5px 0; color:var(--wmbb-ink-soft); display:flex; gap:8px; align-items:baseline; }
+.cat li .id { color:var(--wmbb-olive); font-weight:700; font-size:11.5px; min-width:26px; }
+.cat li .g { margin-left:auto; font-size:10.5px; font-weight:700; color:var(--wmbb-olive); background:var(--wmbb-paper-warm); border:1px solid var(--wmbb-sand); border-radius:4px; padding:0 5px; }
+.cat li.cmd { display:block; padding:5px 0; }
+.cat li.cmd b { font-size:13.5px; font-weight:700; }
+.cat li.cmd small { display:block; color:var(--wmbb-ink-quiet); font-size:12px; margin-top:1px; line-height:1.5; }
+/* CTA */
+.cta { margin-top:80px; text-align:center; background:var(--wmbb-ink); color:var(--wmbb-paper); border-radius:var(--radius-lg); padding:44px 24px; }
+.cta h3 { font-weight:500; font-size:26px; margin-bottom:8px; }
+.cta p { color:var(--wmbb-ink-fade); font-size:15px; }
+.cta .cmd { display:inline-block; background:var(--wmbb-highlight); color:var(--wmbb-ink); font-weight:700; border-radius:var(--radius-sm); padding:10px 22px; margin:16px 8px 0; font-size:16px; }
+footer { text-align:center; color:var(--wmbb-ink-fade); font-size:13px; margin-top:60px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">MARKETING OS</div>
+  <h1>1명이 운영하는<br>마케팅 회사 한 채</h1>
+  <div class="sub">팀장 1 · 부서장 10 · 실행 직원 37 · 업무 카드 100장 · 결재권은 항상 당신에게</div>
+</header>
+
+<h2><span class="no">①</span>조직도 · 누가 어디서 일하나</h2>
+<p class="desc">당신은 사장입니다. 말을 걸면 팀장 <b>트루먼</b>이 받아서, 일의 크기에 따라 직접 하거나 부서장·직원에게 맡깁니다. 노트북이 꺼져 있어도 클라우드 루틴이 정해진 시간에 스스로 일합니다.</p>
+<div class="box org">
+  <div class="node ceo">👑 사장 (당신)<small>말한다 · 고른다 · 결재한다</small></div>
+  <div class="down"></div>
+  <div class="node orch">🧠 팀장 트루먼<small>요청 접수 · 스코프 결정 · 위임 · 보고</small></div>
+  <div class="down"></div>
+
+  <div class="sec-label">부서장 10 · 카테고리 책임자 (업무 카드 10장씩 담당)</div>
+  <div class="grid5">
+    <div class="chip">🔍 시장조사</div><div class="chip">📦 제품기획</div><div class="chip">✍️ 콘텐츠</div><div class="chip">📱 소셜</div><div class="chip">📢 광고</div>
+    <div class="chip">🛒 커머스</div><div class="chip">📊 데이터분석</div><div class="chip">💌 CRM</div><div class="chip">🤝 브랜드·영업</div><div class="chip">⚙️ 운영</div>
+  </div>
+
+  <div class="sec-label">스태프 3 · 만들지 않고 지키는 사람들</div>
+  <div class="grid3">
+    <div class="chip staff">🔎 관점 검수관<small>대표·재무·고객·법무·브랜드 5관점 압박 검토</small></div>
+    <div class="chip staff">⛔ 규제 감사관<small>광고·발행물 법규 검사, 유일한 차단 권한</small></div>
+    <div class="chip staff">🛠 스킬 빌더<small>나만의 업무 카드 신규 제작</small></div>
+  </div>
+
+  <div class="sec-label">실행 직원 37 · 도구를 들고 실제로 일하는 팀</div>
+  <div class="grid4">
+    <div class="chip">🎛 운영팀 7<small>채널 브리핑 · 강의 제작 · 콘텐츠 기획 · 성장 감사</small></div>
+    <div class="chip">📮 콘텐츠·카피 8<small>뉴스레터 · 발행 · 카피 10종 · 상세페이지 · 링크드인</small></div>
+    <div class="chip">🔬 리서치 5<small>경쟁사 · 트렌드 · 광고 레퍼런스 · 리뷰 · SEO</small></div>
+    <div class="chip">📈 광고·분석 9<small>메타 · 구글 · 네이버 · 3매체 통합 · GA4 · A/B 판정</small></div>
+    <div class="chip">🤲 CRM 3<small>고객 통합 · CS 답변 · LTV 분석</small></div>
+    <div class="chip">🚀 확장 3<small>마케팅 캘린더 · 프로토타입 · 전략 보고서</small></div>
+    <div class="chip">🎨 제작·검토 2<small>디자인 산출 · 계획 압박 검토</small></div>
+    <div class="chip ghost">☁️ 클라우드 루틴 3<small>매일 채널 브리핑 · 월 콘텐츠 기획 · 금 성장 감사. 꺼져 있어도 가동</small></div>
+  </div>
+
+  <div class="sec-label">기억 레이어 · 팀의 장기기억</div>
+  <div class="grid2c">
+    <div class="chip ghost">🧠 장기기억 (gbrain)<small>모든 직원이 작업 전에 조회하고, 작업 후에 기록하는 공용 기억. 쓸수록 팀이 우리 회사에 맞아집니다 (로컬 DB · 외부 서버 없음)</small></div>
+    <div class="chip ghost">📇 브랜드 허브 (brand/)<small>프로필 · 톤 · 플레이북. 첫 3분 질문서 한 번이면 직원 전원이 재질문 없이 참조</small></div>
+  </div>
+
+  <div class="sec-label">연결된 도구 (MCP) · 직원들의 손과 발, 총 18개</div>
+  <div class="grid3">
+    <div class="chip">📊 데이터·분석<small>Google Sheets · GA4 · 네이버 데이터랩</small></div>
+    <div class="chip">🔎 리서치·수집<small>Firecrawl · YouTube Data</small></div>
+    <div class="chip">📢 광고 계정<small>Meta Ads (공식 호스티드) · Google Ads</small></div>
+    <div class="chip">📮 발행·소통<small>Buffer · Notion · Gmail · Google Calendar · Discord</small></div>
+    <div class="chip">🎬 제작 스튜디오<small>Figma · HeyGen · ElevenLabs · Higgsfield (+Hyperframes 로컬)</small></div>
+    <div class="chip ghost">🔌 연결 방식<small>로컬 11 · 호스티드 1 · claude.ai 커넥터 5 · 플러그인 1 (Discord)</small></div>
+  </div>
+
+  <div class="sec-label">업무 카드 100장 · 방법이 적힌 레시피 서랍 (msk/카탈로그.html)</div>
+  <div class="grid2c">
+    <div class="chip ghost">🗂 10 카테고리 × 10장<small>각 카드 = 트리거 문장 + 품질 약속(Contract) + 단계(Phases). 직원들이 일할 때 이 카드를 참조합니다</small></div>
+    <div class="chip ghost">🔗 커맨드 (묶음 실행)<small>"시장리서치 돌려줘"처럼 "~돌려줘" 한 마디로 카드 여러 장이 이어달리기</small></div>
+  </div>
+
+  <div class="sec-label">가동 방식 3단 + 하네스 6패턴 · 일의 크기에 맞는 진용 (agents/TEAM-MODE.md)</div>
+  <div class="grid3">
+    <div class="chip">👤 단건 (기본)<small>직원 1명에게 위임, 결과만 보고 · 일상 업무의 정답</small></div>
+    <div class="chip">🔗 체인 (Pipeline)<small>커맨드로 카드 3~4장 이어달리기 · 인수인계 계약으로 릴레이</small></div>
+    <div class="chip">👥 팀 소집 ("팀으로 돌려줘")<small>부서장 3~5명이 서로 대화하며 동시 작업 · 부서 협업 · 토론 검수 · 리서치 스웜 3편성 (실험 기능 · 결재 필수)</small></div>
+    <div class="chip ghost">🏗 하네스 6패턴 완비<small>Supervisor · 계층 위임 · Pipeline · Fan-out/in · Producer-Reviewer · Expert Pool · 업계 표준 팀 아키텍처를 전부 사용 중</small></div>
+    <div class="chip ghost">🧪 스킬 테스트 3단<small>새 카드는 트리거 검증 → 드라이런 → 유/무 비교 통과 후에만 정식 채용</small></div>
+    <div class="chip ghost">🛡 자가 건강검진<small>npm run drift · 조직·카드·연결 상태 6항목 자동 검사</small></div>
+  </div>
+</div>
+
+<h2><span class="no">②</span>업무 카드 100장 · 서랍을 전부 열어보기</h2>
+<p class="desc">카드 한 장 = <b>"이렇게 말하면 이런 결과물이 나온다"는 약속 문서</b>입니다. 직원(에이전트)들도 일할 때 이 카드를 방법론 정본으로 참조합니다. 카드별 트리거 문장·자세한 설명은 <b>msk/카탈로그.html</b> 진열대에서 볼 수 있습니다.</p>
+
+<div class="box" style="margin-bottom:16px;">
+  <div class="sec-label" style="margin-top:0;">카드 한 장의 속 · 부품 5개</div>
+  <div class="anatomy" style="margin-bottom:4px;">
+    <div class="part"><b>① 트리거</b><small>"예산 다시 짜줘" 같은 말이 카드를 엽니다</small></div>
+    <div class="part"><b>② 계약</b><small>품질 약속: 판정 기준 · 산출물 규격 · 금지 사항</small></div>
+    <div class="part"><b>③ 단계</b><small>일하는 순서: 같은 입력이면 같은 결과</small></div>
+    <div class="part"><b>④ 게이트</b><small><span class="g" style="margin:0;">G</span> 표시 카드(32장) = 발행 전 규제 검사 필수</small></div>
+    <div class="part"><b>⑤ 체인</b><small>끝나면 다음 카드를 추천하는 이어달리기 연결 고리</small></div>
+  </div>
+</div>
+
+<div class="grid2c">
+  <div class="cat"><h3>🔍 시장조사 & 트렌드<small>001~010</small></h3><ul>
+    <li><span class="id">001</span>키워드 수요 리서치</li>
+    <li><span class="id">002</span>경쟁사 분석 리포트</li>
+    <li><span class="id">003</span>경쟁사 상시 모니터링</li>
+    <li><span class="id">004</span>시장 규모 추정 (TAM-SAM-SOM)</li>
+    <li><span class="id">005</span>트렌드 스캐닝</li>
+    <li><span class="id">006</span>소비자 리뷰 마이닝</li>
+    <li><span class="id">007</span>설문 설계 & 분석</li>
+    <li><span class="id">008</span>타깃 페르소나 빌더</li>
+    <li><span class="id">009</span>가격 조사 & 포지셔닝 맵</li>
+    <li><span class="id">010</span>진입 시장 우선순위</li>
+  </ul></div>
+  <div class="cat"><h3>📦 제품기획 & 포지셔닝<small>011~020</small></h3><ul>
+    <li><span class="id">011</span>신제품 컨셉 브레인스토밍</li>
+    <li><span class="id">012</span>USP·가치제안 정의</li>
+    <li><span class="id">013</span>제품명·네이밍</li>
+    <li><span class="id">014</span>소싱 상품 평가</li>
+    <li><span class="id">015</span>스펙시트 → 셀링포인트</li>
+    <li><span class="id">016</span>번들·프로모션 설계</li>
+    <li><span class="id">017</span>가격 전략 설계</li>
+    <li><span class="id">018</span>출시 체크리스트 & GTM 플랜</li>
+    <li><span class="id">019</span>A/B 테스트 설계</li>
+    <li><span class="id">020</span>제품 개선 백로그 우선순위</li>
+  </ul></div>
+  <div class="cat"><h3>✍️ 콘텐츠 마케팅<small>021~030</small></h3><ul>
+    <li><span class="id">021</span>콘텐츠 캘린더 빌더</li>
+    <li><span class="id">022</span>블로그 SEO 아티클<span class="g">G</span></li>
+    <li><span class="id">023</span>뉴스레터 제작 자동화<span class="g">G</span></li>
+    <li><span class="id">024</span>YouTube 스크립트<span class="g">G</span></li>
+    <li><span class="id">025</span>썸네일·제목 A/B<span class="g">G</span></li>
+    <li><span class="id">026</span>쇼츠·릴스 대본 팩<span class="g">G</span></li>
+    <li><span class="id">027</span>OSMU 멀티채널 변환기<span class="g">G</span></li>
+    <li><span class="id">028</span>링크드인 포스트 빌더<span class="g">G</span></li>
+    <li><span class="id">029</span>스레드 콘텐츠 팩<span class="g">G</span></li>
+    <li><span class="id">030</span>콘텐츠 성과 회고</li>
+  </ul></div>
+  <div class="cat"><h3>📱 SNS 운영 & 커뮤니티<small>031~040</small></h3><ul>
+    <li><span class="id">031</span>인스타그램 피드 기획<span class="g">G</span></li>
+    <li><span class="id">032</span>댓글·DM 응대 어시스턴트<span class="g">G</span></li>
+    <li><span class="id">033</span>인플루언서 발굴·평가</li>
+    <li><span class="id">034</span>인플루언서 계약·브리프<span class="g">G</span></li>
+    <li><span class="id">035</span>이벤트·기브어웨이 설계<span class="g">G</span></li>
+    <li><span class="id">036</span>커뮤니티 운영 플레이북</li>
+    <li><span class="id">037</span>UGC 수집·활용 시스템<span class="g">G</span></li>
+    <li><span class="id">038</span>소셜 리스닝 리포트</li>
+    <li><span class="id">039</span>채널 성장 진단</li>
+    <li><span class="id">040</span>바이럴 훅 라이브러리<span class="g">G</span></li>
+  </ul></div>
+  <div class="cat"><h3>📢 광고 운영 & 분석<small>041~050</small></h3><ul>
+    <li><span class="id">041</span>쿠팡 광고 성과 분석</li>
+    <li><span class="id">042</span>네이버 쇼핑검색광고 최적화</li>
+    <li><span class="id">043</span>메타 광고 소재 카피 팩<span class="g">G</span></li>
+    <li><span class="id">044</span>구글·유튜브 광고 세팅 가이드</li>
+    <li><span class="id">045</span>광고 주간 리포트 자동화</li>
+    <li><span class="id">046</span>ROAS 진단 & 예산 재배분</li>
+    <li><span class="id">047</span>광고 소재 A/B 판독기</li>
+    <li><span class="id">048</span>랜딩페이지 CRO 진단</li>
+    <li><span class="id">049</span>광고 정책·심의 체커</li>
+    <li><span class="id">050</span>어트리뷰션 정리 (UTM)</li>
+  </ul></div>
+  <div class="cat"><h3>🛒 이커머스 & 상세페이지<small>051~060</small></h3><ul>
+    <li><span class="id">051</span>상세페이지 24섹션 빌더<span class="g">G</span></li>
+    <li><span class="id">052</span>상세페이지 → Figma 자동화</li>
+    <li><span class="id">053</span>상품명·검색 최적화<span class="g">G</span></li>
+    <li><span class="id">054</span>리뷰 관리 시스템<span class="g">G</span></li>
+    <li><span class="id">055</span>스마트스토어 진단</li>
+    <li><span class="id">056</span>쿠팡 로켓·마켓플레이스 운영</li>
+    <li><span class="id">057</span>프로모션 캘린더 & 행사 대응</li>
+    <li><span class="id">058</span>배송·CS 정책 설계<span class="g">G</span></li>
+    <li><span class="id">059</span>크라우드펀딩 페이지 빌더<span class="g">G</span></li>
+    <li><span class="id">060</span>글로벌 리스팅 로컬라이즈<span class="g">G</span></li>
+  </ul></div>
+  <div class="cat"><h3>📊 데이터 분석 & 리포팅<small>061~070</small></h3><ul>
+    <li><span class="id">061</span>판매 데이터 분석</li>
+    <li><span class="id">062</span>마케팅 대시보드 빌더</li>
+    <li><span class="id">063</span>GA4 분석 리포트</li>
+    <li><span class="id">064</span>코호트·리텐션 분석</li>
+    <li><span class="id">065</span>고객 세그먼트 RFM 분석</li>
+    <li><span class="id">066</span>KPI 트리 설계</li>
+    <li><span class="id">067</span>월간 마케팅 리포트 자동화</li>
+    <li><span class="id">068</span>데이터 클리닝 & 전처리</li>
+    <li><span class="id">069</span>예측 시뮬레이션</li>
+    <li><span class="id">070</span>설문·NPS 응답 분석</li>
+  </ul></div>
+  <div class="cat"><h3>💌 CRM & 고객관리<small>071~080</small></h3><ul>
+    <li><span class="id">071</span>CS 챗봇 구축 (RAG)</li>
+    <li><span class="id">072</span>CS 응대 매뉴얼 빌더</li>
+    <li><span class="id">073</span>고객 여정 맵핑</li>
+    <li><span class="id">074</span>이메일 시퀀스 빌더<span class="g">G</span></li>
+    <li><span class="id">075</span>카카오 알림톡·친구톡 설계<span class="g">G</span></li>
+    <li><span class="id">076</span>멤버십·등급 제도 설계</li>
+    <li><span class="id">077</span>이탈 방지 윈백 캠페인<span class="g">G</span></li>
+    <li><span class="id">078</span>VOC 취합·분류 시스템</li>
+    <li><span class="id">079</span>리뷰·후기 요청 자동화<span class="g">G</span></li>
+    <li><span class="id">080</span>고객 인터뷰 스크립트 & 요약</li>
+  </ul></div>
+  <div class="cat"><h3>🤝 브랜딩 & PR·세일즈<small>081~090</small></h3><ul>
+    <li><span class="id">081</span>브랜드 스토리·미션 빌더</li>
+    <li><span class="id">082</span>브랜드 가이드라인 문서화</li>
+    <li><span class="id">083</span>보도자료 작성<span class="g">G</span></li>
+    <li><span class="id">084</span>제안서 자동 생성<span class="g">G</span></li>
+    <li><span class="id">085</span>세일즈 덱 빌더<span class="g">G</span></li>
+    <li><span class="id">086</span>미팅 노트 → 후속 액션</li>
+    <li><span class="id">087</span>파트너십·제휴 제안 팩<span class="g">G</span></li>
+    <li><span class="id">088</span>스폰서십 콘텐츠 기획<span class="g">G</span></li>
+    <li><span class="id">089</span>위기 커뮤니케이션 플랜<span class="g">G</span></li>
+    <li><span class="id">090</span>수상·인증 지원서 빌더<span class="g">G</span></li>
+  </ul></div>
+  <div class="cat"><h3>⚙️ 마케팅 운영 & 생산성<small>091~100</small></h3><ul>
+    <li><span class="id">091</span>마케팅 업무 자동화 진단</li>
+    <li><span class="id">092</span>나만의 스킬 만들기 (메타 스킬)</li>
+    <li><span class="id">093</span>회의록·업무 위임 자동화</li>
+    <li><span class="id">094</span>외주 브리프 빌더</li>
+    <li><span class="id">095</span>마케팅 예산 플래너</li>
+    <li><span class="id">096</span>경쟁 입찰·견적 비교기</li>
+    <li><span class="id">097</span>팀 온보딩 문서 자동화</li>
+    <li><span class="id">098</span>주간 업무 회고 & 플래닝</li>
+    <li><span class="id">099</span>법무 기초 체커</li>
+    <li><span class="id">100</span>멀티 에이전트 오케스트레이션</li>
+  </ul></div>
+</div>
+
+<h2><span class="no">③</span>커맨드 15종 · 여러 카드가 이어달리는 묶음 업무</h2>
+<p class="desc">업무 카드가 명사(1장짜리 업무)라면 커맨드는 동사("~돌려줘")입니다. 한 마디에 카드 3~4장이 순서대로 이어달리고, 앞 카드의 결과물이 다음 카드에 자동으로 입력됩니다. 당신은 단계 사이 체크포인트(⏸)에서만 답하면 됩니다. 업무 생애주기 5단계로 묶여 있습니다.</p>
+<div class="grid2c">
+  <div class="cat"><h3>W1 진단·리서치<small>일을 시작하기 전, 시장·고객을 알아본다</small></h3><ul>
+    <li class="cmd"><b>"시장리서치 돌려줘"</b><small>키워드 리서치 → 경쟁사 분석 → 리뷰 마이닝 → 가격 조사</small></li>
+    <li class="cmd"><b>"VOC애널리틱스 돌려줘"</b><small>리뷰 마이닝 → VOC 분류 → 개선 우선순위 → 리뷰 관리</small></li>
+  </ul></div>
+  <div class="cat"><h3>W2 구축·런칭<small>새로 세운다: 브랜드 · 제품 · 스토어 · OS</small></h3><ul>
+    <li class="cmd"><b>"브랜드셋업 돌려줘"</b><small>브랜드 스토리 → 가이드라인 → 페르소나 → 가치제안</small></li>
+    <li class="cmd"><b>"신제품런칭 돌려줘"</b><small>컨셉 브레인스토밍 → 가치제안 → 가격 전략 → 런칭 플랜</small></li>
+    <li class="cmd"><b>"스토어셋업 돌려줘"</b><small>상품명 최적화 → 상세페이지 → Figma 디자인 → 정책 설계</small></li>
+    <li class="cmd"><b>"마케터OS셋업 돌려줘"</b><small>자동화 진단 → 나만의 스킬 만들기 → 오케스트레이션</small></li>
+  </ul></div>
+  <div class="cat"><h3>W3 제작·캠페인<small>알린다: 콘텐츠 · 채널 · 협업 운영</small></h3><ul>
+    <li class="cmd"><b>"콘텐츠프로덕션 돌려줘"</b><small>캘린더 → 블로그(또는 유튜브 대본) → 멀티채널 변환 → 성과 회고</small></li>
+    <li class="cmd"><b>"유튜브프로덕션 돌려줘"</b><small>트렌드 스캔 → 스크립트 → 썸네일·제목 A/B → 쇼츠 변환</small></li>
+    <li class="cmd"><b>"소셜그로스 돌려줘"</b><small>채널 진단 → 피드 기획 → 바이럴 훅 → 이벤트 설계</small></li>
+    <li class="cmd"><b>"인플루언서캠페인 돌려줘"</b><small>발굴·평가 → 계약·브리프 → UGC 활용 → 멀티채널 변환</small></li>
+  </ul></div>
+  <div class="cat"><h3>W4 분석·최적화<small>잰다: 성과를 측정하고 조정한다</small></h3><ul>
+    <li class="cmd"><b>"광고애널리틱스 돌려줘"</b><small>주간 리포트 → 쿠팡(네이버) 분석 → 예산 재배분 → 소재 카피</small></li>
+    <li class="cmd"><b>"월간리포트 돌려줘"</b><small>데이터 클리닝 → 판매 분석 → 월간 보고서 → KPI 트리</small></li>
+  </ul></div>
+  <div class="cat"><h3>W5 관계·대응<small>지킨다: 고객 관계 · 수주 · 위기</small></h3><ul>
+    <li class="cmd"><b>"리텐션캠페인 돌려줘"</b><small>RFM 세그먼트 → 고객 여정 → 이메일 시퀀스 → 윈백 캠페인</small></li>
+    <li class="cmd"><b>"세일즈파이프라인 돌려줘"</b><small>미팅 노트 → 제안서 → 세일즈 덱 → 제휴 제안</small></li>
+    <li class="cmd"><b>"위기커뮤니케이션 돌려줘"</b><small>소셜 리스닝 → 대응 플랜 → 응대 (+보도자료)</small></li>
+  </ul></div>
+  <div class="cat"><h3>커맨드의 속<small>커맨드가 정하는 것은 딱 3가지</small></h3><ul>
+    <li><span class="id">①</span>카드 호출 순서 (체인)</li>
+    <li><span class="id">②</span>단계 사이 체크포인트 ⏸ (사용자 게이트)</li>
+    <li><span class="id">③</span>끝난 뒤 다음 커맨드 자연어 제안</li>
+  </ul></div>
+</div>
+
+<h2><span class="no">④</span>요청 1건의 여정 · "유튜브 콘텐츠 분석해줘"가 처리되는 길</h2>
+<p class="desc">모든 요청이 같은 길을 갑니다. 멈춤 표시(<span class="ptag">⏸ 결재</span>)가 있는 곳에서만 당신의 답을 기다립니다. 나머지는 알아서 굴러갑니다.</p>
+<div class="flow">
+  <div class="step"><span class="n">1</span><b>말한다</b><p>"유튜브 콘텐츠 분석해줘. 채널 〈…〉, 기간 〈최근 30일〉" 처럼 짧게 말해도 되묻고, 구체적일수록 첫 결과가 좋아집니다</p></div>
+  <div class="step"><span class="n">2</span><b>기억 조회 & 크기 판정</b><p>과거에 통했던 것을 먼저 찾아보고(장기기억), 카드 1장짜리인지 · 체인인지 · 전체 가동인지 크기를 정합니다</p></div>
+  <div class="step pause"><span class="n">3</span><b>업무 브리핑</b><span class="ptag">⏸ 결재</span><p>담당 부서장이 계획 · 예상 산출물 · 필요한 재료를 1화면으로 보고: "이대로 진행할까요?"</p></div>
+  <div class="step"><span class="n">4</span><b>실행</b><p>가벼우면 팀장이 직접, 깊으면 부서장 · 실행 직원에게 위임 (독립 작업 공간 · 병렬 가능)</p></div>
+  <div class="branch"><b>브랜드 자동 주입</b> · 톤 · 타깃 · 금기 표현은 brand/profile.md에서 자동으로. 매번 설명할 필요 없음</div>
+  <div class="step"><span class="n">5</span><b>품질 · 규제 게이트</b><p>6축 채점(기본값 = 반려, 수치·근거 없으면 통과 불가), 광고 등 발행물은 규제 감사관(⛔) 검사</p></div>
+  <div class="step pause"><span class="n">6</span><b>발송 결재</b><span class="ptag">⏸ 결재</span><p>발송 · 발행 · 광고 집행 직전에 묻습니다. 승인 전에는 아무것도 밖으로 나가지 않습니다</p></div>
+  <div class="step"><span class="n">7</span><b>전달 & 기록</b><p>산출물 전달 + "보완할 점 없나요?" 확인 → 디스코드 · 노션 · outputs/ 폴더에 기록</p></div>
+  <div class="step"><span class="n">8</span><b>다음 제안</b><p>"이어서 다음 영상 기획 할까요?" 처럼 카드의 연결 고리를 보고 다음 한 걸음을 먼저 제안</p></div>
+</div>
+
+<h2><span class="no">⑤</span>온보딩 7관문 · 처음이라면 이 길로 (25~30분)</h2>
+<p class="desc">채팅에 <b>"온보딩 시작"</b>이라고 치면, 아래 관문을 한 번에 하나씩(답을 받아야만 다음으로) 완주시켜 드립니다. 끝나면 이 OS의 5가지 핵심 동작을 전부 직접 해본 상태가 됩니다.</p>
+<div class="grid4">
+  <div class="chip">G0 · 진단 & 경로<small>내 상태 확인, 정석 / 샘플 급행 / 급한 일 먼저</small></div>
+  <div class="chip">G1 · 3분 셋업<small>브랜드 6문항, 이후 다시는 안 물어봄</small></div>
+  <div class="chip">G2 · 카드 체험<small>업무 카드 1장 직접 실행 (파일 없이 되는 것)</small></div>
+  <div class="chip">G3 · 직원 체험<small>같은 일을 직원에게 위임, 카드와 직원의 차이 체득</small></div>
+  <div class="chip">G4 · 안전장치<small>발송 직전 ⏸에서 직접 "거절"해보기</small></div>
+  <div class="chip">G5 · 이어달리기<small>앞 결과가 자동 입력되는 체인 1회</small></div>
+  <div class="chip">G6 · 자동화 & 졸업<small>클라우드 루틴 · 디스코드 봇 안내 → 🎓</small></div>
+  <div class="chip ghost">중단해도 OK<small>진행 상태가 저장되어 "이어서 할까요?"로 복귀</small></div>
+</div>
+
+<h2><span class="no">⑥</span>이렇게 말하세요 · 자주 쓰는 문장 8개</h2>
+<p class="desc">공식: <b>[무엇을] + [재료: 파일 · 기간 · 대상] + [기준: 목표 수치] + [원하는 형태]</b>. 아는 만큼만 채우면 됩니다. 나머지는 시스템이 되묻습니다. 전체 문장집은 "매뉴얼 보여줘".</p>
+<div class="grid2c">
+  <span class="say"><b>"온보딩 시작"</b><small>처음이라면 이것부터, 7관문 완주 가이드</small></span>
+  <span class="say"><b>"에이전트 시작"</b><small>팀장 트루먼 가동, 오늘 할 일 제안부터</small></span>
+  <span class="say"><b>"뭐부터 자동화하지?"</b><small>10분 문답, 나에게 필요한 카드 15장 선별</small></span>
+  <span class="say"><b>"경쟁사 분석해줘"</b><small>브랜드 2~5개 · 캡처 첨부하면 더 정확</small></span>
+  <span class="say"><b>"광고 카피 뽑아줘: (메시지 1줄)"</b><small>10패턴 + 6축 채점까지</small></span>
+  <span class="say"><b>"시장리서치 돌려줘"</b><small>커맨드형, 조사 4종이 자동으로 이어달림</small></span>
+  <span class="say"><b>"유튜브 브리프"</b><small>다음 영상 뭐 찍지, 경쟁 채널 + 내 채널 분석</small></span>
+  <span class="say"><b>"매뉴얼 보여줘"</b><small>상황별 문장집, 막힐 때 언제든</small></span>
+</div>
+
+<div class="cta">
+  <h3>지금 시작하기</h3>
+  <p>Claude Code에서 이 폴더를 열고, 아래 한 마디면 됩니다</p>
+  <span class="cmd">온보딩 시작</span><span class="cmd">에이전트 시작</span>
+</div>
+
+<footer>마케팅 OS · 구조도 · 자세한 규정: agents/orchestrator.md (단일 진실원천) · 100 카드 진열대: msk/카탈로그.html</footer>
+</div>
+</body>
+</html>

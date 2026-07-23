@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "_comment": "marketing-os 프로젝트 설정. cron·SDK·인터랙티브 모두 이 settings.json을 읽음. .env.example의 환경변수를 .env로 채워야 hook들이 정상 동작.",
+  "enabledMcpjsonServers": [
+    "google-sheets",
+    "ga4",
+    "firecrawl",
+    "youtube-data",
+    "buffer",
+    "google-ads",
+    "heygen",
+    "elevenlabs",
+    "TalkToFigma",
+    "naver-datalab",
+    "gbrain"
+  ],
+  "permissions": {
+    "_comment": "트루먼 봇 권한 정책 (2026-06-23 bot-build). 조회·분석·검수는 자동 허용, 삭제·예산변경은 차단. 발행/발송은 아래 hooks의 require-approval 게이트가 별도 처리.",
+    "allow": [
+      "mcp__youtube-data__*",
+      "mcp__ga4__*",
+      "mcp__firecrawl__firecrawl_scrape",
+      "mcp__firecrawl__firecrawl_search",
+      "mcp__firecrawl__firecrawl_map",
+      "mcp__google-sheets__read_sheet",
+      "mcp__google-sheets__batch_read_sheet",
+      "mcp__naver-datalab__*",
+      "mcp__claude_ai_Notion__notion-fetch",
+      "mcp__claude_ai_Notion__notion-search"
+    ],
+    "deny": [
+      "mcp__meta-ads__*update*budget*",
+      "mcp__google-ads__*update*budget*",
+      "mcp__google-sheets__delete_sheet"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "mcp__meta-ads__.*(update|create|delete|activate|boost|pause|adjust).*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/scripts/hooks/require-approval.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__google-ads__.*(update|pause|delete|create|adjust|mutate).*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/scripts/hooks/require-approval.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__buffer__use_buffer_api",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/scripts/hooks/require-approval.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__.*[Gg]mail.*__(send_message|send_email|delete_message)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/scripts/hooks/require-approval.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/scripts/hooks/log-cost.sh"
+          }
+        ]
+      },
+      {
+        "_comment": "gbrain put → 노션 gbrain 로그 미러 강제 (2026-07-20). 규약만으로는 계속 누락돼 훅으로 승격.",
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/scripts/hooks/gbrain-notion-mirror.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/scripts/hooks/close-run.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  }
+}

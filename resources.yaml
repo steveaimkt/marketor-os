@@ -1,0 +1,166 @@
+# marketing-os — 리소스 ID 중앙 관리
+#
+# 이 파일은 30개 에이전트가 공유하는 외부 리소스 ID(노션 DB, 디스코드 채널, 시트 등)를
+# 한 곳에서 관리하기 위함입니다. 첫 실행 시 `/bootstrap` 명령이 빈 ID들을 자동으로 채워줍니다.
+#
+# 학습자/팀원에게 폴더를 공유할 때 이 파일을 함께 보내면 환경 재현이 빠릅니다.
+# (개인 정보 아니므로 git 커밋해도 됨. 단, 디스코드 webhook URL은 .env로 분리)
+
+# ────────────────────────────────────────────────
+# Notion 데이터베이스 (8개)
+# ────────────────────────────────────────────────
+notion:
+  databases:
+    weekly_trends:                     # Part 4 trend-scanner → Part 3 email-newsletter
+      id: ""                           # /bootstrap이 자동 채움
+      name: "주간 트렌드"
+      schema:
+        - { name: "키워드", type: "title" }
+        - { name: "카테고리", type: "select", options: ["뷰티", "광고", "SNS", "리뷰", "트렌드"] }
+        - { name: "URL", type: "url" }
+        - { name: "요약", type: "rich_text" }
+        - { name: "수집일", type: "date" }
+        - { name: "관련성", type: "number" }
+
+    competitors:
+      id: ""
+      name: "경쟁사"
+      schema:
+        - { name: "브랜드명", type: "title" }
+        - { name: "도메인", type: "url" }
+        - { name: "인스타핸들", type: "rich_text" }
+        - { name: "광고라이브러리URL", type: "url" }
+        - { name: "카테고리", type: "select", options: ["토너", "세럼", "크림", "기타"] }
+
+    competitor_snapshots:              # Part 4 competitor-monitor diff 비교용
+      id: ""
+      name: "경쟁사 스냅샷 아카이브"
+
+    content_calendar:                  # Part 5 content-calendar → Part 3 content-publisher
+      id: ""
+      name: "콘텐츠 캘린더"
+      schema:
+        - { name: "제목", type: "title" }
+        - { name: "발행일", type: "date" }
+        - { name: "채널", type: "multi_select", options: ["Instagram", "Facebook", "X", "LinkedIn", "TikTok", "Blog"] }
+        - { name: "상태", type: "select", options: ["Draft", "Approved", "Scheduled", "Published"] }
+        - { name: "담당자", type: "people" }
+        - { name: "광고비", type: "number" }
+        - { name: "ROAS", type: "number" }
+        - { name: "링크", type: "url" }
+
+    ad_reports_archive:                # Part 6 광고 분석 결과 보관
+      id: ""
+      name: "광고 리포트 아카이브"
+
+    newsletter_archive:                # Part 3 email-newsletter 발송 이력
+      id: ""
+      name: "뉴스레터 아카이브"
+
+    cs_wiki:                           # Part 8 cs-responder RAG
+      id: ""
+      name: "CS 응대 위키"
+
+    ab_test_library:                   # Part 6 ab-test-analyzer 우승 패턴 적재
+      id: ""
+      name: "A/B 라이브러리"
+
+  # 단일 페이지 (DB 아님)
+  pages:
+    brand_voice:                       # Part 5 brand-guidelines가 생성, 모든 카피 에이전트가 읽음
+      id: ""
+      name: "Brand Voice"
+    trend_scanner_config:              # Part 4 trend-scanner 카테고리 설정
+      id: ""
+      name: "trend-scanner 설정"
+
+# ────────────────────────────────────────────────
+# Discord 채널 (5개)
+# ────────────────────────────────────────────────
+discord:
+  guild_id: ""                          # 서버 ID
+  channels:
+    main:                               # #marketing-os — 모든 일반 출력
+      channel_id: ""
+      webhook_url_env: "DISCORD_WEBHOOK_URL"
+    alerts:                             # #marketing-alerts — 광고 임계치
+      channel_id: ""
+      webhook_url_env: "DISCORD_WEBHOOK_URL_ALERTS"
+    approvals:                          # #marketing-approvals — 승인 게이트
+      channel_id: ""
+      webhook_url_env: "DISCORD_WEBHOOK_URL_APPROVALS"
+    research:                           # #marketing-research — 리서치 자동 발송
+      channel_id: ""
+      webhook_url_env: "DISCORD_WEBHOOK_URL_RESEARCH"
+    cs:                                 # #marketing-cs — CS 응대 초안
+      channel_id: ""
+      webhook_url_env: "DISCORD_WEBHOOK_URL_CS"
+
+# ────────────────────────────────────────────────
+# Google Sheets (3개)
+# ────────────────────────────────────────────────
+google_sheets:
+  spreadsheets:
+    ads_references:                     # Part 4 ad-reference-collector
+      id: ""
+      name: "광고 레퍼런스 카탈로그"
+    voc_reports:                        # Part 4 voc-analyzer
+      id: ""
+      name: "VoC 리포트"
+    seo_keywords:                       # Part 4 seo-keyword-research
+      id: ""
+      name: "SEO 키워드 리포트"
+    customer_master:                    # Part 8 customer-data-unifier
+      id: ""
+      name: "고객 마스터 DB"
+    ad_copy_ab:                         # Part 5 ad-copy-ab
+      id: ""
+      name: "광고 카피 A/B"
+    ga4_analysis:                       # Part 7 ga4-analyzer
+      id: ""
+      name: "GA4 분석"
+
+# ────────────────────────────────────────────────
+# 임계치·정책 (운영 중 조정)
+# ────────────────────────────────────────────────
+thresholds:
+  ads:
+    roas_warn: 2.0
+    roas_block: 1.0
+    cpa_warn: 30000
+    cpa_block: 50000
+    ctr_warn: 0.01
+    daily_budget_warn: 1.1
+    daily_budget_block: 1.3
+  quality:
+    min_average_score: 3.5            # quality-reviewer-6axis 자동 재작성 기준
+    compliance_block: 2.0             # 규제 안전성 2점 이하 = 자동 차단
+  cost:
+    monthly_budget_won: 100000        # 월 LLM 비용 한도. 초과 시 디스코드 알림
+    per_run_alert_won: 10000          # 1회 /ax-team-run 비용 알림 임계
+
+# ────────────────────────────────────────────────
+# 브랜드 컨텍스트 (학습자가 직접 채움)
+# ────────────────────────────────────────────────
+brand:
+  name: ""                              # 예: "내 브랜드"
+  category: ""                          # 예: "K-뷰티 D2C 토너"
+  website: ""                           # 예: "https://mybrand.com"
+  instagram_handle: ""                  # 예: "@mybrand"
+  competitors:                          # 핵심 경쟁사 도메인 (Notion DB에도 동기화됨)
+    - ""
+    - ""
+    - ""
+  personas:                             # brand-guidelines가 자동 갱신
+    - name: ""
+      age: ""
+      core_pain: ""
+
+# ────────────────────────────────────────────────
+# 메타
+# ────────────────────────────────────────────────
+meta:
+  version: "1.0.0"
+  last_bootstrap: ""                    # /bootstrap 실행 시 자동 갱신
+  timezone: "Asia/Seoul"
+  locale: "ko-KR"
