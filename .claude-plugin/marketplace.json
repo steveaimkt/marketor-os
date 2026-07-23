@@ -2,11 +2,11 @@
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "marketplaceVersion": "1",
   "name": "marketor-os",
-  "description": "패스트캠퍼스 「마케터를 위한 클로드코드」 강의 공식 플러그인 마켓플레이스.",
+  "description": "마케팅 OS — 우리 회사에 맞는 사람+AI 마케팅팀을 구축하는 오픈 플러그인 마켓플레이스.",
   "plugins": [
     {
       "name": "marketor-os",
-      "description": "마케터를 위한 클로드코드 — 30개 에이전트로 24시간 가동되는 마케팅 자동화 OS.",
+      "description": "마케팅 OS — AI 에이전트 71 + 방법론 100스킬로 회사 맞춤 마케팅팀을 구축하는 오픈 시스템.",
       "category": "productivity",
       "version": "0.1.0",
       "source": {
