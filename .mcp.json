@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json.schemastore.org/mcp.json",
+  "_comment": "marketing-os MCP 설정 — 9종 골격. .env 에 키를 채우면 자동 활성화. Claude.ai 통합(Notion, Gmail, Calendar, Drive, Slack)은 Claude Code 에서 OAuth 로 자동 인증되므로 여기에 명시하지 않아도 됩니다.",
+  "mcpServers": {
+    "google-sheets": {
+      "_part": "2 Ch1-2 스프레드시트 자동화 (자체 호스팅 MCP)",
+      "_comment": "자체 호스팅 OAuth2 MCP 서버 (mcp-servers/google-sheets/index.js). 10 도구: get_spreadsheet_info, read_sheet, batch_read_sheet, write_sheet, append_sheet, clear_sheet, add_sheet, delete_sheet, create_spreadsheet, format_cells. 최초 1회 mcp-servers/google-sheets/oauth_credentials.json 발급 후 첫 실행 시 브라우저 인증 자동. 설치: /mcp설치-google-sheets 스킬.",
+      "command": "bash",
+      "args": [
+        "-c",
+        "exec node \"${CLAUDE_PROJECT_DIR:-$PWD}/mcp-servers/google-sheets/index.js\""
+      ]
+    },
+    "ga4": {
+      "_part": "2 Ch1-3 웹사이트 성과 자동 리포트",
+      "_comment": "Google 공식 analytics-mcp (PyPI v0.6.0 · github.com/googleanalytics/google-analytics-mcp · Python/uvx). 도구 9개: get_account_summaries, get_property_details, get_custom_dimensions_and_metrics, list_property_annotations, list_google_ads_links, run_report, run_realtime_report, run_funnel_report, run_conversions_report. 인증은 ADC (gcloud auth application-default login --scopes=analytics.readonly,cloud-platform) · 회사 도메인 조직의 Service Account 키 발급 차단 정책 우회 목적으로 ADC 유지. google-ads 와 같은 uvx 패턴.",
+      "_comment_migration": "2026-07-27 교체: 기존 npx mcp-server-ga4 (npm v1.0.2 · 개인 배포판 · 미유지보수) 가 번들한 google-auth-library@9.15.1 의 gRPC 토큰 취득이 깨져 모든 호출이 '2 UNKNOWN: Getting metadata from plugin failed ... oauth2.googleapis.com/token: Premature close' 로 실패. 동일 ADC 로 Python/최신 google-auth-library 경로는 정상 → 패키지 결함 확정. 되돌리려면 command=npx, args=[-y, mcp-server-ga4], env 에 GA_PROPERTY_ID 추가.",
+      "_comment_property": "공식 서버는 속성 고정값이 없고 도구 호출마다 property_id 를 받는다 (구 GA_PROPERTY_ID 대체). 이 회사 계정 속성 5개 = ${GA4_PROPERTY_ID}(이 회사) · ${GA4_PROPERTY_ID}(이 회사 뉴스레터 플랫폼 · 기존 기본값) · ${GA4_PROPERTY_ID}(이 회사 뉴스레터) · ${GA4_PROPERTY_ID}(인사이트 아티클) · ${GA4_PROPERTY_ID}(AI Commerce OS).",
+      "command": "bash",
+      "args": [
+        "-c",
+        "UVX=\"$(command -v uvx || echo \"$HOME/.local/bin/uvx\")\"; exec \"$UVX\" --from analytics-mcp google-analytics-mcp"
+      ],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "${HOME}/.config/gcloud/application_default_credentials.json"
+      }
+    },
+    "firecrawl": {
+      "_part": "2 Ch1-4",
+      "_comment": "키는 .env 를 bash source 로 주입(.mcp.json 에 평문 미노출). VSCode 확장 Claude Code 는 .zshrc export 미적용이라 ${FIRECRAWL_API_KEY} 직접 참조 시 빈 값 → Invalid token. buffer 와 동일 패턴. 발급: https://firecrawl.dev/app/api-keys",
+      "command": "bash",
+      "args": [
+        "-c",
+        "set -a; source \"${CLAUDE_PROJECT_DIR:-$PWD}/.env\"; set +a; exec npx -y firecrawl-mcp"
+      ]
+    },
+    "youtube-data": {
+      "_part": "2 Ch2-2 유튜브 채널·영상 분석",
+      "_comment": "youtube-data-mcp-server (npm v1.0.16). Phase 1: Data API v3 (YOUTUBE_API_KEY, 공개 데이터). Phase 2: Analytics API v2 (YOUTUBE_OAUTH_*, 본인 채널 구독 변동·이탈·트래픽·인구통계). Phase 2 셋업: analytics-api-oauth.md STEP 1~6. 무료 한도: 일 10,000 unit. 키는 .env 를 bash source 로 주입(평문 미노출). VSCode 확장 Claude Code 는 .zshrc export 미적용이라 env 블록의 ${YOUTUBE_*} 직접 참조 시 빈 값 → 'Missing environment variables' 경고. firecrawl·buffer 와 동일 패턴으로 전환 (2026-06-19).",
+      "command": "bash",
+      "args": [
+        "-c",
+        "set -a; source \"${CLAUDE_PROJECT_DIR:-$PWD}/.env\"; set +a; exec npx -y youtube-data-mcp-server"
+      ]
+    },
+    "buffer": {
+      "_part": "2 Ch3-1 소셜 미디어 예약 발행",
+      "_comment": "@damusix/buffer-mcp (npm v0.2.1). Buffer 소셜 미디어 API 통합 (api.buffer.com). 키는 .env 를 bash source 로 주입(.mcp.json 에 평문 미노출). VSCode 확장 Claude Code 는 .zshrc export 미적용이라 ${BUFFER_ACCESS_TOKEN} 직접 참조 시 빈 값 전달 → Unauthorized. firecrawl 과 동일 패턴으로 해결 (2026-06-15). 발급: buffer.com Settings → Access Tokens.",
+      "command": "bash",
+      "args": [
+        "-c",
+        "set -a; source \"${CLAUDE_PROJECT_DIR:-$PWD}/.env\"; set +a; exec npx -y @damusix/buffer-mcp"
+      ]
+    },
+    "_notes_meta_ads_moved_to_hosted": {
+      "_comment": "Meta 광고 MCP 는 Meta 공식 hosted MCP (https://mcp.facebook.com/ads · OAuth 2.1) 로 전환됨. claude mcp add --transport http --scope user meta-ads https://mcp.facebook.com/ads 로 등록. Claude Code 재시작 후 첫 사용 시 OAuth 자동 인증 (5 scope: ads_management, ads_read, catalog_management, business_management, pages_show_list). System User Token / META_ACCESS_TOKEN / META_AD_ACCOUNT_ID 불필요. 설치: /mcp설치-ads 스킬 의 Meta 섹션 (단순화됨).",
+      "command": "echo",
+      "args": [
+        "See claude mcp list — meta-ads"
+      ]
+    },
+    "google-ads": {
+      "_part": "2 Ch3-2 Google 광고 분석 (Google 공식 MCP)",
+      "_comment": "github.com/googleads/google-ads-mcp (Google 공식 · Python · FastMCP 3.3.1 · 86 패키지). 읽기 전용 강제. ADC 자동 인증 (gcloud auth application-default login). 도구 3개: list_accessible_customers, search (GAQL), get_resource_metadata. DEVELOPER_TOKEN(비밀)은 .env 를 bash source 로 주입(.mcp.json 평문 미노출). GOOGLE_PROJECT_ID 는 비밀 아님이라 inline export 유지.",
+      "command": "bash",
+      "args": [
+        "-c",
+        "set -a; source \"${CLAUDE_PROJECT_DIR:-$PWD}/.env\"; set +a; export GOOGLE_PROJECT_ID=${GOOGLE_PROJECT_ID}; exec uvx --from git+https://github.com/googleads/google-ads-mcp.git google-ads-mcp"
+      ]
+    },
+    "_notes_oauth_via_claude_ai": {
+      "_comment": "Claude.ai 통합으로 자동 인증되는 도구 (별도 등록 불필요): notion (Ch4-1), gmail, google-calendar, google-drive. Claude Desktop/Web의 Settings → Integrations에서 Connect만 한 번 해두세요.",
+      "command": "echo",
+      "args": [
+        "See Claude.ai Integrations"
+      ]
+    }
+  }
+}

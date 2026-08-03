@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills 100 MAP · 마케팅 방법론 100개를 부르는 말</title>
+<style>
+:root {
+  /* 이 회사 Design System (claude.ai/design) */
+  --bg:#F3F3F2; --ink:#2A2A28; --ink-soft:#3C3633; --accent:#747264; --card:#FFFFFF;
+  --line:#EBEBEB; --sub:#4C4D59; --soft:#EEEDEB; --sand:#E0CCBE; --olive:#747264; --lilac-100:#E6E9FF; --lilac-200:#C4C9E5; --highlight:#EBFF2C;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background:var(--bg); color:var(--ink);
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+  line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.wrap { max-width:1180px; margin:0 auto; padding:0 20px 80px; }
+
+/* ---------- 헤더 ---------- */
+header { padding:52px 0 28px; text-align:center; }
+header .eyebrow { color:var(--accent); font-weight:700; letter-spacing:.14em; font-size:13px; }
+header h1 { font-size:clamp(28px,4.5vw,44px); font-weight:500; margin:10px 0 6px; letter-spacing:-.02em; }
+header .sub { color:var(--sub); font-size:16px; }
+.howto {
+  display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin:28px auto 0; max-width:860px;
+}
+.howto .step {
+  flex:1 1 240px; background:var(--card); border:1px solid var(--line); border-radius:13px;
+  padding:16px 18px; text-align:left;
+}
+.howto .n { display:inline-block; width:24px; height:24px; border-radius:50%; background:var(--accent);
+  color:#fff; font-weight:800; font-size:13px; text-align:center; line-height:24px; margin-bottom:8px; }
+.howto b { display:block; font-size:15px; margin-bottom:2px; }
+.howto p { font-size:13.5px; color:var(--sub); }
+.first-cmd {
+  margin:22px auto 0; max-width:640px; background:var(--ink); color:var(--bg);
+  border-radius:13px; padding:16px 20px; font-size:15px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; justify-content:center;
+}
+.first-cmd code {
+  background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); border-radius:5px;
+  padding:4px 12px; font-family:inherit; font-weight:700; color:var(--highlight);
+}
+.first-cmd .copy { background:var(--highlight); color:var(--ink); border:none; }
+
+/* ---------- 필터 바 ---------- */
+.filterbar {
+  position:sticky; top:0; z-index:20; background:color-mix(in srgb, var(--bg) 92%, transparent);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  padding:14px 0 12px; border-bottom:1px solid var(--line); margin-bottom:22px;
+}
+.search-row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:10px; }
+#search {
+  flex:1 1 260px; padding:11px 16px; border-radius:10px; border:1.5px solid var(--line);
+  background:var(--card); font-size:15px; font-family:inherit; color:var(--ink); outline:none;
+}
+#search:focus { border-color:var(--accent); }
+.toggle {
+  display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none;
+  background:var(--card); border:1.5px solid var(--line); border-radius:10px; padding:10px 14px; font-size:14px; font-weight:600;
+}
+.toggle input { display:none; }
+.toggle .sw { width:36px; height:20px; border-radius:20px; background:#D6D3CC; position:relative; transition:.2s; flex:none; }
+.toggle .sw::after { content:""; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#fff; transition:.2s; }
+.toggle input:checked + .sw { background:#4A6B4A; }
+.toggle input:checked + .sw::after { left:18px; }
+.tabs { display:flex; gap:8px; flex-wrap:wrap; }
+.tab {
+  border:1.5px solid var(--line); background:var(--card); color:var(--sub);
+  padding:7px 14px; border-radius:99px; font-size:13.5px; font-weight:600; cursor:pointer; font-family:inherit; transition:.15s;
+}
+.tab:hover { border-color:var(--ink); color:var(--ink); background:var(--soft); }
+.tab.active { background:var(--ink); border-color:var(--ink); color:var(--bg); }
+.tab .cnt { opacity:.7; font-weight:500; }
+.result-line { font-size:13.5px; color:var(--sub); margin-top:8px; }
+
+/* ---------- 카드 그리드 ---------- */
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; }
+.card {
+  background:var(--card); border:1px solid var(--line); border-radius:13px; padding:18px 18px 16px;
+  display:flex; flex-direction:column; gap:10px; transition:box-shadow .15s, transform .15s;
+}
+.card:hover { box-shadow:0 4px 14px rgba(42,42,40,.06); transform:translateY(-2px); }
+.card.hide { display:none; }
+.card-top { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; }
+.badge { background:var(--soft); color:var(--sub); border:1px solid var(--line); font-size:11.5px; font-weight:600; padding:4px 10px; border-radius:99px; letter-spacing:.01em; }
+.st { font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:99px; white-space:nowrap; }
+.st-done { background:#E7EFE6; color:#4A6B4A; }
+.st-stub { background:var(--soft); color:var(--sub); }
+.st-gate { background:var(--sand); color:var(--ink); }
+.card h3 { font-size:16.5px; font-weight:600; letter-spacing:-.01em; line-height:1.4; }
+.card .desc { font-size:13.5px; color:var(--sub); flex:1; }
+.say { background:var(--lilac-100); border:1px solid var(--lilac-200); border-radius:10px; padding:10px 12px; }
+.say-label { font-size:11.5px; font-weight:700; color:var(--sub); margin-bottom:5px; }
+.say-row { display:flex; align-items:center; gap:8px; justify-content:space-between; }
+.say-text { font-size:14.5px; font-weight:600; color:var(--ink); word-break:keep-all; }
+.say-base { font-size:13px; font-weight:600; color:var(--sub); }
+.say-label2 { margin-top:9px; color:var(--ink-soft); }
+.say-full { font-size:13px; font-weight:550; line-height:1.55; word-break:keep-all; }
+.copy {
+  flex:none; border:1.5px solid var(--ink); background:#fff; color:var(--ink);
+  font-family:inherit; font-size:12.5px; font-weight:600; padding:5px 12px; border-radius:5px; cursor:pointer; transition:.15s;
+}
+.copy:hover { background:var(--ink); color:var(--bg); }
+.copy.ok { background:#4A6B4A; border-color:#4A6B4A; color:#fff; }
+.card-foot { display:flex; gap:6px; flex-wrap:wrap; }
+.empty { display:none; text-align:center; color:var(--sub); padding:60px 0; font-size:15px; }
+.empty.show { display:block; }
+
+/* ---------- 체인 섹션 ---------- */
+.cmd-sec { margin-top:64px; }
+.cmd-sec h2 { font-size:24px; font-weight:500; letter-spacing:-.02em; }
+.cmd-sec .lead { color:var(--sub); margin:6px 0 20px; font-size:15px; }
+.cmd-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:14px; }
+.cmd {
+  background:var(--ink); color:#EEEDEB; border-radius:13px; padding:18px;
+  display:flex; flex-direction:column; gap:8px;
+}
+.cmd-head { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.cmd-name { font-weight:600; font-size:17px; color:var(--sand); }
+.cmd-desc { font-size:13px; color:#AFAFAC; line-height:1.55; }
+.cmd-chain { font-size:12px; color:#848383; letter-spacing:.02em; }
+.copy-sm { background:transparent; border-color:rgba(255,255,255,.35); color:#EEEDEB; }
+.copy-sm:hover { background:var(--sand); border-color:var(--sand); color:var(--ink); }
+footer { margin-top:56px; text-align:center; color:var(--sub); font-size:13px; }
+footer b { color:var(--ink); }
+
+/* ---------- 토스트 ---------- */
+#toast {
+  position:fixed; left:50%; bottom:28px; transform:translate(-50%,20px);
+  background:var(--ink); color:#fff; padding:11px 22px; border-radius:99px; font-size:14px; font-weight:600;
+  opacity:0; pointer-events:none; transition:.25s; z-index:99;
+}
+#toast.show { opacity:1; transform:translate(-50%,0); }
+
+@media (max-width:640px) {
+  header { padding:36px 0 20px; }
+  .grid { grid-template-columns:1fr; }
+  .cmd-grid { grid-template-columns:1fr; }
+  .howto .step { flex:1 1 100%; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">MARKETING SKILLS 100</div>
+  <h1>Skills 100 MAP</h1>
+  <p class="sub">외울 것은 없습니다. 카드의 문장을 그대로 말하면 담당자가 잡습니다.</p>
+
+  <div class="howto">
+    <div class="step"><span class="n">1</span><b>말한다 · 트리거</b><p>카드의 &ldquo;이렇게 말하세요&rdquo; 문장을 복사해 그대로 치세요. 비슷하게만 말해도 잡습니다. 부르는 말이 454개 등록돼 있습니다.</p></div>
+    <div class="step"><span class="n">2</span><b>되묻는다</b><p>빠진 정보가 있으면 팀이 먼저 물어봅니다. 어떤 스킬을 쓸지는 시스템이 찾으니 답만 고르세요.</p></div>
+    <div class="step"><span class="n">3</span><b>멈춘다 · 게이트</b><p>100개 중 <b>32개</b>는 되돌릴 수 없는 자리에서 결재(⏸)를 받으러 옵니다. 승인 전엔 아무것도 안 나갑니다.</p></div>
+  </div>
+
+  <div class="first-cmd">
+    <span>🚀 가볍게 &middot; 5분이면 됩니다</span>
+    <code>스킬 100개 설치하자</code>
+    <button class="copy" data-copy="스킬 100개 설치하자">복사</button>
+    <span>팀은 안 만들고 방법론 100개를 바로 씁니다</span>
+  </div>
+
+  <div class="first-cmd" style="margin-top:10px; background:var(--card); color:var(--ink); border:1.5px solid var(--line);">
+    <span>🏢 제대로 &middot; 컨설팅 한 세션</span>
+    <code style="background:var(--soft); border-color:var(--line); color:var(--accent);">팀 구축하자</code>
+    <button class="copy" data-copy="팀 구축하자">복사</button>
+    <span style="color:var(--sub);">내 회사에 맞는 AI 팀이 섭니다 &middot; 이어서 「팀 실행하자」 「팀 피드백하자」</span>
+  </div>
+</header>
+
+<div class="filterbar">
+  <div class="search-row">
+    <input id="search" type="search" placeholder="🔍 검색 제목이나 트리거 문장으로 찾기 (예: 리뷰, 광고, 페르소나)">
+    <label class="toggle"><input type="checkbox" id="gateOnly"><span class="sw"></span>⏸ 결재받는 것만 (32)</label>
+  </div>
+  <div class="tabs">
+<button class="tab active" data-cat="all">전체 <span class="cnt">100</span></button>
+<button class="tab" data-cat="01">시장조사 &amp; 트렌드</button>
+<button class="tab" data-cat="02">제품기획 &amp; 포지셔닝</button>
+<button class="tab" data-cat="03">콘텐츠 마케팅</button>
+<button class="tab" data-cat="04">SNS 운영 &amp; 커뮤니티</button>
+<button class="tab" data-cat="05">광고 운영 &amp; 분석</button>
+<button class="tab" data-cat="06">이커머스 &amp; 상세페이지</button>
+<button class="tab" data-cat="07">데이터 분석 &amp; 리포팅</button>
+<button class="tab" data-cat="08">CRM &amp; 고객관리</button>
+<button class="tab" data-cat="09">브랜딩 &amp; PR·세일즈</button>
+<button class="tab" data-cat="10">마케팅 운영 &amp; 생산성</button>
+  </div>
+  <div class="result-line" id="resultLine">100개 스킬 전체를 보고 있습니다</div>
+</div>
+
+<main class="grid" id="grid">
+<article class="card" data-cat="01" data-done="1" data-q="팔리는 검색어를 발굴하는 키워드 수요 리서치 키워드 수요 리서치 키워드 조사해줘 001">
+<div class="card-top"><span class="badge">시장조사 &amp; 트렌드 · 001</span><span class="st st-done">✅ 완성</span></div>
+<h3>팔리는 검색어를 발굴하는 키워드 수요 리서치</h3>
+<p class="desc">카테고리 키워드 발굴·검색량·경쟁강도 분석 (329개 키워드 방법론)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;키워드 조사해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t001">&ldquo;키워드 조사해줘. 시드 키워드 1개 〈…〉, 타겟 시장 〈한국〉, 콘텐츠 포맷 〈blog〉. 결과는 키워드 TOP 20 우선순위 표 중심으로&rdquo;</span>
+<button class="copy" data-copy="키워드 조사해줘. 시드 키워드 1개 〈…〉, 타겟 시장 〈한국〉, 콘텐츠 포맷 〈blog〉. 결과는 키워드 TOP 20 우선순위 표 중심으로" data-tid="t001">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="01" data-done="1" data-q="경쟁 브랜드를 한 장으로 해부하는 비교 리포트 경쟁사 분석 리포트 경쟁사 분석해줘 002">
+<div class="card-top"><span class="badge">시장조사 &amp; 트렌드 · 002</span><span class="st st-done">✅ 완성</span></div>
+<h3>경쟁 브랜드를 한 장으로 해부하는 비교 리포트</h3>
+<p class="desc">경쟁 브랜드 포지셔닝·가격·채널 비교표 자동 생성</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;경쟁사 분석해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t002">&ldquo;경쟁사 분석해줘. 경쟁 브랜드 2~5개 〈…〉, 〈비교 자료〉 첨부, 비교 축 추가 요청 〈…〉. 결과는 3축 경쟁사 비교표(포지셔닝·가격·채널) 중심으로&rdquo;</span>
+<button class="copy" data-copy="경쟁사 분석해줘. 경쟁 브랜드 2~5개 〈…〉, 〈비교 자료〉 첨부, 비교 축 추가 요청 〈…〉. 결과는 3축 경쟁사 비교표(포지셔닝·가격·채널) 중심으로" data-tid="t002">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="01" data-done="1" data-q="자는 동안 경쟁사를 지켜보는 상시 모니터링 경쟁사 상시 모니터링 경쟁사 추적 켜줘 003">
+<div class="card-top"><span class="badge">시장조사 &amp; 트렌드 · 003</span><span class="st st-done">✅ 완성</span></div>
+<h3>자는 동안 경쟁사를 지켜보는 상시 모니터링</h3>
+<p class="desc">경쟁사 사이트·SNS 변화 주간 추적 리포트 (Firecrawl 연동)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;경쟁사 추적 켜줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t003">&ldquo;경쟁사 추적 켜줘. 경쟁사 URL·SNS 목록(최대 10개) 〈…〉, 추적 주기 〈주 1회〉. 결과는 주간 변화 리포트 중심으로&rdquo;</span>
+<button class="copy" data-copy="경쟁사 추적 켜줘. 경쟁사 URL·SNS 목록(최대 10개) 〈…〉, 추적 주기 〈주 1회〉. 결과는 주간 변화 리포트 중심으로" data-tid="t003">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="01" data-done="1" data-q="시장 크기를 숫자로 말하는 tam-sam-som 추정 시장 규모 추정 (tam-sam-som) 시장 크기 알려줘 004">
+<div class="card-top"><span class="badge">시장조사 &amp; 트렌드 · 004</span><span class="st st-done">✅ 완성</span></div>
+<h3>시장 크기를 숫자로 말하는 TAM-SAM-SOM 추정</h3>
+<p class="desc">탑다운+바텀업 시장 규모 산출</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;시장 크기 알려줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t004">&ldquo;시장 크기 알려줘. 카테고리·제품 정의 〈…〉, 〈참고 통계 자료〉 있으면 첨부. 결과는 TAM-SAM-SOM 산출표(탑다운·바텀업 병렬) 중심으로&rdquo;</span>
+<button class="copy" data-copy="시장 크기 알려줘. 카테고리·제품 정의 〈…〉, 〈참고 통계 자료〉 있으면 첨부. 결과는 TAM-SAM-SOM 산출표(탑다운·바텀업 병렬) 중심으로" data-tid="t004">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="01" data-done="1" data-q="카테고리의 다음 신호를 잡는 트렌드 스캐닝 트렌드 스캐닝 트렌드 분석해줘 005">
+<div class="card-top"><span class="badge">시장조사 &amp; 트렌드 · 005</span><span class="st st-done">✅ 완성</span></div>
+<h3>카테고리의 다음 신호를 잡는 트렌드 스캐닝</h3>
+<p class="desc">뉴스·커뮤니티·검색 트렌드에서 카테고리 시그널 추출</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;트렌드 분석해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t005">&ldquo;트렌드 분석해줘. 시드 키워드 1~3개 〈…〉, 스캔 기간 〈최근 30일〉. 결과는 트렌드 시그널 TOP 10(출처·점수 포함) 중심으로&rdquo;</span>
+<button class="copy" data-copy="트렌드 분석해줘. 시드 키워드 1~3개 〈…〉, 스캔 기간 〈최근 30일〉. 결과는 트렌드 시그널 TOP 10(출처·점수 포함) 중심으로" data-tid="t005">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="01" data-done="1" data-q="리뷰 수백 개에서 페인포인트를 캐내는 리뷰 마이닝 소비자 리뷰 마이닝 리뷰 분석해줘 006">
+<div class="card-top"><span class="badge">시장조사 &amp; 트렌드 · 006</span><span class="st st-done">✅ 완성</span></div>
+<h3>리뷰 수백 개에서 페인포인트를 캐내는 리뷰 마이닝</h3>
+<p class="desc">자사·경쟁사 리뷰 대량 수집 → 페인포인트·구매동기 추출</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;리뷰 분석해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t006">&ldquo;리뷰 분석해줘. 〈리뷰·댓글·CS 데이터(CSV/텍스트/URL)〉 첨부, 분석 기간 〈최근 7일〉, 최대 건수 〈500〉. 결과는 행별 분류 시트(5분류+5축 점수) 중심으로&rdquo;</span>
+<button class="copy" data-copy="리뷰 분석해줘. 〈리뷰·댓글·CS 데이터(CSV/텍스트/URL)〉 첨부, 분석 기간 〈최근 7일〉, 최대 건수 〈500〉. 결과는 행별 분류 시트(5분류+5축 점수) 중심으로" data-tid="t006">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="01" data-done="1" data-q="물어봐야 나오는 답을 설계하는 설문 설계 &amp; 분석 설문 설계 &amp; 분석 설문 만들어줘 007">
+<div class="card-top"><span class="badge">시장조사 &amp; 트렌드 · 007</span><span class="st st-done">✅ 완성</span></div>
+<h3>물어봐야 나오는 답을 설계하는 설문 설계 &amp; 분석</h3>
+<p class="desc">설문 문항 설계 → 응답 데이터 세그먼트 분석</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;설문 만들어줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t007">&ldquo;설문 만들어줘. 조사 목적 〈…〉, 〈타깃 응답자〉 첨부, 〈(분석 시) 응답 데이터(CSV/시트)〉 첨부. 결과는 가설-문항 매핑표 중심으로&rdquo;</span>
+<button class="copy" data-copy="설문 만들어줘. 조사 목적 〈…〉, 〈타깃 응답자〉 첨부, 〈(분석 시) 응답 데이터(CSV/시트)〉 첨부. 결과는 가설-문항 매핑표 중심으로" data-tid="t007">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="01" data-done="1" data-q="데이터로 그리는 진짜 고객, 페르소나 빌더 타깃 페르소나 빌더 페르소나 만들어줘 008">
+<div class="card-top"><span class="badge">시장조사 &amp; 트렌드 · 008</span><span class="st st-done">✅ 완성</span></div>
+<h3>데이터로 그리는 진짜 고객, 페르소나 빌더</h3>
+<p class="desc">데이터 기반 페르소나 3~5종 + JTBD 정의</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;페르소나 만들어줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t008">&ldquo;페르소나 만들어줘. 〈고객 데이터〉 첨부, 제품 정보 〈…〉. 결과는 페르소나 카드 3~5종 중심으로&rdquo;</span>
+<button class="copy" data-copy="페르소나 만들어줘. 〈고객 데이터〉 첨부, 제품 정보 〈…〉. 결과는 페르소나 카드 3~5종 중심으로" data-tid="t008">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="01" data-done="1" data-q="경쟁 가격을 지도로 그리는 포지셔닝 맵 가격 조사 &amp; 포지셔닝 맵 경쟁 가격 조사해줘 009">
+<div class="card-top"><span class="badge">시장조사 &amp; 트렌드 · 009</span><span class="st st-done">✅ 완성</span></div>
+<h3>경쟁 가격을 지도로 그리는 포지셔닝 맵</h3>
+<p class="desc">경쟁 가격 수집 → 가격-가치 포지셔닝 맵</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;경쟁 가격 조사해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t009">&ldquo;경쟁 가격 조사해줘. 자사 제품·판매가 〈…〉, 경쟁 제품 목록(또는 카테고리 키워드) 〈…〉, 옵션 기준(용량·구성 등) 〈…〉. 결과는 정규화 가격 수집표 중심으로&rdquo;</span>
+<button class="copy" data-copy="경쟁 가격 조사해줘. 자사 제품·판매가 〈…〉, 경쟁 제품 목록(또는 카테고리 키워드) 〈…〉, 옵션 기준(용량·구성 등) 〈…〉. 결과는 정규화 가격 수집표 중심으로" data-tid="t009">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="01" data-done="1" data-q="어디부터 진입할지 정하는 우선순위 평가 진입 시장 우선순위 어느 시장부터 들어가지? 010">
+<div class="card-top"><span class="badge">시장조사 &amp; 트렌드 · 010</span><span class="st st-done">✅ 완성</span></div>
+<h3>어디부터 진입할지 정하는 우선순위 평가</h3>
+<p class="desc">신규 카테고리/채널 진입 Impact×Effort 평가</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;어느 시장부터 들어가지?&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t010">&ldquo;어느 시장부터 들어가지? 진입 후보 시장·채널 목록(2~7개) 〈…〉, 자원 제약(인력·예산) 〈…〉, (있으면) 004 SOM 산출물 〈…〉. 결과는 Impact×Effort 평가 매트릭스(4분면) 중심으로&rdquo;</span>
+<button class="copy" data-copy="어느 시장부터 들어가지? 진입 후보 시장·채널 목록(2~7개) 〈…〉, 자원 제약(인력·예산) 〈…〉, (있으면) 004 SOM 산출물 〈…〉. 결과는 Impact×Effort 평가 매트릭스(4분면) 중심으로" data-tid="t010">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="02" data-done="1" data-q="시장 갭에서 출발하는 신제품 컨셉 브레인스토밍 신제품 컨셉 브레인스토밍 제품 아이디어 내줘 011">
+<div class="card-top"><span class="badge">제품기획 &amp; 포지셔닝 · 011</span><span class="st st-done">✅ 완성</span></div>
+<h3>시장 갭에서 출발하는 신제품 컨셉 브레인스토밍</h3>
+<p class="desc">시장 갭 기반 제품 컨셉 5안 + 검증 가설</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;제품 아이디어 내줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t011">&ldquo;제품 아이디어 내줘. 〈시장 갭·리서치 자료〉 첨부, 카테고리 〈…〉, 가용 자원·제약 〈…〉. 결과는 시장 갭 요약표 중심으로&rdquo;</span>
+<button class="copy" data-copy="제품 아이디어 내줘. 〈시장 갭·리서치 자료〉 첨부, 카테고리 〈…〉, 가용 자원·제약 〈…〉. 결과는 시장 갭 요약표 중심으로" data-tid="t011">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="02" data-done="1" data-q="&quot;누구에게 왜&quot;를 한 문장으로 usp·가치제안 정의 usp·가치제안 정의 차별점 정리해줘 012">
+<div class="card-top"><span class="badge">제품기획 &amp; 포지셔닝 · 012</span><span class="st st-done">✅ 완성</span></div>
+<h3>&quot;누구에게 왜&quot;를 한 문장으로 USP·가치제안 정의</h3>
+<p class="desc">6단 JTBD 가치제안문 (누구에게/왜/무엇을/어떻게)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;차별점 정리해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t012">&ldquo;차별점 정리해줘. 제품 정보 〈…〉, 타깃 페르소나(008 산출물 권장) 〈…〉, 〈경쟁 비교 자료(002 산출물 권장)〉 첨부. 결과는 6단 JTBD 가치제안문 + 원라이너 중심으로&rdquo;</span>
+<button class="copy" data-copy="차별점 정리해줘. 제품 정보 〈…〉, 타깃 페르소나(008 산출물 권장) 〈…〉, 〈경쟁 비교 자료(002 산출물 권장)〉 첨부. 결과는 6단 JTBD 가치제안문 + 원라이너 중심으로" data-tid="t012">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="02" data-done="1" data-q="상표 걱정까지 끝내는 제품명·네이밍 제품명·네이밍 이름 지어줘 013">
+<div class="card-top"><span class="badge">제품기획 &amp; 포지셔닝 · 013</span><span class="st st-done">✅ 완성</span></div>
+<h3>상표 걱정까지 끝내는 제품명·네이밍</h3>
+<p class="desc">브랜드 톤 정렬 네이밍 + 상표·도메인 체크리스트</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;이름 지어줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t013">&ldquo;이름 지어줘. 제품 컨셉·가치제안(012 산출물 권장) 〈…〉, 피해야 할 단어·기존 상표 〈…〉. 결과는 네이밍 20안(4유형×5) + 3축 평가표 중심으로&rdquo;</span>
+<button class="copy" data-copy="이름 지어줘. 제품 컨셉·가치제안(012 산출물 권장) 〈…〉, 피해야 할 단어·기존 상표 〈…〉. 결과는 네이밍 20안(4유형×5) + 3축 평가표 중심으로" data-tid="t013">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="02" data-done="1" data-q="소싱 전에 go/no-go를 판정하는 상품 평가 소싱 상품 평가 이 상품 소싱할까? 014">
+<div class="card-top"><span class="badge">제품기획 &amp; 포지셔닝 · 014</span><span class="st st-done">✅ 완성</span></div>
+<h3>소싱 전에 GO/NO-GO를 판정하는 상품 평가</h3>
+<p class="desc">소싱 후보 마진·경쟁·수요 스코어링 (이커머스 특화)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;이 상품 소싱할까?&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t014">&ldquo;이 상품 소싱할까? 소싱 후보 상품 정보(원가·공급처·MOQ) 〈…〉, 목표 판매가 〈…〉, 판매 채널(수수료율) 〈…〉. 결과는 실마진 계산서 중심으로&rdquo;</span>
+<button class="copy" data-copy="이 상품 소싱할까? 소싱 후보 상품 정보(원가·공급처·MOQ) 〈…〉, 목표 판매가 〈…〉, 판매 채널(수수료율) 〈…〉. 결과는 실마진 계산서 중심으로" data-tid="t014">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="02" data-done="1" data-q="스펙 문서를 고객 언어로 바꾸는 셀링포인트 변환 제품 스펙시트 → 셀링포인트 스펙을 소구점으로 바꿔줘 015">
+<div class="card-top"><span class="badge">제품기획 &amp; 포지셔닝 · 015</span><span class="st st-done">✅ 완성</span></div>
+<h3>스펙 문서를 고객 언어로 바꾸는 셀링포인트 변환</h3>
+<p class="desc">스펙 문서를 소비자 언어 셀링포인트로 변환</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;스펙을 소구점으로 바꿔줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t015">&ldquo;스펙을 소구점으로 바꿔줘. 〈제품 스펙 문서(사양서·상세 스펙표)〉 첨부, 타깃 고객 〈…〉, 〈리뷰·VoC 자료〉 있으면 첨부. 결과는 기업 언어↔고객 언어 매핑표 중심으로&rdquo;</span>
+<button class="copy" data-copy="스펙을 소구점으로 바꿔줘. 〈제품 스펙 문서(사양서·상세 스펙표)〉 첨부, 타깃 고객 〈…〉, 〈리뷰·VoC 자료〉 있으면 첨부. 결과는 기업 언어↔고객 언어 매핑표 중심으로" data-tid="t015">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="02" data-done="1" data-q="객단가를 끌어올리는 번들·프로모션 설계 번들·프로모션 설계 기획전 짜줘 016">
+<div class="card-top"><span class="badge">제품기획 &amp; 포지셔닝 · 016</span><span class="st st-done">✅ 완성</span></div>
+<h3>객단가를 끌어올리는 번들·프로모션 설계</h3>
+<p class="desc">객단가 상승 번들 구성 + 마진 시뮬레이션</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;기획전 짜줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t016">&ldquo;기획전 짜줘. 상품 목록 〈…〉, 목표 객단가 〈…〉, 행사·시즌 맥락(선택, 057 산출물) 〈…〉. 결과는 번들 구성안 3종 중심으로&rdquo;</span>
+<button class="copy" data-copy="기획전 짜줘. 상품 목록 〈…〉, 목표 객단가 〈…〉, 행사·시즌 맥락(선택, 057 산출물) 〈…〉. 결과는 번들 구성안 3종 중심으로" data-tid="t016">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="02" data-done="1" data-q="시나리오 3안으로 정하는 가격 전략 가격 전략 설계 가격 어떻게 잡지? 017">
+<div class="card-top"><span class="badge">제품기획 &amp; 포지셔닝 · 017</span><span class="st st-done">✅ 완성</span></div>
+<h3>시나리오 3안으로 정하는 가격 전략</h3>
+<p class="desc">원가·경쟁·지불의사 기반 가격 시나리오 3안</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;가격 어떻게 잡지?&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t017">&ldquo;가격 어떻게 잡지? 원가 구조 〈…〉, 〈경쟁 가격 자료(009 산출물 권장)〉 첨부, 목표 마진·고정비 〈…〉. 결과는 원가 구조표(항목·수량·단가) 중심으로&rdquo;</span>
+<button class="copy" data-copy="가격 어떻게 잡지? 원가 구조 〈…〉, 〈경쟁 가격 자료(009 산출물 권장)〉 첨부, 목표 마진·고정비 〈…〉. 결과는 원가 구조표(항목·수량·단가) 중심으로" data-tid="t017">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="02" data-done="1" data-q="채널별 타임라인이 나오는 gtm 런칭 플랜 출시 체크리스트 &amp; gtm 플랜 런칭 플랜 짜줘 018">
+<div class="card-top"><span class="badge">제품기획 &amp; 포지셔닝 · 018</span><span class="st st-done">✅ 완성</span></div>
+<h3>채널별 타임라인이 나오는 GTM 런칭 플랜</h3>
+<p class="desc">채널별 런칭 타임라인 + 책임 매트릭스</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;런칭 플랜 짜줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t018">&ldquo;런칭 플랜 짜줘. 출시 제품 정보 〈…〉, 목표 출시일(D-day) 〈…〉, 가용 채널 목록 〈…〉. 결과는 D-30~D+30 채널별 런칭 타임라인 중심으로&rdquo;</span>
+<button class="copy" data-copy="런칭 플랜 짜줘. 출시 제품 정보 〈…〉, 목표 출시일(D-day) 〈…〉, 가용 채널 목록 〈…〉. 결과는 D-30~D+30 채널별 런칭 타임라인 중심으로" data-tid="t018">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="02" data-done="1" data-q="감이 아니라 설계로 하는 a/b 테스트 설계 a/b 테스트 설계 테스트 설계해줘 019">
+<div class="card-top"><span class="badge">제품기획 &amp; 포지셔닝 · 019</span><span class="st st-done">✅ 완성</span></div>
+<h3>감이 아니라 설계로 하는 A/B 테스트 설계</h3>
+<p class="desc">가설→변수→표본수→판정 기준 설계서</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;테스트 설계해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t019">&ldquo;테스트 설계해줘. 검증 가설 〈…〉, 대상 지표(기준 전환율 등 현재값) 〈…〉, 예상 트래픽(일 방문·노출) 〈…〉. 결과는 A/B 테스트 설계서 1페이지 중심으로&rdquo;</span>
+<button class="copy" data-copy="테스트 설계해줘. 검증 가설 〈…〉, 대상 지표(기준 전환율 등 현재값) 〈…〉, 예상 트래픽(일 방문·노출) 〈…〉. 결과는 A/B 테스트 설계서 1페이지 중심으로" data-tid="t019">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="02" data-done="1" data-q="개선 요청 더미에서 우선순위를 뽑는 rice 백로그 제품 개선 백로그 우선순위 개선 뭐부터 하지? 020">
+<div class="card-top"><span class="badge">제품기획 &amp; 포지셔닝 · 020</span><span class="st st-done">✅ 완성</span></div>
+<h3>개선 요청 더미에서 우선순위를 뽑는 RICE 백로그</h3>
+<p class="desc">VOC·데이터 기반 개선 항목 RICE 스코어링</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;개선 뭐부터 하지?&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t020">&ldquo;개선 뭐부터 하지? VOC·개선 요청 목록(078 산출물 권장) 〈…〉, 〈데이터 근거(판매·리뷰·CS 수치)〉 첨부, 가용 리소스(월 인주, 선택) 〈…〉. 결과는 RICE 스코어링 표(근거 병기) 중심으로&rdquo;</span>
+<button class="copy" data-copy="개선 뭐부터 하지? VOC·개선 요청 목록(078 산출물 권장) 〈…〉, 〈데이터 근거(판매·리뷰·CS 수치)〉 첨부, 가용 리소스(월 인주, 선택) 〈…〉. 결과는 RICE 스코어링 표(근거 병기) 중심으로" data-tid="t020">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="03" data-done="1" data-q="한 달 치가 한 번에 나오는 콘텐츠 캘린더 콘텐츠 캘린더 빌더 콘텐츠 캘린더 짜줘 021">
+<div class="card-top"><span class="badge">콘텐츠 마케팅 · 021</span><span class="st st-done">✅ 완성</span></div>
+<h3>한 달 치가 한 번에 나오는 콘텐츠 캘린더</h3>
+<p class="desc">채널·주제·퍼널 단계별 월간 캘린더 자동 생성</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;콘텐츠 캘린더 짜줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t021">&ldquo;콘텐츠 캘린더 짜줘. 운영 채널 목록 〈…〉, 핵심 주제·캠페인 일정 〈…〉, 월 발행 목표(캐파) 〈…〉. 결과는 월간 캘린더 표 중심으로&rdquo;</span>
+<button class="copy" data-copy="콘텐츠 캘린더 짜줘. 운영 채널 목록 〈…〉, 핵심 주제·캠페인 일정 〈…〉, 월 발행 목표(캐파) 〈…〉. 결과는 월간 캘린더 표 중심으로" data-tid="t021">복사</button></div></div>
+
+</article>
+<article class="card" data-gate="1" data-cat="03" data-done="1" data-q="검색 의도를 읽고 쓰는 블로그 seo 아티클 블로그 seo 아티클 블로그 글 써줘 022">
+<div class="card-top"><span class="badge">콘텐츠 마케팅 · 022</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>검색 의도를 읽고 쓰는 블로그 SEO 아티클</h3>
+<p class="desc">키워드 → 검색의도 분석 → SEO 최적화 글</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;블로그 글 써줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t022">&ldquo;블로그 글 써줘. 타깃 키워드 1개(001 산출물 권장) 〈…〉, 〈참고 자료〉 있으면 첨부, 목표 독자·전환 목표 〈…〉. 결과는 검색의도 분석 블록 중심으로&rdquo;</span>
+<button class="copy" data-copy="블로그 글 써줘. 타깃 키워드 1개(001 산출물 권장) 〈…〉, 〈참고 자료〉 있으면 첨부, 목표 독자·전환 목표 〈…〉. 결과는 검색의도 분석 블록 중심으로" data-tid="t022">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="03" data-done="1" data-q="수집부터 발행 포맷까지, 뉴스레터 자동화 뉴스레터 제작 자동화 뉴스레터 써줘 023">
+<div class="card-top"><span class="badge">콘텐츠 마케팅 · 023</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>수집부터 발행 포맷까지, 뉴스레터 자동화</h3>
+<p class="desc">소스 수집 → 큐레이션 → 발행 포맷 완성</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;뉴스레터 써줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t023">&ldquo;뉴스레터 써줘. 〈주제 1개 또는 소스 자료 3~7개〉 첨부, CTA 텍스트·URL 〈…〉. 결과는 본문 약 800자(HTML) 중심으로&rdquo;</span>
+<button class="copy" data-copy="뉴스레터 써줘. 〈주제 1개 또는 소스 자료 3~7개〉 첨부, CTA 텍스트·URL 〈…〉. 결과는 본문 약 800자(HTML) 중심으로" data-tid="t023">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="03" data-done="1" data-q="훅-시연-데이터-cta로 짜는 유튜브 스크립트 youtube 스크립트 (성과 증명형) 유튜브 대본 써줘 024">
+<div class="card-top"><span class="badge">콘텐츠 마케팅 · 024</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>훅-시연-데이터-CTA로 짜는 유튜브 스크립트</h3>
+<p class="desc">훅-시연-데이터-CTA 10분 구성 스크립트</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;유튜브 대본 써줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t024">&ldquo;유튜브 대본 써줘. 주제·시연 소재 〈…〉, 목표 시청자 〈…〉, 〈근거 데이터〉 첨부. 결과는 6섹션 스크립트 중심으로&rdquo;</span>
+<button class="copy" data-copy="유튜브 대본 써줘. 주제·시연 소재 〈…〉, 목표 시청자 〈…〉, 〈근거 데이터〉 첨부. 결과는 6섹션 스크립트 중심으로" data-tid="t024">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="03" data-done="1" data-q="클릭을 결정하는 썸네일·제목 10안 youtube 썸네일·제목 a/b 썸네일 제목 뽑아줘 025">
+<div class="card-top"><span class="badge">콘텐츠 마케팅 · 025</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>클릭을 결정하는 썸네일·제목 10안</h3>
+<p class="desc">제목·썸네일 카피 10안 + CTR 예측 근거</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;썸네일 제목 뽑아줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t025">&ldquo;썸네일 제목 뽑아줘. 영상 주제 또는 024 스크립트 〈…〉, 증명 소재 〈…〉, 채널 톤 〈…〉. 결과는 제목 10안 표(패턴·CTR 심리 근거) 중심으로&rdquo;</span>
+<button class="copy" data-copy="썸네일 제목 뽑아줘. 영상 주제 또는 024 스크립트 〈…〉, 증명 소재 〈…〉, 채널 톤 〈…〉. 결과는 제목 10안 표(패턴·CTR 심리 근거) 중심으로" data-tid="t025">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="03" data-done="1" data-q="롱폼 하나로 쇼츠 다섯 개 만드는 대본 팩 쇼츠/릴스 대본 팩 쇼츠 대본 만들어줘 026">
+<div class="card-top"><span class="badge">콘텐츠 마케팅 · 026</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>롱폼 하나로 쇼츠 다섯 개 만드는 대본 팩</h3>
+<p class="desc">롱폼 1개 → 숏폼 대본 5개 변환</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;쇼츠 대본 만들어줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t026">&ldquo;쇼츠 대본 만들어줘. 롱폼 원본 1개(스크립트·글·링크) 〈…〉, 대상 채널 〈…〉. 결과는 숏폼 대본 5개 중심으로&rdquo;</span>
+<button class="copy" data-copy="쇼츠 대본 만들어줘. 롱폼 원본 1개(스크립트·글·링크) 〈…〉, 대상 채널 〈…〉. 결과는 숏폼 대본 5개 중심으로" data-tid="t026">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="03" data-done="1" data-q="채널 문법에 맞춰 변신하는 멀티채널 변환기 osmu 멀티채널 변환기 채널별로 바꿔줘 027">
+<div class="card-top"><span class="badge">콘텐츠 마케팅 · 027</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>채널 문법에 맞춰 변신하는 멀티채널 변환기</h3>
+<p class="desc">원본 1개 → 링크드인·스레드·뉴스레터·블로그 동시 변환</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;채널별로 바꿔줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t027">&ldquo;채널별로 바꿔줘. 원본 콘텐츠 1개(글·스크립트·링크) 〈…〉, 대상 채널 목록 〈링크드인·스레드·뉴스레터·블로그〉. 결과는 채널별 변환본 세트 중심으로&rdquo;</span>
+<button class="copy" data-copy="채널별로 바꿔줘. 원본 콘텐츠 1개(글·스크립트·링크) 〈…〉, 대상 채널 목록 〈링크드인·스레드·뉴스레터·블로그〉. 결과는 채널별 변환본 세트 중심으로" data-tid="t027">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="03" data-done="1" data-q="검증된 훅 공식으로 쓰는 링크드인 포스트 링크드인 포스트 빌더 링크드인 글 써줘 028">
+<div class="card-top"><span class="badge">콘텐츠 마케팅 · 028</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>검증된 훅 공식으로 쓰는 링크드인 포스트</h3>
+<p class="desc">훅 공식 + ❶❷❸ 구조 + CTA (검증된 포맷 내장)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;링크드인 글 써줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t028">&ldquo;링크드인 글 써줘. 주제 1개 〈…〉, 목적 〈…〉, 비용·숫자 대조 소재(권장) 〈…〉. 결과는 완성 포스트 1편(모바일 포맷팅 적용) 중심으로&rdquo;</span>
+<button class="copy" data-copy="링크드인 글 써줘. 주제 1개 〈…〉, 목적 〈…〉, 비용·숫자 대조 소재(권장) 〈…〉. 결과는 완성 포스트 1편(모바일 포맷팅 적용) 중심으로" data-tid="t028">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="03" data-done="1" data-q="다섯 편이 한 호흡으로 이어지는 스레드 팩 스레드 콘텐츠 팩 스레드 글 써줘 029">
+<div class="card-top"><span class="badge">콘텐츠 마케팅 · 029</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>다섯 편이 한 호흡으로 이어지는 스레드 팩</h3>
+<p class="desc">브랜드 계정용 스레드 시리즈 (검증 방법론)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;스레드 글 써줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t029">&ldquo;스레드 글 써줘. 주제 1개 〈…〉, 숫자·경험 소재(권장) 〈…〉, 시리즈 목적 〈…〉. 결과는 스레드 시리즈 5편(편당 500자 이내) 중심으로&rdquo;</span>
+<button class="copy" data-copy="스레드 글 써줘. 주제 1개 〈…〉, 숫자·경험 소재(권장) 〈…〉, 시리즈 목적 〈…〉. 결과는 스레드 시리즈 5편(편당 500자 이내) 중심으로" data-tid="t029">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-cat="03" data-done="1" data-q="다음 달 주제가 나오는 콘텐츠 성과 회고 콘텐츠 성과 회고 콘텐츠 성과 어때? 030">
+<div class="card-top"><span class="badge">콘텐츠 마케팅 · 030</span><span class="st st-done">✅ 완성</span></div>
+<h3>다음 달 주제가 나오는 콘텐츠 성과 회고</h3>
+<p class="desc">발행 콘텐츠 성과 분석 → 다음 달 주제 추천</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;콘텐츠 성과 어때?&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t030">&ldquo;콘텐츠 성과 어때? 〈발행 콘텐츠 목록·성과 데이터(또는 연동 채널)〉 첨부, 회고 기간 〈지난 1개월〉. 결과는 3계층(도달·참여·전환) 성과 리포트 중심으로&rdquo;</span>
+<button class="copy" data-copy="콘텐츠 성과 어때? 〈발행 콘텐츠 목록·성과 데이터(또는 연동 채널)〉 첨부, 회고 기간 〈지난 1개월〉. 결과는 3계층(도달·참여·전환) 성과 리포트 중심으로" data-tid="t030">복사</button></div></div>
+
+</article>
+<article class="card" data-gate="1" data-cat="04" data-done="1" data-q="한 달 치 그리드가 나오는 인스타 피드 기획 인스타그램 피드 기획 인스타 피드 기획해줘 031">
+<div class="card-top"><span class="badge">SNS 운영 &amp; 커뮤니티 · 031</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>한 달 치 그리드가 나오는 인스타 피드 기획</h3>
+<p class="desc">그리드 무드 + 캡션 + 해시태그 월 30일치</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;인스타 피드 기획해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t031">&ldquo;인스타 피드 기획해줘. 브랜드 무드·제품 사진 자산 현황 〈…〉, 월 발행 수 〈30〉, 계정 목적(팔로워/판매/커뮤니티) 〈…〉. 결과는 그리드 무드보드(팔레트·배치 패턴) 중심으로&rdquo;</span>
+<button class="copy" data-copy="인스타 피드 기획해줘. 브랜드 무드·제품 사진 자산 현황 〈…〉, 월 발행 수 〈30〉, 계정 목적(팔로워/판매/커뮤니티) 〈…〉. 결과는 그리드 무드보드(팔레트·배치 패턴) 중심으로" data-tid="t031">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="04" data-done="1" data-q="위기 키워드까지 감지하는 댓글·dm 응대 댓글·dm 응대 어시스턴트 댓글 답변 도와줘 032">
+<div class="card-top"><span class="badge">SNS 운영 &amp; 커뮤니티 · 032</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>위기 키워드까지 감지하는 댓글·DM 응대</h3>
+<p class="desc">브랜드 톤 응대 템플릿 + 위기 키워드 감지</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;댓글 답변 도와줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t032">&ldquo;댓글 답변 도와줘. 수신 댓글·DM 목록(원문) 〈…〉, 채널 〈…〉. 결과는 건별 분류 태그(3분류·감정점수·긴급도) 중심으로&rdquo;</span>
+<button class="copy" data-copy="댓글 답변 도와줘. 수신 댓글·DM 목록(원문) 〈…〉, 채널 〈…〉. 결과는 건별 분류 태그(3분류·감정점수·긴급도) 중심으로" data-tid="t032">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-cat="04" data-done="1" data-q="진성 팔로워를 가려내는 인플루언서 발굴·평가 인플루언서 발굴·평가 인플루언서 찾아줘 033">
+<div class="card-top"><span class="badge">SNS 운영 &amp; 커뮤니티 · 033</span><span class="st st-done">✅ 완성</span></div>
+<h3>진성 팔로워를 가려내는 인플루언서 발굴·평가</h3>
+<p class="desc">후보 리스트업 → 진성 팔로워·적합도 스코어링</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;인플루언서 찾아줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t033">&ldquo;인플루언서 찾아줘. 카테고리·타깃 〈…〉, 예산 범위 〈…〉, 후보 계정 리스트 〈…〉. 결과는 후보 스코어카드 중심으로&rdquo;</span>
+<button class="copy" data-copy="인플루언서 찾아줘. 카테고리·타깃 〈…〉, 예산 범위 〈…〉, 후보 계정 리스트 〈…〉. 결과는 후보 스코어카드 중심으로" data-tid="t033">복사</button></div></div>
+
+</article>
+<article class="card" data-gate="1" data-cat="04" data-done="1" data-q="분쟁을 예방하는 협업 브리프·계약 체크 인플루언서 계약·브리프 협업 브리프 만들어줘 034">
+<div class="card-top"><span class="badge">SNS 운영 &amp; 커뮤니티 · 034</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>분쟁을 예방하는 협업 브리프·계약 체크</h3>
+<p class="desc">협업 브리프 + 계약 조항 체크 (실전 계약 경험 기반)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;협업 브리프 만들어줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t034">&ldquo;협업 브리프 만들어줘. 캠페인 목표 〈…〉, 선정 인플루언서 〈…〉, 예산·일정 〈…〉. 결과는 협업 브리프 중심으로&rdquo;</span>
+<button class="copy" data-copy="협업 브리프 만들어줘. 캠페인 목표 〈…〉, 선정 인플루언서 〈…〉, 예산·일정 〈…〉. 결과는 협업 브리프 중심으로" data-tid="t034">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="04" data-done="1" data-q="목표부터 당첨 운영까지, 이벤트 설계 이벤트·기브어웨이 설계 이벤트 기획해줘 035">
+<div class="card-top"><span class="badge">SNS 운영 &amp; 커뮤니티 · 035</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>목표부터 당첨 운영까지, 이벤트 설계</h3>
+<p class="desc">목표별 이벤트 기획 + 당첨자 운영 플로우</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;이벤트 기획해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t035">&ldquo;이벤트 기획해줘. 이벤트 목표(팔로워/UGC/전환) 〈…〉, 경품 예산 〈…〉, 기간 〈…〉. 결과는 이벤트 기획안 중심으로&rdquo;</span>
+<button class="copy" data-copy="이벤트 기획해줘. 이벤트 목표(팔로워/UGC/전환) 〈…〉, 경품 예산 〈…〉, 기간 〈…〉. 결과는 이벤트 기획안 중심으로" data-tid="t035">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-cat="04" data-done="1" data-q="채널 구조부터 활성화 룰까지, 커뮤니티 플레이북 커뮤니티 운영 플레이북 커뮤니티 만들자 036">
+<div class="card-top"><span class="badge">SNS 운영 &amp; 커뮤니티 · 036</span><span class="st st-done">✅ 완성</span></div>
+<h3>채널 구조부터 활성화 룰까지, 커뮤니티 플레이북</h3>
+<p class="desc">Discord/카페 채널 구조·온보딩·활성화 룰 설계</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;커뮤니티 만들자&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t036">&ldquo;커뮤니티 만들자. 커뮤니티 목적 〈…〉, 플랫폼 〈…〉, 예상 규모 〈…〉. 결과는 채널 구조 설계표 중심으로&rdquo;</span>
+<button class="copy" data-copy="커뮤니티 만들자. 커뮤니티 목적 〈…〉, 플랫폼 〈…〉, 예상 규모 〈…〉. 결과는 채널 구조 설계표 중심으로" data-tid="t036">복사</button></div></div>
+
+</article>
+<article class="card" data-gate="1" data-cat="04" data-done="1" data-q="고객 콘텐츠를 자산으로 바꾸는 ugc 시스템 ugc 수집·활용 시스템 고객 콘텐츠 모으자 037">
+<div class="card-top"><span class="badge">SNS 운영 &amp; 커뮤니티 · 037</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>고객 콘텐츠를 자산으로 바꾸는 UGC 시스템</h3>
+<p class="desc">고객 콘텐츠 수집 요청 → 권리 확보 → 재활용</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;고객 콘텐츠 모으자&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t037">&ldquo;고객 콘텐츠 모으자. 제품·브랜드 해시태그 〈…〉, 수집 채널 〈…〉, 리워드 정책(있으면) 〈…〉. 결과는 수집 캠페인 설계(요청 문구·리워드) 중심으로&rdquo;</span>
+<button class="copy" data-copy="고객 콘텐츠 모으자. 제품·브랜드 해시태그 〈…〉, 수집 채널 〈…〉, 리워드 정책(있으면) 〈…〉. 결과는 수집 캠페인 설계(요청 문구·리워드) 중심으로" data-tid="t037">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-cat="04" data-done="1" data-q="우리 브랜드가 어떻게 불리는지 듣는 소셜 리스닝 소셜 리스닝 리포트 브랜드 언급 분석해줘 038">
+<div class="card-top"><span class="badge">SNS 운영 &amp; 커뮤니티 · 038</span><span class="st st-done">✅ 완성</span></div>
+<h3>우리 브랜드가 어떻게 불리는지 듣는 소셜 리스닝</h3>
+<p class="desc">브랜드 언급 수집 → 감성 분석 주간 리포트</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;브랜드 언급 분석해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t038">&ldquo;브랜드 언급 분석해줘. 브랜드·제품 키워드(오타 변형 포함) 〈…〉, 수집 채널 세트 〈…〉, 주기 〈주 1회〉. 결과는 주간 언급·감성 리포트 중심으로&rdquo;</span>
+<button class="copy" data-copy="브랜드 언급 분석해줘. 브랜드·제품 키워드(오타 변형 포함) 〈…〉, 수집 채널 세트 〈…〉, 주기 〈주 1회〉. 결과는 주간 언급·감성 리포트 중심으로" data-tid="t038">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="04" data-done="1" data-q="성장 병목을 특정하는 채널 진단 채널 성장 진단 채널 뭐가 문제야? 039">
+<div class="card-top"><span class="badge">SNS 운영 &amp; 커뮤니티 · 039</span><span class="st st-done">✅ 완성</span></div>
+<h3>성장 병목을 특정하는 채널 진단</h3>
+<p class="desc">계정 데이터 분석 → 성장 병목·액션 3가지</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;채널 뭐가 문제야?&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t039">&ldquo;채널 뭐가 문제야? 〈계정 데이터(도달·팔로워·참여)〉 첨부, 기간 〈…〉. 결과는 성장 진단 리포트(강점·약점·병목) 중심으로&rdquo;</span>
+<button class="copy" data-copy="채널 뭐가 문제야? 〈계정 데이터(도달·팔로워·참여)〉 첨부, 기간 〈…〉. 결과는 성장 진단 리포트(강점·약점·병목) 중심으로" data-tid="t039">복사</button></div></div>
+
+</article>
+<article class="card" data-gate="1" data-cat="04" data-done="1" data-q="검증된 패턴만 모은 바이럴 훅 라이브러리 바이럴 훅 라이브러리 훅 뽑아줘 040">
+<div class="card-top"><span class="badge">SNS 운영 &amp; 커뮤니티 · 040</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>검증된 패턴만 모은 바이럴 훅 라이브러리</h3>
+<p class="desc">카테고리별 검증된 훅 패턴 적용기</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;훅 뽑아줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t040">&ldquo;훅 뽑아줘. 콘텐츠 주제 〈…〉, 대상 채널(쇼츠/피드/텍스트/롱폼) 〈…〉, 본문 또는 핵심 근거 〈…〉. 결과는 훅 10종 표(패턴 태그·채널 추천) 중심으로&rdquo;</span>
+<button class="copy" data-copy="훅 뽑아줘. 콘텐츠 주제 〈…〉, 대상 채널(쇼츠/피드/텍스트/롱폼) 〈…〉, 본문 또는 핵심 근거 〈…〉. 결과는 훅 10종 표(패턴 태그·채널 추천) 중심으로" data-tid="t040">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-cat="05" data-done="1" data-q="낭비 키워드를 잡아내는 쿠팡 광고 분석 쿠팡 광고 성과 분석 쿠팡 광고 분석 041">
+<div class="card-top"><span class="badge">광고 운영 &amp; 분석 · 041</span><span class="st st-done">✅ 완성</span></div>
+<h3>낭비 키워드를 잡아내는 쿠팡 광고 분석</h3>
+<p class="desc">캠페인 데이터 → 낭비 키워드·입찰 조정안 (검증 자산)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;쿠팡 광고 분석&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t041">&ldquo;쿠팡 광고 분석. 〈쿠팡 광고센터 키워드 리포트(xlsx·CSV)〉 첨부, 분석 기간 〈…〉. 결과는 KPI 성과 요약 중심으로&rdquo;</span>
+<button class="copy" data-copy="쿠팡 광고 분석. 〈쿠팡 광고센터 키워드 리포트(xlsx·CSV)〉 첨부, 분석 기간 〈…〉. 결과는 KPI 성과 요약 중심으로" data-tid="t041">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="05" data-done="1" data-q="합산 roas의 착시를 해부하는 네이버 광고 최적화 네이버 쇼핑검색광고 최적화 네이버 광고 봐줘 042">
+<div class="card-top"><span class="badge">광고 운영 &amp; 분석 · 042</span><span class="st st-done">✅ 완성</span></div>
+<h3>합산 ROAS의 착시를 해부하는 네이버 광고 최적화</h3>
+<p class="desc">키워드·소재·입찰 진단 리포트</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;네이버 광고 봐줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t042">&ldquo;네이버 광고 봐줘. 〈네이버 광고 데이터〉 첨부, 자사 브랜드 키워드 목록 〈…〉, 기간 〈…〉. 결과는 브랜드/일반 분리 ROAS 리포트 중심으로&rdquo;</span>
+<button class="copy" data-copy="네이버 광고 봐줘. 〈네이버 광고 데이터〉 첨부, 자사 브랜드 키워드 목록 〈…〉, 기간 〈…〉. 결과는 브랜드/일반 분리 ROAS 리포트 중심으로" data-tid="t042">복사</button></div></div>
+
+</article>
+<article class="card" data-gate="1" data-cat="05" data-done="1" data-q="오디언스별 소재 10종, 메타 광고 카피 팩 메타 광고 소재 카피 팩 광고 카피 뽑아줘 043">
+<div class="card-top"><span class="badge">광고 운영 &amp; 분석 · 043</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>오디언스별 소재 10종, 메타 광고 카피 팩</h3>
+<p class="desc">후킹 카피 × 오디언스별 소재 세트 10종</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;광고 카피 뽑아줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t043">&ldquo;광고 카피 뽑아줘. 핵심 메시지 1개 〈…〉. 결과는 카피 10종 중심으로&rdquo;</span>
+<button class="copy" data-copy="광고 카피 뽑아줘. 핵심 메시지 1개 〈…〉. 결과는 카피 10종 중심으로" data-tid="t043">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-cat="05" data-done="1" data-q="캠페인 구조부터 잡는 구글·유튜브 세팅 가이드 구글·유튜브 광고 세팅 가이드 구글 광고 세팅 도와줘 044">
+<div class="card-top"><span class="badge">광고 운영 &amp; 분석 · 044</span><span class="st st-done">✅ 완성</span></div>
+<h3>캠페인 구조부터 잡는 구글·유튜브 세팅 가이드</h3>
+<p class="desc">캠페인 구조 설계 + 타깃팅 체크리스트</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;구글 광고 세팅 도와줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t044">&ldquo;구글 광고 세팅 도와줘. 광고 목표·월 예산 〈…〉, 타깃 정의 〈…〉, 랜딩 URL 〈…〉. 결과는 캠페인 구조 설계안 중심으로&rdquo;</span>
+<button class="copy" data-copy="구글 광고 세팅 도와줘. 광고 목표·월 예산 〈…〉, 타깃 정의 〈…〉, 랜딩 URL 〈…〉. 결과는 캠페인 구조 설계안 중심으로" data-tid="t044">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="05" data-done="1" data-q="매주 월요일 아침에 도착하는 주간 광고 리포트 광고 주간 리포트 자동화 광고 주간 리포트 045">
+<div class="card-top"><span class="badge">광고 운영 &amp; 분석 · 045</span><span class="st st-done">✅ 완성</span></div>
+<h3>매주 월요일 아침에 도착하는 주간 광고 리포트</h3>
+<p class="desc">매체 데이터 취합 → 주간 성과 리포트 (실전 자산)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;광고 주간 리포트&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t045">&ldquo;광고 주간 리포트. 〈매체별 광고 데이터 소스(메타·구글·네이버 등)〉 첨부, 〈리포트 수신 채널〉 첨부. 결과는 주간 성과 HTML 리포트 중심으로&rdquo;</span>
+<button class="copy" data-copy="광고 주간 리포트. 〈매체별 광고 데이터 소스(메타·구글·네이버 등)〉 첨부, 〈리포트 수신 채널〉 첨부. 결과는 주간 성과 HTML 리포트 중심으로" data-tid="t045">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="05" data-done="1" data-q="채널별 예산을 다시 짜는 roas 진단 &amp; 재배분 roas 진단 &amp; 예산 재배분 예산 다시 짜줘 046">
+<div class="card-top"><span class="badge">광고 운영 &amp; 분석 · 046</span><span class="st st-done">✅ 완성</span></div>
+<h3>채널별 예산을 다시 짜는 ROAS 진단 &amp; 재배분</h3>
+<p class="desc">채널별 기여 분석 → 예산 이동 시나리오</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;예산 다시 짜줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t046">&ldquo;예산 다시 짜줘. 〈채널별 지출·성과 데이터〉 첨부, 총 예산 〈…〉. 결과는 채널 기여 분석 중심으로&rdquo;</span>
+<button class="copy" data-copy="예산 다시 짜줘. 〈채널별 지출·성과 데이터〉 첨부, 총 예산 〈…〉. 결과는 채널 기여 분석 중심으로" data-tid="t046">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="05" data-done="1" data-q="이긴 소재를 통계로 가리는 a/b 판독기 광고 소재 a/b 판독기 ab 테스트 결과 판정 047">
+<div class="card-top"><span class="badge">광고 운영 &amp; 분석 · 047</span><span class="st st-done">✅ 완성</span></div>
+<h3>이긴 소재를 통계로 가리는 A/B 판독기</h3>
+<p class="desc">소재 테스트 결과 통계 판정 + 다음 변형 제안</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;AB 테스트 결과 판정&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t047">&ldquo;AB 테스트 결과 판정. 소재별 노출·클릭·전환·광고비 〈…〉, 판정 지표 〈…〉. 결과는 3판정(확정승·박빙·표본부족) 중심으로&rdquo;</span>
+<button class="copy" data-copy="AB 테스트 결과 판정. 소재별 노출·클릭·전환·광고비 〈…〉, 판정 지표 〈…〉. 결과는 3판정(확정승·박빙·표본부족) 중심으로" data-tid="t047">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="05" data-done="1" data-q="전환이 새는 지점을 찾는 랜딩페이지 cro 진단 랜딩페이지 cro 진단 랜딩 전환율 봐줘 048">
+<div class="card-top"><span class="badge">광고 운영 &amp; 분석 · 048</span><span class="st st-done">✅ 완성</span></div>
+<h3>전환이 새는 지점을 찾는 랜딩페이지 CRO 진단</h3>
+<p class="desc">랜딩 구조·카피 전환 저해 요소 진단</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;랜딩 전환율 봐줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t048">&ldquo;랜딩 전환율 봐줘. 랜딩 URL·스크린샷 〈…〉, 〈전환 데이터〉 있으면 첨부, 유입 광고 소재 〈…〉. 결과는 4축 진단표 중심으로&rdquo;</span>
+<button class="copy" data-copy="랜딩 전환율 봐줘. 랜딩 URL·스크린샷 〈…〉, 〈전환 데이터〉 있으면 첨부, 유입 광고 소재 〈…〉. 결과는 4축 진단표 중심으로" data-tid="t048">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="05" data-done="1" data-q="심의 반려를 예방하는 광고 정책 체커 광고 정책·심의 체커 이 광고 문제없어? 049">
+<div class="card-top"><span class="badge">광고 운영 &amp; 분석 · 049</span><span class="st st-done">✅ 완성</span></div>
+<h3>심의 반려를 예방하는 광고 정책 체커</h3>
+<p class="desc">매체별 금지 표현·업종 규제 사전 검토 (게이트 방법론)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;이 광고 문제없어?&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t049">&ldquo;이 광고 문제없어? 〈광고 소재(카피·이미지 설명)〉 첨부, 게재 매체(메타·네이버·쿠팡·구글) 〈…〉, 업종 〈…〉. 결과는 매체별 위반 위험 목록(3단 판정) 중심으로&rdquo;</span>
+<button class="copy" data-copy="이 광고 문제없어? 〈광고 소재(카피·이미지 설명)〉 첨부, 게재 매체(메타·네이버·쿠팡·구글) 〈…〉, 업종 〈…〉. 결과는 매체별 위반 위험 목록(3단 판정) 중심으로" data-tid="t049">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="05" data-done="1" data-q="채널 기여를 해석 가능하게 만드는 utm 정리 어트리뷰션 정리 utm 정리해줘 050">
+<div class="card-top"><span class="badge">광고 운영 &amp; 분석 · 050</span><span class="st st-done">✅ 완성</span></div>
+<h3>채널 기여를 해석 가능하게 만드는 UTM 정리</h3>
+<p class="desc">UTM 체계 설계 + 채널 기여 해석 가이드</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;UTM 정리해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t050">&ldquo;UTM 정리해줘. 현재 UTM 사용 현황 〈…〉, 운영 채널 목록 〈…〉. 결과는 UTM 명명 규칙 표 중심으로&rdquo;</span>
+<button class="copy" data-copy="UTM 정리해줘. 현재 UTM 사용 현황 〈…〉, 운영 채널 목록 〈…〉. 결과는 UTM 명명 규칙 표 중심으로" data-tid="t050">복사</button></div></div>
+
+</article>
+<article class="card" data-gate="1" data-cat="06" data-done="1" data-q="검증된 24섹션으로 짓는 상세페이지 빌더 상세페이지 24섹션 빌더 상세페이지 만들어줘 051">
+<div class="card-top"><span class="badge">이커머스 &amp; 상세페이지 · 051</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>검증된 24섹션으로 짓는 상세페이지 빌더</h3>
+<p class="desc">표준 24섹션 구조 기획서 + 카피 (검증 자산)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;상세페이지 만들어줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t051">&ldquo;상세페이지 만들어줘. 제품 정보·셀링포인트 〈…〉, 타깃 페르소나 〈…〉, 〈VoC·리뷰 자료〉 있으면 첨부. 결과는 24섹션 구조 기획서 중심으로&rdquo;</span>
+<button class="copy" data-copy="상세페이지 만들어줘. 제품 정보·셀링포인트 〈…〉, 타깃 페르소나 〈…〉, 〈VoC·리뷰 자료〉 있으면 첨부. 결과는 24섹션 구조 기획서 중심으로" data-tid="t051">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-cat="06" data-done="1" data-q="기획서가 디자인이 되는 figma 자동화 상세페이지 → figma 자동화 상세페이지 디자인으로 052">
+<div class="card-top"><span class="badge">이커머스 &amp; 상세페이지 · 052</span><span class="st st-done">✅ 완성</span></div>
+<h3>기획서가 디자인이 되는 Figma 자동화</h3>
+<p class="desc">기획서를 Figma 디자인으로 (MCP 파이프라인)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;상세페이지 디자인으로&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t052">&ldquo;상세페이지 디자인으로. 상세페이지 기획서(051 산출물) 〈…〉, 브랜드 디자인 토큰(메인·강조 컬러) 〈…〉, 〈제품 이미지〉 있으면 첨부. 결과는 Figma 상세페이지 시안 중심으로&rdquo;</span>
+<button class="copy" data-copy="상세페이지 디자인으로. 상세페이지 기획서(051 산출물) 〈…〉, 브랜드 디자인 토큰(메인·강조 컬러) 〈…〉, 〈제품 이미지〉 있으면 첨부. 결과는 Figma 상세페이지 시안 중심으로" data-tid="t052">복사</button></div></div>
+
+</article>
+<article class="card" data-gate="1" data-cat="06" data-done="1" data-q="검색 노출을 끌어올리는 상품명 최적화 상품명·검색 최적화 상품명 최적화해줘 053">
+<div class="card-top"><span class="badge">이커머스 &amp; 상세페이지 · 053</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>검색 노출을 끌어올리는 상품명 최적화</h3>
+<p class="desc">플랫폼별 상품명 조합 + 태그·카테고리 세팅</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;상품명 최적화해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t053">&ldquo;상품명 최적화해줘. 상품 정보(브랜드·모델·속성) 〈…〉, 판매 플랫폼 〈…〉, 〈타깃 키워드·유입 검색어 데이터〉 있으면 첨부. 결과는 플랫폼별 상품명 조합안(각 3안) 중심으로&rdquo;</span>
+<button class="copy" data-copy="상품명 최적화해줘. 상품 정보(브랜드·모델·속성) 〈…〉, 판매 플랫폼 〈…〉, 〈타깃 키워드·유입 검색어 데이터〉 있으면 첨부. 결과는 플랫폼별 상품명 조합안(각 3안) 중심으로" data-tid="t053">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="06" data-done="1" data-q="부정 리뷰까지 설계된 리뷰 관리 시스템 리뷰 관리 시스템 리뷰 답변 달아줘 054">
+<div class="card-top"><span class="badge">이커머스 &amp; 상세페이지 · 054</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>부정 리뷰까지 설계된 리뷰 관리 시스템</h3>
+<p class="desc">리뷰 답변 자동화 + 부정 리뷰 대응 플로우</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;리뷰 답변 달아줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t054">&ldquo;리뷰 답변 달아줘. 〈리뷰 목록〉 첨부. 결과는 감정 분류표 중심으로&rdquo;</span>
+<button class="copy" data-copy="리뷰 답변 달아줘. 〈리뷰 목록〉 첨부. 결과는 감정 분류표 중심으로" data-tid="t054">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-cat="06" data-done="1" data-q="노출·전환·재구매 3축으로 보는 스마트스토어 진단 스마트스토어 진단 스토어 진단해줘 055">
+<div class="card-top"><span class="badge">이커머스 &amp; 상세페이지 · 055</span><span class="st st-done">✅ 완성</span></div>
+<h3>노출·전환·재구매 3축으로 보는 스마트스토어 진단</h3>
+<p class="desc">스토어 지표 기반 성장 진단 (SBA 컨설팅 프레임워크)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;스토어 진단해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t055">&ldquo;스토어 진단해줘. 스토어 지표 〈…〉, 스토어 URL 〈…〉, 대표 상품 목록 〈…〉. 결과는 3축 성장 진단 리포트 중심으로&rdquo;</span>
+<button class="copy" data-copy="스토어 진단해줘. 스토어 지표 〈…〉, 스토어 URL 〈…〉, 대표 상품 목록 〈…〉. 결과는 3축 성장 진단 리포트 중심으로" data-tid="t055">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="06" data-done="1" data-q="임계값 룰로 운영하는 쿠팡 마켓플레이스 쿠팡 로켓·마켓플레이스 운영 쿠팡 운영 도와줘 056">
+<div class="card-top"><span class="badge">이커머스 &amp; 상세페이지 · 056</span><span class="st st-done">✅ 완성</span></div>
+<h3>임계값 룰로 운영하는 쿠팡 마켓플레이스</h3>
+<p class="desc">노출 로직 대응 체크리스트 + 가격·재고 전략</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;쿠팡 운영 도와줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t056">&ldquo;쿠팡 운영 도와줘. 〈쿠팡 Wing 셀러 인사이트 데이터〉 첨부, 가격·마진 정보 〈…〉, 〈광고 리포트〉 있으면 첨부. 결과는 노출 로직 대응 체크리스트(위험 신호 판정) 중심으로&rdquo;</span>
+<button class="copy" data-copy="쿠팡 운영 도와줘. 〈쿠팡 Wing 셀러 인사이트 데이터〉 첨부, 가격·마진 정보 〈…〉, 〈광고 리포트〉 있으면 첨부. 결과는 노출 로직 대응 체크리스트(위험 신호 판정) 중심으로" data-tid="t056">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="06" data-done="1" data-q="연간 행사에 대응하는 프로모션 캘린더 프로모션 캘린더 &amp; 행사 대응 행사 일정 짜줘 057">
+<div class="card-top"><span class="badge">이커머스 &amp; 상세페이지 · 057</span><span class="st st-done">✅ 완성</span></div>
+<h3>연간 행사에 대응하는 프로모션 캘린더</h3>
+<p class="desc">플랫폼 행사 일정 기반 딜 기획</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;행사 일정 짜줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t057">&ldquo;행사 일정 짜줘. 판매 플랫폼 목록 〈…〉, 상품·원가·마진 정보 〈…〉, 재고 현황 〈…〉. 결과는 연간/분기 프로모션 캘린더 중심으로&rdquo;</span>
+<button class="copy" data-copy="행사 일정 짜줘. 판매 플랫폼 목록 〈…〉, 상품·원가·마진 정보 〈…〉, 재고 현황 〈…〉. 결과는 연간/분기 프로모션 캘린더 중심으로" data-tid="t057">복사</button></div></div>
+
+</article>
+<article class="card" data-gate="1" data-cat="06" data-done="1" data-q="분쟁을 막는 배송·cs 정책문 설계 배송·cs 정책 설계 반품 정책 만들어줘 058">
+<div class="card-top"><span class="badge">이커머스 &amp; 상세페이지 · 058</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>분쟁을 막는 배송·CS 정책문 설계</h3>
+<p class="desc">반품·교환·배송 정책문 + 고지 문구</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;반품 정책 만들어줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t058">&ldquo;반품 정책 만들어줘. 상품 특성 〈…〉, 물류 조건(택배사·리드타임·배송비) 〈…〉, 판매 플랫폼 규정 〈…〉. 결과는 반품·교환·배송 정책문 세트 중심으로&rdquo;</span>
+<button class="copy" data-copy="반품 정책 만들어줘. 상품 특성 〈…〉, 물류 조건(택배사·리드타임·배송비) 〈…〉, 판매 플랫폼 규정 〈…〉. 결과는 반품·교환·배송 정책문 세트 중심으로" data-tid="t058">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="06" data-done="1" data-q="스토리로 파는 크라우드펀딩 페이지 빌더 크라우드펀딩 페이지 빌더 와디즈 페이지 만들자 059">
+<div class="card-top"><span class="badge">이커머스 &amp; 상세페이지 · 059</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>스토리로 파는 크라우드펀딩 페이지 빌더</h3>
+<p class="desc">와디즈형 스토리 구조 + 리워드 설계</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;와디즈 페이지 만들자&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t059">&ldquo;와디즈 페이지 만들자. 제품·메이커 스토리 소재 〈…〉, 목표 금액·원가 〈…〉, 리워드 구성 요소 〈…〉. 결과는 5막 스토리 페이지 중심으로&rdquo;</span>
+<button class="copy" data-copy="와디즈 페이지 만들자. 제품·메이커 스토리 소재 〈…〉, 목표 금액·원가 〈…〉, 리워드 구성 요소 〈…〉. 결과는 5막 스토리 페이지 중심으로" data-tid="t059">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="06" data-done="1" data-q="해외 판로를 여는 글로벌 리스팅 로컬라이즈 글로벌 리스팅 로컬라이즈 영문 상세페이지로 060">
+<div class="card-top"><span class="badge">이커머스 &amp; 상세페이지 · 060</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>해외 판로를 여는 글로벌 리스팅 로컬라이즈</h3>
+<p class="desc">상세페이지 영/일 현지화 + 규격 변환</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;영문 상세페이지로&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t060">&ldquo;영문 상세페이지로. 원본 상세페이지(051 산출물 우선) 〈…〉, 대상 언어·마켓 〈…〉, 제품 규격·인증 정보 〈…〉. 결과는 현지화 리스팅(영/일) 중심으로&rdquo;</span>
+<button class="copy" data-copy="영문 상세페이지로. 원본 상세페이지(051 산출물 우선) 〈…〉, 대상 언어·마켓 〈…〉, 제품 규격·인증 정보 〈…〉. 결과는 현지화 리스팅(영/일) 중심으로" data-tid="t060">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-cat="07" data-done="1" data-q="로우데이터에서 성장 동인을 찾는 판매 데이터 분석 판매 데이터 분석 매출 데이터 분석해줘 061">
+<div class="card-top"><span class="badge">데이터 분석 &amp; 리포팅 · 061</span><span class="st st-done">✅ 완성</span></div>
+<h3>로우데이터에서 성장 동인을 찾는 판매 데이터 분석</h3>
+<p class="desc">매출 로우데이터 → 성장 동인·이상치 리포트</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;매출 데이터 분석해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t061">&ldquo;매출 데이터 분석해줘. 〈매출 로우데이터〉 첨부, 분석 기간 〈…〉. 결과는 성장 동인 분해 리포트 중심으로&rdquo;</span>
+<button class="copy" data-copy="매출 데이터 분석해줘. 〈매출 로우데이터〉 첨부, 분석 기간 〈…〉. 결과는 성장 동인 분해 리포트 중심으로" data-tid="t061">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="07" data-done="1" data-q="파일 하나로 완성되는 html 대시보드 빌더 마케팅 대시보드 빌더 대시보드 만들어줘 062">
+<div class="card-top"><span class="badge">데이터 분석 &amp; 리포팅 · 062</span><span class="st st-done">✅ 완성</span></div>
+<h3>파일 하나로 완성되는 HTML 대시보드 빌더</h3>
+<p class="desc">멀티채널 데이터 → HTML 대시보드 (검증 방법론)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;대시보드 만들어줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t062">&ldquo;대시보드 만들어줘. 〈멀티채널 데이터 소스〉 첨부, 핵심 지표 정의 〈…〉. 결과는 단일 파일 HTML 대시보드 중심으로&rdquo;</span>
+<button class="copy" data-copy="대시보드 만들어줘. 〈멀티채널 데이터 소스〉 첨부, 핵심 지표 정의 〈…〉. 결과는 단일 파일 HTML 대시보드 중심으로" data-tid="t062">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="07" data-done="1" data-q="유입부터 전환까지 해석하는 ga4 리포트 ga4 분석 리포트 ga4 봐줘 063">
+<div class="card-top"><span class="badge">데이터 분석 &amp; 리포팅 · 063</span><span class="st st-done">✅ 완성</span></div>
+<h3>유입부터 전환까지 해석하는 GA4 리포트</h3>
+<p class="desc">트래픽·전환 데이터 해석 + 개선 액션</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;GA4 봐줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t063">&ldquo;GA4 봐줘. 〈GA4 데이터〉 첨부, 분석 기간 〈최근 28일〉, 핵심 전환 이벤트 정의 〈…〉. 결과는 유입→랜딩→전환 3단 해석 리포트 중심으로&rdquo;</span>
+<button class="copy" data-copy="GA4 봐줘. 〈GA4 데이터〉 첨부, 분석 기간 〈최근 28일〉, 핵심 전환 이벤트 정의 〈…〉. 결과는 유입→랜딩→전환 3단 해석 리포트 중심으로" data-tid="t063">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="07" data-done="1" data-q="재구매의 진실을 보여주는 코호트·리텐션 분석 코호트·리텐션 분석 재구매율 분석해줘 064">
+<div class="card-top"><span class="badge">데이터 분석 &amp; 리포팅 · 064</span><span class="st st-done">✅ 완성</span></div>
+<h3>재구매의 진실을 보여주는 코호트·리텐션 분석</h3>
+<p class="desc">가입/구매 코호트 유지율 곡선 + 해석</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;재구매율 분석해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t064">&ldquo;재구매율 분석해줘. 〈구매/가입 이력 데이터〉 첨부, 코호트 기준 〈첫구매월〉, 관찰 기간 〈12개월〉. 결과는 코호트 유지율 매트릭스 중심으로&rdquo;</span>
+<button class="copy" data-copy="재구매율 분석해줘. 〈구매/가입 이력 데이터〉 첨부, 코호트 기준 〈첫구매월〉, 관찰 기간 〈12개월〉. 결과는 코호트 유지율 매트릭스 중심으로" data-tid="t064">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="07" data-done="1" data-q="고객을 일곱 부족으로 나누는 rfm 세그먼트 고객 세그먼트 rfm 분석 고객 나눠줘 065">
+<div class="card-top"><span class="badge">데이터 분석 &amp; 리포팅 · 065</span><span class="st st-done">✅ 완성</span></div>
+<h3>고객을 일곱 부족으로 나누는 RFM 세그먼트</h3>
+<p class="desc">구매 데이터 → RFM 등급 + 세그먼트별 액션</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;고객 나눠줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t065">&ldquo;고객 나눠줘. 〈구매 데이터〉 첨부. 결과는 RFM 점수표 중심으로&rdquo;</span>
+<button class="copy" data-copy="고객 나눠줘. 〈구매 데이터〉 첨부. 결과는 RFM 점수표 중심으로" data-tid="t065">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="07" data-done="1" data-q="북극성부터 알람까지, kpi 트리 설계 kpi 트리 설계 kpi 정해줘 066">
+<div class="card-top"><span class="badge">데이터 분석 &amp; 리포팅 · 066</span><span class="st st-done">✅ 완성</span></div>
+<h3>북극성부터 알람까지, KPI 트리 설계</h3>
+<p class="desc">북극성 지표 → 입력 지표 분해 + 알림 임계값</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;KPI 정해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t066">&ldquo;KPI 정해줘. 비즈니스 목표(분기·연간) 〈…〉, 〈현재 추적 지표·데이터 소스 목록〉 첨부. 결과는 북극성 지표 정의 중심으로&rdquo;</span>
+<button class="copy" data-copy="KPI 정해줘. 비즈니스 목표(분기·연간) 〈…〉, 〈현재 추적 지표·데이터 소스 목록〉 첨부. 결과는 북극성 지표 정의 중심으로" data-tid="t066">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="07" data-done="1" data-q="전 채널을 한 장으로 모으는 월간 리포트 자동화 월간 마케팅 리포트 자동화 월간 리포트 만들어줘 067">
+<div class="card-top"><span class="badge">데이터 분석 &amp; 리포팅 · 067</span><span class="st st-done">✅ 완성</span></div>
+<h3>전 채널을 한 장으로 모으는 월간 리포트 자동화</h3>
+<p class="desc">전 채널 취합 월간 보고서 (경영진용 요약 포함)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;월간 리포트 만들어줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t067">&ldquo;월간 리포트 만들어줘. 〈전 채널 월간 데이터〉 첨부, 〈전월 리포트〉 첨부, 월 목표 〈…〉. 결과는 월간 통합 보고서(HTML) 중심으로&rdquo;</span>
+<button class="copy" data-copy="월간 리포트 만들어줘. 〈전 채널 월간 데이터〉 첨부, 〈전월 리포트〉 첨부, 월 목표 〈…〉. 결과는 월간 통합 보고서(HTML) 중심으로" data-tid="t067">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="07" data-done="1" data-q="분석보다 먼저 하는 데이터 클리닝 데이터 클리닝 &amp; 전처리 데이터 정리해줘 068">
+<div class="card-top"><span class="badge">데이터 분석 &amp; 리포팅 · 068</span><span class="st st-done">✅ 완성</span></div>
+<h3>분석보다 먼저 하는 데이터 클리닝</h3>
+<p class="desc">지저분한 로우데이터 정리 표준 파이프라인</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;데이터 정리해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t068">&ldquo;데이터 정리해줘. 〈로우데이터 파일〉 첨부, 목표 스키마 〈…〉. 결과는 정리된 데이터셋(사본) 중심으로&rdquo;</span>
+<button class="copy" data-copy="데이터 정리해줘. 〈로우데이터 파일〉 첨부, 목표 스키마 〈…〉. 결과는 정리된 데이터셋(사본) 중심으로" data-tid="t068">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="07" data-done="1" data-q="광고비를 바꾸면 매출이 어떻게 되나, 예측 시뮬레이션 예측 시뮬레이션 매출 시나리오 돌려줘 069">
+<div class="card-top"><span class="badge">데이터 분석 &amp; 리포팅 · 069</span><span class="st st-done">✅ 완성</span></div>
+<h3>광고비를 바꾸면 매출이 어떻게 되나, 예측 시뮬레이션</h3>
+<p class="desc">광고비·전환율 변수 기반 매출 시나리오</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;매출 시나리오 돌려줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t069">&ldquo;매출 시나리오 돌려줘. 〈과거 성과 데이터〉 첨부, 변수 조정 범위(광고비·전환율·객단가) 〈…〉. 결과는 기준선 예측(가중 공식) 중심으로&rdquo;</span>
+<button class="copy" data-copy="매출 시나리오 돌려줘. 〈과거 성과 데이터〉 첨부, 변수 조정 범위(광고비·전환율·객단가) 〈…〉. 결과는 기준선 예측(가중 공식) 중심으로" data-tid="t069">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="07" data-done="1" data-q="주관식 응답에서 테마를 뽑는 nps 분석 설문·nps 응답 분석 설문 결과 분석해줘 070">
+<div class="card-top"><span class="badge">데이터 분석 &amp; 리포팅 · 070</span><span class="st st-done">✅ 완성</span></div>
+<h3>주관식 응답에서 테마를 뽑는 NPS 분석</h3>
+<p class="desc">주관식 응답 테마 추출 + 감성 분류</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;설문 결과 분석해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t070">&ldquo;설문 결과 분석해줘. 〈설문·NPS 응답 데이터〉 첨부, 문항 구조 〈…〉. 결과는 NPS 산출·그룹 분포 중심으로&rdquo;</span>
+<button class="copy" data-copy="설문 결과 분석해줘. 〈설문·NPS 응답 데이터〉 첨부, 문항 구조 〈…〉. 결과는 NPS 산출·그룹 분포 중심으로" data-tid="t070">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="08" data-done="1" data-q="데이터베이스 없이 만드는 cs 챗봇 cs 챗봇 구축 (rag) cs 봇 만들자 071">
+<div class="card-top"><span class="badge">CRM &amp; 고객관리 · 071</span><span class="st st-done">✅ 완성</span></div>
+<h3>데이터베이스 없이 만드는 CS 챗봇</h3>
+<p class="desc">자사 문서 기반 응대 봇 (검증 파이프라인)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;CS 봇 만들자&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t071">&ldquo;CS 봇 만들자. 〈자사 문서(FAQ·정책·매뉴얼)〉 첨부, 응대 톤 〈…〉, 문의 카테고리(모르면 업종 표준 제안) 〈…〉&rdquo;</span>
+<button class="copy" data-copy="CS 봇 만들자. 〈자사 문서(FAQ·정책·매뉴얼)〉 첨부, 응대 톤 〈…〉, 문의 카테고리(모르면 업종 표준 제안) 〈…〉" data-tid="t071">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="08" data-done="1" data-q="에스컬레이션 기준까지 담긴 cs 매뉴얼 빌더 cs 응대 매뉴얼 빌더 cs 매뉴얼 만들어줘 072">
+<div class="card-top"><span class="badge">CRM &amp; 고객관리 · 072</span><span class="st st-done">✅ 완성</span></div>
+<h3>에스컬레이션 기준까지 담긴 CS 매뉴얼 빌더</h3>
+<p class="desc">FAQ·상황별 스크립트 + 에스컬레이션 기준</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;CS 매뉴얼 만들어줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t072">&ldquo;CS 매뉴얼 만들어줘. 〈자주 오는 문의·리뷰 목록(로그·캡처)〉 첨부, 〈정책 문서(배송·반품·환불)〉 첨부, 고객센터 연락처·영업시간 〈…〉. 결과는 3분류 응대 스크립트 세트(악성·문의·칭찬) 중심으로&rdquo;</span>
+<button class="copy" data-copy="CS 매뉴얼 만들어줘. 〈자주 오는 문의·리뷰 목록(로그·캡처)〉 첨부, 〈정책 문서(배송·반품·환불)〉 첨부, 고객센터 연락처·영업시간 〈…〉. 결과는 3분류 응대 스크립트 세트(악성·문의·칭찬) 중심으로" data-tid="t072">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="08" data-done="1" data-q="이탈 지점이 보이는 고객 여정 맵 고객 여정 맵핑 고객 여정 그려줘 073">
+<div class="card-top"><span class="badge">CRM &amp; 고객관리 · 073</span><span class="st st-done">✅ 완성</span></div>
+<h3>이탈 지점이 보이는 고객 여정 맵</h3>
+<p class="desc">인지→구매→재구매 터치포인트·감정·이탈점 맵</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;고객 여정 그려줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t073">&ldquo;고객 여정 그려줘. 터치포인트 목록 〈…〉, 〈고객 데이터·VOC(리뷰·CS·설문)〉 첨부, 〈065 세그먼트 리포트〉 있으면 첨부. 결과는 여정 매트릭스(4단계×4행) 중심으로&rdquo;</span>
+<button class="copy" data-copy="고객 여정 그려줘. 터치포인트 목록 〈…〉, 〈고객 데이터·VOC(리뷰·CS·설문)〉 첨부, 〈065 세그먼트 리포트〉 있으면 첨부. 결과는 여정 매트릭스(4단계×4행) 중심으로" data-tid="t073">복사</button></div></div>
+
+</article>
+<article class="card" data-gate="1" data-cat="08" data-done="1" data-q="웰컴부터 재구매까지, 이메일 시퀀스 빌더 이메일 시퀀스 빌더 이메일 시퀀스 짜줘 074">
+<div class="card-top"><span class="badge">CRM &amp; 고객관리 · 074</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>웰컴부터 재구매까지, 이메일 시퀀스 빌더</h3>
+<p class="desc">웰컴·장바구니·재구매 자동화 시나리오 + 카피</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;이메일 시퀀스 짜줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t074">&ldquo;이메일 시퀀스 짜줘. 시나리오 유형(웰컴/장바구니/재구매) 〈…〉, 고객 세그먼트(065 산출물 권장) 〈…〉, 오퍼 〈…〉. 결과는 시퀀스 설계도(트리거·시점·중단 조건) 중심으로&rdquo;</span>
+<button class="copy" data-copy="이메일 시퀀스 짜줘. 시나리오 유형(웰컴/장바구니/재구매) 〈…〉, 고객 세그먼트(065 산출물 권장) 〈…〉, 오퍼 〈…〉. 결과는 시퀀스 설계도(트리거·시점·중단 조건) 중심으로" data-tid="t074">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="08" data-done="1" data-q="심사에 통과하는 카카오 알림톡 설계 카카오 알림톡·친구톡 설계 알림톡 만들어줘 075">
+<div class="card-top"><span class="badge">CRM &amp; 고객관리 · 075</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>심사에 통과하는 카카오 알림톡 설계</h3>
+<p class="desc">시나리오별 템플릿 + 심사 통과 문구 가이드</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;알림톡 만들어줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t075">&ldquo;알림톡 만들어줘. 발송 시나리오 〈…〉, 변수 필드 〈…〉, 브랜드 톤 〈…〉. 결과는 유형 판정표(알림톡/친구톡) 중심으로&rdquo;</span>
+<button class="copy" data-copy="알림톡 만들어줘. 발송 시나리오 〈…〉, 변수 필드 〈…〉, 브랜드 톤 〈…〉. 결과는 유형 판정표(알림톡/친구톡) 중심으로" data-tid="t075">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-cat="08" data-done="1" data-q="등급과 혜택을 계산으로 짜는 멤버십 설계 멤버십·등급 제도 설계 멤버십 만들자 076">
+<div class="card-top"><span class="badge">CRM &amp; 고객관리 · 076</span><span class="st st-done">✅ 완성</span></div>
+<h3>등급과 혜택을 계산으로 짜는 멤버십 설계</h3>
+<p class="desc">등급 혜택 구조 + 마진 시뮬레이션</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;멤버십 만들자&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t076">&ldquo;멤버십 만들자. 〈065 세그먼트 리포트(권장) 또는 고객 구매 분포〉 첨부, 마진 구조(원가율·배송비) 〈…〉, 목표 리텐션 〈…〉. 결과는 등급 구조표(기준·혜택) 중심으로&rdquo;</span>
+<button class="copy" data-copy="멤버십 만들자. 〈065 세그먼트 리포트(권장) 또는 고객 구매 분포〉 첨부, 마진 구조(원가율·배송비) 〈…〉, 목표 리텐션 〈…〉. 결과는 등급 구조표(기준·혜택) 중심으로" data-tid="t076">복사</button></div></div>
+
+</article>
+<article class="card" data-gate="1" data-cat="08" data-done="1" data-q="휴면 고객을 되살리는 윈백 캠페인 이탈 방지 윈백 캠페인 휴면 고객 깨워줘 077">
+<div class="card-top"><span class="badge">CRM &amp; 고객관리 · 077</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>휴면 고객을 되살리는 윈백 캠페인</h3>
+<p class="desc">휴면 세그먼트 정의 → 윈백 오퍼 시나리오</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;휴면 고객 깨워줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t077">&ldquo;휴면 고객 깨워줘. 〈구매 데이터 또는 065·064 산출물〉 첨부, 가용 오퍼(할인·적립·증정) 〈…〉, 마진 구조 〈…〉. 결과는 휴면 세그먼트 정의(기준 명시) 중심으로&rdquo;</span>
+<button class="copy" data-copy="휴면 고객 깨워줘. 〈구매 데이터 또는 065·064 산출물〉 첨부, 가용 오퍼(할인·적립·증정) 〈…〉, 마진 구조 〈…〉. 결과는 휴면 세그먼트 정의(기준 명시) 중심으로" data-tid="t077">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-cat="08" data-done="1" data-q="흩어진 불만을 개선 백로그로 잇는 voc 시스템 voc 취합·분류 시스템 voc 정리해줘 078">
+<div class="card-top"><span class="badge">CRM &amp; 고객관리 · 078</span><span class="st st-done">✅ 완성</span></div>
+<h3>흩어진 불만을 개선 백로그로 잇는 VOC 시스템</h3>
+<p class="desc">채널별 VOC 수집 → 카테고리 분류 → 개선 백로그 연결</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;VOC 정리해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t078">&ldquo;VOC 정리해줘. 채널별 VOC 소스 〈…〉, 분류 기준 〈4+1 카테고리〉, 070 설문 분석 산출물 〈…〉. 결과는 채널별 수집 표준 중심으로&rdquo;</span>
+<button class="copy" data-copy="VOC 정리해줘. 채널별 VOC 소스 〈…〉, 분류 기준 〈4+1 카테고리〉, 070 설문 분석 산출물 〈…〉. 결과는 채널별 수집 표준 중심으로" data-tid="t078">복사</button></div></div>
+
+</article>
+<article class="card" data-gate="1" data-cat="08" data-done="1" data-q="시점을 설계해 보내는 리뷰 요청 자동화 리뷰·후기 요청 자동화 리뷰 요청 보내자 079">
+<div class="card-top"><span class="badge">CRM &amp; 고객관리 · 079</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>시점을 설계해 보내는 리뷰 요청 자동화</h3>
+<p class="desc">구매 후 시점별 리뷰 요청 플로우 + 인센티브 설계</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;리뷰 요청 보내자&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t079">&ldquo;리뷰 요청 보내자. 〈구매 데이터(주문일·채널·제품)〉 첨부, 인센티브 정책(적립·쿠폰 예산) 〈…〉, 제품 사용주기(모르면 업종 표준) 〈…〉. 결과는 시점별 요청 플로우 중심으로&rdquo;</span>
+<button class="copy" data-copy="리뷰 요청 보내자. 〈구매 데이터(주문일·채널·제품)〉 첨부, 인센티브 정책(적립·쿠폰 예산) 〈…〉, 제품 사용주기(모르면 업종 표준) 〈…〉. 결과는 시점별 요청 플로우 중심으로" data-tid="t079">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-cat="08" data-done="1" data-q="jtbd로 묻고 요약까지, 고객 인터뷰 스크립트 고객 인터뷰 스크립트 &amp; 요약 고객 인터뷰 준비해줘 080">
+<div class="card-top"><span class="badge">CRM &amp; 고객관리 · 080</span><span class="st st-done">✅ 완성</span></div>
+<h3>JTBD로 묻고 요약까지, 고객 인터뷰 스크립트</h3>
+<p class="desc">JTBD 인터뷰 설계 → 녹취 요약·인사이트 추출</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;고객 인터뷰 준비해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t080">&ldquo;고객 인터뷰 준비해줘. 인터뷰 목적·검증 가설 〈…〉, 대상 고객 프로필 〈…〉, 〈(요약 시) 녹취·기록〉 첨부. 결과는 JTBD 인터뷰 스크립트(5블록) 중심으로&rdquo;</span>
+<button class="copy" data-copy="고객 인터뷰 준비해줘. 인터뷰 목적·검증 가설 〈…〉, 대상 고객 프로필 〈…〉, 〈(요약 시) 녹취·기록〉 첨부. 결과는 JTBD 인터뷰 스크립트(5블록) 중심으로" data-tid="t080">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="09" data-done="1" data-q="창업 스토리를 내러티브로 바꾸는 브랜드 스토리 빌더 브랜드 스토리·미션 빌더 브랜드 스토리 만들어줘 081">
+<div class="card-top"><span class="badge">브랜딩 &amp; PR·세일즈 · 081</span><span class="st st-done">✅ 완성</span></div>
+<h3>창업 스토리를 내러티브로 바꾸는 브랜드 스토리 빌더</h3>
+<p class="desc">창업 스토리 → 브랜드 내러티브·톤앤매너 문서</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;브랜드 스토리 만들어줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t081">&ldquo;브랜드 스토리 만들어줘. 창업 배경·연혁(문답으로 수집) 〈…〉, 브랜드 지향점 〈…〉. 결과는 브랜드 내러티브 문서(계기→신념→약속) 중심으로&rdquo;</span>
+<button class="copy" data-copy="브랜드 스토리 만들어줘. 창업 배경·연혁(문답으로 수집) 〈…〉, 브랜드 지향점 〈…〉. 결과는 브랜드 내러티브 문서(계기→신념→약속) 중심으로" data-tid="t081">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="09" data-done="1" data-q="원페이지로 정리하는 브랜드 가이드라인 브랜드 가이드라인 문서화 브랜드 가이드 정리해줘 082">
+<div class="card-top"><span class="badge">브랜딩 &amp; PR·세일즈 · 082</span><span class="st st-done">✅ 완성</span></div>
+<h3>원페이지로 정리하는 브랜드 가이드라인</h3>
+<p class="desc">로고·컬러·보이스 사용 규정 원페이지</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;브랜드 가이드 정리해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t082">&ldquo;브랜드 가이드 정리해줘. 〈로고·컬러·폰트 자산(파일·컬러코드)〉 첨부, 〈보이스 톤 자료(081 산출물 우선)〉 첨부. 결과는 브랜드 가이드라인 원페이지 중심으로&rdquo;</span>
+<button class="copy" data-copy="브랜드 가이드 정리해줘. 〈로고·컬러·폰트 자산(파일·컬러코드)〉 첨부, 〈보이스 톤 자료(081 산출물 우선)〉 첨부. 결과는 브랜드 가이드라인 원페이지 중심으로" data-tid="t082">복사</button></div></div>
+
+</article>
+<article class="card" data-gate="1" data-cat="09" data-done="1" data-q="뉴스 가치를 찾아 쓰는 보도자료 보도자료 작성 보도자료 써줘 083">
+<div class="card-top"><span class="badge">브랜딩 &amp; PR·세일즈 · 083</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>뉴스 가치를 찾아 쓰는 보도자료</h3>
+<p class="desc">언론 배포용 보도자료 + 미디어 리스트 전략</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;보도자료 써줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t083">&ldquo;보도자료 써줘. 알릴 소식 1건 〈…〉, 근거 수치·인용 가능한 담당자 〈…〉. 결과는 뉴스 가치 앵글 3안 중심으로&rdquo;</span>
+<button class="copy" data-copy="보도자료 써줘. 알릴 소식 1건 〈…〉, 근거 수치·인용 가능한 담당자 〈…〉. 결과는 뉴스 가치 앵글 3안 중심으로" data-tid="t083">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="09" data-done="1" data-q="rfp에서 초안까지, 제안서 자동 생성 제안서 자동 생성 제안서 써줘 084">
+<div class="card-top"><span class="badge">브랜딩 &amp; PR·세일즈 · 084</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>RFP에서 초안까지, 제안서 자동 생성</h3>
+<p class="desc">문의 → 맞춤 제안서 (검증 파이프라인 v2)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;제안서 써줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t084">&ldquo;제안서 써줘. 〈고객 문의·RFP(파일 또는 붙여넣기)〉 첨부, 서비스·가격 정보 〈…〉. 결과는 Win Theme 3개 중심으로&rdquo;</span>
+<button class="copy" data-copy="제안서 써줘. 〈고객 문의·RFP(파일 또는 붙여넣기)〉 첨부, 서비스·가격 정보 〈…〉. 결과는 Win Theme 3개 중심으로" data-tid="t084">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="09" data-done="1" data-q="고객 유형별로 갈아끼우는 세일즈 덱 빌더 세일즈 덱 빌더 피치덱 만들어줘 085">
+<div class="card-top"><span class="badge">브랜딩 &amp; PR·세일즈 · 085</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>고객 유형별로 갈아끼우는 세일즈 덱 빌더</h3>
+<p class="desc">고객 유형별 피치덱 구조 + 슬라이드 카피</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;피치덱 만들어줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t085">&ldquo;피치덱 만들어줘. 고객 유형 〈…〉, 핵심 오퍼 〈…〉, 사례·수치 〈…〉. 결과는 고객 유형 진단 중심으로&rdquo;</span>
+<button class="copy" data-copy="피치덱 만들어줘. 고객 유형 〈…〉, 핵심 오퍼 〈…〉, 사례·수치 〈…〉. 결과는 고객 유형 진단 중심으로" data-tid="t085">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-cat="09" data-done="1" data-q="녹취가 팔로업 메일이 되는 미팅 노트 정리 미팅 노트 → 후속 액션 미팅 정리해줘 086">
+<div class="card-top"><span class="badge">브랜딩 &amp; PR·세일즈 · 086</span><span class="st st-done">✅ 완성</span></div>
+<h3>녹취가 팔로업 메일이 되는 미팅 노트 정리</h3>
+<p class="desc">상담 녹취 → 요약·할 일·팔로업 메일</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;미팅 정리해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t086">&ldquo;미팅 정리해줘. 〈미팅 녹취·메모(텍스트·전사본)〉 첨부, 참석자·미팅 목적(있으면) 〈…〉. 결과는 결정사항 요약 중심으로&rdquo;</span>
+<button class="copy" data-copy="미팅 정리해줘. 〈미팅 녹취·메모(텍스트·전사본)〉 첨부, 참석자·미팅 목적(있으면) 〈…〉. 결과는 결정사항 요약 중심으로" data-tid="t086">복사</button></div></div>
+
+</article>
+<article class="card" data-gate="1" data-cat="09" data-done="1" data-q="상대의 이득부터 설계하는 제휴 제안 팩 파트너십·제휴 제안 팩 제휴 제안하자 087">
+<div class="card-top"><span class="badge">브랜딩 &amp; PR·세일즈 · 087</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>상대의 이득부터 설계하는 제휴 제안 팩</h3>
+<p class="desc">콜라보 제안서 + 수익 구조 옵션 (실전 협상 기반)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;제휴 제안하자&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t087">&ldquo;제휴 제안하자. 제휴 대상 정보(브랜드·채널·규모) 〈…〉, 우리 자산·목표 〈…〉. 결과는 상호 자산 맵 중심으로&rdquo;</span>
+<button class="copy" data-copy="제휴 제안하자. 제휴 대상 정보(브랜드·채널·규모) 〈…〉, 우리 자산·목표 〈…〉. 결과는 상호 자산 맵 중심으로" data-tid="t087">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="09" data-done="1" data-q="앞광고 원칙으로 만드는 스폰서십 콘텐츠 기획 스폰서십 콘텐츠 기획 협찬 콘텐츠 기획해줘 088">
+<div class="card-top"><span class="badge">브랜딩 &amp; PR·세일즈 · 088</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>앞광고 원칙으로 만드는 스폰서십 콘텐츠 기획</h3>
+<p class="desc">광고주 브리프 → 앞광고 원칙 콘텐츠 기획안 (8단 구조)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;협찬 콘텐츠 기획해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t088">&ldquo;협찬 콘텐츠 기획해줘. 〈광고주 브리프〉 첨부, 채널·포맷 〈…〉, 고지 정책 〈…〉. 결과는 브리프 분석표 중심으로&rdquo;</span>
+<button class="copy" data-copy="협찬 콘텐츠 기획해줘. 〈광고주 브리프〉 첨부, 채널·포맷 〈…〉, 고지 정책 〈…〉. 결과는 브리프 분석표 중심으로" data-tid="t088">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="09" data-done="1" data-q="이슈 유형별 대응 트리, 위기 커뮤니케이션 플랜 위기 커뮤니케이션 플랜 이슈 터졌어 어떡해 089">
+<div class="card-top"><span class="badge">브랜딩 &amp; PR·세일즈 · 089</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>이슈 유형별 대응 트리, 위기 커뮤니케이션 플랜</h3>
+<p class="desc">이슈 유형별 대응 문구 + 의사결정 트리</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;이슈 터졌어 어떡해&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t089">&ldquo;이슈 터졌어 어떡해. 이슈 상황 설명 〈…〉, 사실 관계·타임라인 〈…〉, 현재 확산 상태(채널·규모) 〈…〉. 결과는 이슈 유형·심각도 분류 중심으로&rdquo;</span>
+<button class="copy" data-copy="이슈 터졌어 어떡해. 이슈 상황 설명 〈…〉, 사실 관계·타임라인 〈…〉, 현재 확산 상태(채널·규모) 〈…〉. 결과는 이슈 유형·심각도 분류 중심으로" data-tid="t089">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-gate="1" data-cat="09" data-done="1" data-q="정부지원사업·어워드 지원서 빌더 수상·인증 지원서 빌더 지원사업 서류 써줘 090">
+<div class="card-top"><span class="badge">브랜딩 &amp; PR·세일즈 · 090</span><span class="st st-gate">⏸ 결재</span></div>
+<h3>정부지원사업·어워드 지원서 빌더</h3>
+<p class="desc">정부지원사업·어워드 지원서 구조화 작성</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;지원사업 서류 써줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t090">&ldquo;지원사업 서류 써줘. 〈지원 공고문(평가 기준·배점표 포함)〉 첨부, 회사·제품 정보 〈…〉, 성과 수치·증빙 후보 목록 〈…〉. 결과는 평가 기준 역산 구조표 중심으로&rdquo;</span>
+<button class="copy" data-copy="지원사업 서류 써줘. 〈지원 공고문(평가 기준·배점표 포함)〉 첨부, 회사·제품 정보 〈…〉, 성과 수치·증빙 후보 목록 〈…〉. 결과는 평가 기준 역산 구조표 중심으로" data-tid="t090">복사</button></div></div>
+<div class="card-foot"><span class="st st-gate" title="발행 전 규제·심의 검사를 자동으로 거칩니다">🛡 발행 전 자동 규제검사</span></div>
+</article>
+<article class="card" data-cat="10" data-done="1" data-q="자동화 지도를 그리는 마케팅 업무 진단 마케팅 업무 자동화 진단 뭐부터 자동화하지? 091">
+<div class="card-top"><span class="badge">마케팅 운영 &amp; 생산성 · 091</span><span class="st st-done">✅ 완성</span></div>
+<h3>자동화 지도를 그리는 마케팅 업무 진단</h3>
+<p class="desc">내 업무 리스트 → 자동화 가능 영역·ROI 맵 (교육 1주차)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;뭐부터 자동화하지?&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t091">&ldquo;뭐부터 자동화하지? 사용자 문답 〈…〉, 〈있으면 업무 목록 문서〉 첨부. 결과는 업무 인벤토리표 중심으로&rdquo;</span>
+<button class="copy" data-copy="뭐부터 자동화하지? 사용자 문답 〈…〉, 〈있으면 업무 목록 문서〉 첨부. 결과는 업무 인벤토리표 중심으로" data-tid="t091">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="10" data-done="1" data-q="내 업무를 스킬로 만드는 메타 스킬 나만의 스킬 만들기 (메타 스킬) 스킬 만들어줘 092">
+<div class="card-top"><span class="badge">마케팅 운영 &amp; 생산성 · 092</span><span class="st st-done">✅ 완성</span></div>
+<h3>내 업무를 스킬로 만드는 메타 스킬</h3>
+<p class="desc">자기 업무를 SKILL.md로 만드는 가이드 스킬</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;스킬 만들어줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t092">&ldquo;스킬 만들어줘. 대상 업무 설명(문답으로 수집) 〈…〉, 잘된 결과물 예시 2~3개 〈…〉. 결과는 SKILL.md 완성본(SPEC 14필드) 중심으로&rdquo;</span>
+<button class="copy" data-copy="스킬 만들어줘. 대상 업무 설명(문답으로 수집) 〈…〉, 잘된 결과물 예시 2~3개 〈…〉. 결과는 SKILL.md 완성본(SPEC 14필드) 중심으로" data-tid="t092">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="10" data-done="1" data-q="회의가 태스크로 바뀌는 회의록 위임 자동화 회의록·업무 위임 자동화 회의록 정리해줘 093">
+<div class="card-top"><span class="badge">마케팅 운영 &amp; 생산성 · 093</span><span class="st st-done">✅ 완성</span></div>
+<h3>회의가 태스크로 바뀌는 회의록 위임 자동화</h3>
+<p class="desc">회의 → 요약 → 담당자별 태스크 배분</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;회의록 정리해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t093">&ldquo;회의록 정리해줘. 〈회의 녹취·메모〉 첨부, 참석자·역할 〈…〉, 이전 회의록(미결 추적용 선택) 〈…〉. 결과는 회의 요약(결정·보류·액션 3구획) 중심으로&rdquo;</span>
+<button class="copy" data-copy="회의록 정리해줘. 〈회의 녹취·메모〉 첨부, 참석자·역할 〈…〉, 이전 회의록(미결 추적용 선택) 〈…〉. 결과는 회의 요약(결정·보류·액션 3구획) 중심으로" data-tid="t093">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="10" data-done="1" data-q="수정 지옥을 예방하는 외주 브리프 빌더 외주 브리프 빌더 외주 브리프 만들어줘 094">
+<div class="card-top"><span class="badge">마케팅 운영 &amp; 생산성 · 094</span><span class="st st-done">✅ 완성</span></div>
+<h3>수정 지옥을 예방하는 외주 브리프 빌더</h3>
+<p class="desc">디자인·영상·개발 외주 브리프 표준화</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;외주 브리프 만들어줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t094">&ldquo;외주 브리프 만들어줘. 프로젝트 개요 〈…〉, 예산·일정 〈…〉, 레퍼런스 2~3개 〈…〉. 결과는 표준 외주 브리프 10항목(디자인/영상/개발) 중심으로&rdquo;</span>
+<button class="copy" data-copy="외주 브리프 만들어줘. 프로젝트 개요 〈…〉, 예산·일정 〈…〉, 레퍼런스 2~3개 〈…〉. 결과는 표준 외주 브리프 10항목(디자인/영상/개발) 중심으로" data-tid="t094">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="10" data-done="1" data-q="채널별 배분과 캐시플로, 마케팅 예산 플래너 마케팅 예산 플래너 예산 짜줘 095">
+<div class="card-top"><span class="badge">마케팅 운영 &amp; 생산성 · 095</span><span class="st st-done">✅ 완성</span></div>
+<h3>채널별 배분과 캐시플로, 마케팅 예산 플래너</h3>
+<p class="desc">채널별 예산 배분 + 월별 캐시플로 시트</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;예산 짜줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t095">&ldquo;예산 짜줘. 총 예산 또는 목표 매출 〈…〉, 채널별 과거 성과(있는 만큼) 〈…〉, 기간·시즌 변수 〈…〉. 결과는 채널별 예산 배분안(목표 역산 산식 포함) 중심으로&rdquo;</span>
+<button class="copy" data-copy="예산 짜줘. 총 예산 또는 목표 매출 〈…〉, 채널별 과거 성과(있는 만큼) 〈…〉, 기간·시즌 변수 〈…〉. 결과는 채널별 예산 배분안(목표 역산 산식 포함) 중심으로" data-tid="t095">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="10" data-done="1" data-q="견적 비교와 협상 포인트 도출 경쟁 입찰·견적 비교기 견적 비교해줘 096">
+<div class="card-top"><span class="badge">마케팅 운영 &amp; 생산성 · 096</span><span class="st st-done">✅ 완성</span></div>
+<h3>견적 비교와 협상 포인트 도출</h3>
+<p class="desc">견적서 비교 분석 + 협상 포인트 도출</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;견적 비교해줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t096">&ldquo;견적 비교해줘. 견적서 2개 이상(1개면 항목 검증 모드) 〈…〉, 〈발주 브리프(094 산출물 선택)〉 있으면 첨부, 평가 기준·예산 상한 〈…〉. 결과는 항목 정렬 비교표(VAT 통일) 중심으로&rdquo;</span>
+<button class="copy" data-copy="견적 비교해줘. 견적서 2개 이상(1개면 항목 검증 모드) 〈…〉, 〈발주 브리프(094 산출물 선택)〉 있으면 첨부, 평가 기준·예산 상한 〈…〉. 결과는 항목 정렬 비교표(VAT 통일) 중심으로" data-tid="t096">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="10" data-done="1" data-q="인수인계가 하루면 끝나는 팀 온보딩 문서 팀 온보딩 문서 자동화 인수인계 문서 만들어줘 097">
+<div class="card-top"><span class="badge">마케팅 운영 &amp; 생산성 · 097</span><span class="st st-done">✅ 완성</span></div>
+<h3>인수인계가 하루면 끝나는 팀 온보딩 문서</h3>
+<p class="desc">업무 매뉴얼·인수인계 문서 표준 생성</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;인수인계 문서 만들어줘&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t097">&ldquo;인수인계 문서 만들어줘. 업무 프로세스 보완 문답 〈…〉, 사용 툴·계정 목록 〈…〉. 결과는 업무 매뉴얼 중심으로&rdquo;</span>
+<button class="copy" data-copy="인수인계 문서 만들어줘. 업무 프로세스 보완 문답 〈…〉, 사용 툴·계정 목록 〈…〉. 결과는 업무 매뉴얼 중심으로" data-tid="t097">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="10" data-done="1" data-q="다음 주가 정리되는 주간 회고 &amp; 플래닝 주간 업무 회고 &amp; 플래닝 이번 주 회고하자 098">
+<div class="card-top"><span class="badge">마케팅 운영 &amp; 생산성 · 098</span><span class="st st-done">✅ 완성</span></div>
+<h3>다음 주가 정리되는 주간 회고 &amp; 플래닝</h3>
+<p class="desc">주간 성과 회고 → 다음 주 우선순위 자동 정리</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;이번 주 회고하자&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t098">&ldquo;이번 주 회고하자. 〈logs/build-log.md 주간 기록(자동 조회)〉 첨부, 이번 주 완료·미완료 업무 보완 입력 〈…〉, 주요 지표 〈…〉. 결과는 주간 회고(완료·성과·배움 3구획) 중심으로&rdquo;</span>
+<button class="copy" data-copy="이번 주 회고하자. 〈logs/build-log.md 주간 기록(자동 조회)〉 첨부, 이번 주 완료·미완료 업무 보완 입력 〈…〉, 주요 지표 〈…〉. 결과는 주간 회고(완료·성과·배움 3구획) 중심으로" data-tid="t098">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="10" data-done="1" data-q="발행 전 마지막 관문, 법무 기초 체커 법무 기초 체커 법적으로 문제없어? 099">
+<div class="card-top"><span class="badge">마케팅 운영 &amp; 생산성 · 099</span><span class="st st-done">✅ 완성</span></div>
+<h3>발행 전 마지막 관문, 법무 기초 체커</h3>
+<p class="desc">광고 표시광고법·개인정보 고지 사전 점검</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-base">&ldquo;법적으로 문제없어?&rdquo;</div>
+<div class="say-label say-label2">⭐ 잘 나오는 요청 〈…〉만 채우세요</div>
+<div class="say-row"><span class="say-text say-full" id="t099">&ldquo;법적으로 문제없어? 점검 대상 〈…〉. 결과는 3법 점검표 중심으로&rdquo;</span>
+<button class="copy" data-copy="법적으로 문제없어? 점검 대상 〈…〉. 결과는 3법 점검표 중심으로" data-tid="t099">복사</button></div></div>
+
+</article>
+<article class="card" data-cat="10" data-done="1" data-q="스킬들을 하나의 팀으로 묶는 멀티 에이전트 오케스트레이션 멀티 에이전트 오케스트레이션 os 아키텍처 설명해줘 100">
+<div class="card-top"><span class="badge">마케팅 운영 &amp; 생산성 · 100</span><span class="st st-done">✅ 완성</span></div>
+<h3>스킬들을 하나의 팀으로 묶는 멀티 에이전트 오케스트레이션</h3>
+<p class="desc">스킬들을 하나의 마케팅 OS로 묶는 아키텍처 (책 종착점)</p>
+<div class="say"><div class="say-label">💬 이렇게 말하세요</div>
+<div class="say-row"><span class="say-text" id="t100">&ldquo;OS 아키텍처 설명해줘&rdquo;</span>
+<button class="copy" data-copy="OS 아키텍처 설명해줘" data-tid="t100">복사</button></div></div>
+
+</article>
+</main>
+<div class="empty" id="empty">조건에 맞는 스킬이 없습니다. 검색어를 바꾸거나 필터를 풀어보세요.</div>
+
+<section class="cmd-sec">
+  <h2>체인 15종 한 마디로 여러 스킬이 이어 달립니다</h2>
+  <p class="lead">&ldquo;○○ 돌려줘&rdquo;라고 말하는 순간 여러 스킬이 릴레이로 실행됩니다. 10개 팀마다 대표 체인이 하나씩 있고(+ 교차 체인 5종), 중간 확인 질문에만 답하면 됩니다.</p>
+  <div class="cmd-grid">
+<div class="cmd">
+<div class="cmd-head"><span class="cmd-name">광고애널리틱스 돌려줘</span>
+<button class="copy copy-sm" data-copy="광고애널리틱스 돌려줘">복사</button></div>
+<p class="cmd-desc">광고 주간 리포트→매체 심층 분석(쿠팡/네이버 선택)→ROAS 예산 재배분→새 소재 카피까지 잇는 광고 종합 처방 체인</p>
+<p class="cmd-chain">🔗 045→041(042)→046→043</p>
+<p class="cmd-chain">🗂 W4 분석·최적화</p>
+</div>
+<div class="cmd">
+<div class="cmd-head"><span class="cmd-name">리텐션캠페인 돌려줘</span>
+<button class="copy copy-sm" data-copy="리텐션캠페인 돌려줘">복사</button></div>
+<p class="cmd-desc">RFM 세그먼트→고객 여정 맵→이메일 시퀀스→윈백 캠페인으로 재구매 메시지 체계를 완성하는 리텐션 체인</p>
+<p class="cmd-chain">🔗 065→073→074→077</p>
+<p class="cmd-chain">🗂 W5 관계·대응</p>
+</div>
+<div class="cmd">
+<div class="cmd-head"><span class="cmd-name">마케터OS셋업 돌려줘</span>
+<button class="copy copy-sm" data-copy="마케터OS셋업 돌려줘">복사</button></div>
+<p class="cmd-desc">첫 실행 온보딩 업무 진단과 브랜드 질문서로 brand/profile.md를 만들고, 나만의 스킬·오케스트레이션 이해까지 끝내는 셋업 체인</p>
+<p class="cmd-chain">🔗 091→092→100</p>
+<p class="cmd-chain">🗂 W2 구축·런칭</p>
+</div>
+<div class="cmd">
+<div class="cmd-head"><span class="cmd-name">세일즈파이프라인 돌려줘</span>
+<button class="copy copy-sm" data-copy="세일즈파이프라인 돌려줘">복사</button></div>
+<p class="cmd-desc">미팅 노트 정리→맞춤 제안서→세일즈 덱→제휴 제안 팩으로 이어지는 B2B 수주 파이프라인 체인</p>
+<p class="cmd-chain">🔗 086→084→085→087</p>
+<p class="cmd-chain">🗂 W5 관계·대응</p>
+</div>
+<div class="cmd">
+<div class="cmd-head"><span class="cmd-name">스토어셋업 돌려줘</span>
+<button class="copy copy-sm" data-copy="스토어셋업 돌려줘">복사</button></div>
+<p class="cmd-desc">상품명 최적화→상세페이지 24섹션→Figma 디자인 자동화→배송·CS 정책까지 커머스 개점 준비를 완주하는 체인</p>
+<p class="cmd-chain">🔗 053→051→052→058</p>
+<p class="cmd-chain">🗂 W2 구축·런칭</p>
+</div>
+<div class="cmd">
+<div class="cmd-head"><span class="cmd-name">시장리서치 돌려줘</span>
+<button class="copy copy-sm" data-copy="시장리서치 돌려줘">복사</button></div>
+<p class="cmd-desc">키워드 수요→경쟁사→리뷰→가격 포지셔닝을 한 흐름으로 훑어 우리 시장의 현재 좌표를 잡는 진단 체인</p>
+<p class="cmd-chain">🔗 001→002→006→009</p>
+<p class="cmd-chain">🗂 W1 진단·리서치</p>
+</div>
+<div class="cmd">
+<div class="cmd-head"><span class="cmd-name">신제품런칭 돌려줘</span>
+<button class="copy copy-sm" data-copy="신제품런칭 돌려줘">복사</button></div>
+<p class="cmd-desc">컨셉 발상→USP 정의→가격 전략→GTM 플랜까지 신제품 출시 준비를 게이트 걸고 완주하는 런칭 체인</p>
+<p class="cmd-chain">🔗 011→012→017→018</p>
+<p class="cmd-chain">🗂 W2 구축·런칭</p>
+</div>
+<div class="cmd">
+<div class="cmd-head"><span class="cmd-name">월간리포트 돌려줘</span>
+<button class="copy copy-sm" data-copy="월간리포트 돌려줘">복사</button></div>
+<p class="cmd-desc">데이터 클리닝→판매 분석→월간 리포트→KPI 트리 점검까지 한 달을 닫고 build-log 월간 요약을 갱신하는 정례 체인</p>
+<p class="cmd-chain">🔗 068→061→067→066</p>
+<p class="cmd-chain">🗂 W4 분석·최적화</p>
+</div>
+<div class="cmd">
+<div class="cmd-head"><span class="cmd-name">소셜그로스 돌려줘</span>
+<button class="copy copy-sm" data-copy="소셜그로스 돌려줘">복사</button></div>
+<p class="cmd-desc">채널 성장 진단으로 병목을 찾고 인스타 피드 기획→바이럴 훅→이벤트 설계까지 처방하는 채널 성장 체인</p>
+<p class="cmd-chain">🔗 039→031→040→035</p>
+<p class="cmd-chain">🗂 W3 제작·캠페인</p>
+</div>
+<div class="cmd">
+<div class="cmd-head"><span class="cmd-name">콘텐츠프로덕션 돌려줘</span>
+<button class="copy copy-sm" data-copy="콘텐츠프로덕션 돌려줘">복사</button></div>
+<p class="cmd-desc">캘린더→원본 제작(블로그 또는 유튜브 선택)→OSMU 멀티채널 변환→성과 회고까지 콘텐츠 생산 라인을 한 바퀴 돌리는 체인</p>
+<p class="cmd-chain">🔗 021→(022|024)→027→030</p>
+<p class="cmd-chain">🗂 W3 제작·캠페인</p>
+</div>
+<p class="cmd-desc">트렌드 스캐닝→유튜브 스크립트→썸네일·제목 A/B→쇼츠 대본 팩까지 유튜브 채널 제작 라인을 한 바퀴 돌리는 체인</p>
+<p class="cmd-chain">🔗 005→024→025→026</p>
+<p class="cmd-chain">🗂 W3 제작·캠페인</p>
+</div>
+<p class="cmd-desc">소셜 리스닝으로 이슈 파악→위기 대응 플랜→채널 응대(댓글·DM)와 공식 입장문(보도자료)까지 잇는 이슈 대응 체인</p>
+<p class="cmd-chain">🔗 038→089→(032∥083)</p>
+<p class="cmd-chain">🗂 W5 관계·대응</p>
+</div>
+<p class="cmd-desc">리뷰 대량 마이닝→VOC 분류→개선 백로그 RICE 우선순위→리뷰 답변 운영까지 고객의 소리를 개선으로 잇는 체인</p>
+<p class="cmd-chain">🔗 006→078→020→054</p>
+<p class="cmd-chain">🗂 W1 진단·리서치</p>
+</div>
+<p class="cmd-desc">인플루언서 발굴·진성도 평가→협업 브리프·계약→UGC 수집·권리 확보→멀티채널 재활용까지 협업 캠페인 전 과정 체인</p>
+<p class="cmd-chain">🔗 033→034→037→027</p>
+<p class="cmd-chain">🗂 W3 제작·캠페인</p>
+</div>
+<p class="cmd-desc">브랜드 스토리→가이드라인 문서화→타깃 페르소나→USP 가치제안까지 브랜드의 기준 문서 4종을 세우는 체인</p>
+<p class="cmd-chain">🔗 081→082→008→012</p>
+<p class="cmd-chain">🗂 W2 구축·런칭</p>
+</div>
+  </div>
+</section>
+
+<footer>
+  <p><b>Skills 100 MAP</b> · 이 문서는 오프라인에서도 열립니다 · 🛡 표시 스킬은 발행 전 규제검사를 자동으로 거칩니다</p>
+</footer>
+
+</div>
+<div id="toast">복사됐습니다 붙여넣어 보세요!</div>
+
+<script>
+(function() {
+  var state = { cat: "all", gate: false, q: "" };
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".card"));
+  var resultLine = document.getElementById("resultLine");
+  var empty = document.getElementById("empty");
+
+  function apply() {
+    var n = 0;
+    cards.forEach(function(c) {
+      var ok = (state.cat === "all" || c.dataset.cat === state.cat)
+        && (!state.gate || c.dataset.gate === "1")
+        && (!state.q || c.dataset.q.indexOf(state.q) !== -1);
+      c.classList.toggle("hide", !ok);
+      if (ok) n++;
+    });
+    empty.classList.toggle("show", n === 0);
+    var parts = [];
+    if (state.cat !== "all") {
+      var t = document.querySelector('.tab[data-cat="' + state.cat + '"]');
+      parts.push(t ? t.textContent.trim() : "");
+    }
+    if (state.gate) parts.push("결재받는 것만");
+    if (state.q) parts.push('"' + state.q + '" 검색');
+    resultLine.textContent = n + "개 스킬" + (parts.length ? " (" + parts.join(" · ") + ")" : " 전체를 보고 있습니다");
+  }
+
+  document.querySelectorAll(".tab").forEach(function(t) {
+    t.addEventListener("click", function() {
+      document.querySelectorAll(".tab").forEach(function(x) { x.classList.remove("active"); });
+      t.classList.add("active");
+      state.cat = t.dataset.cat;
+      apply();
+    });
+  });
+  document.getElementById("gateOnly").addEventListener("change", function(ev) {
+    state.gate = ev.target.checked; apply();
+  });
+  var deb;
+  document.getElementById("search").addEventListener("input", function(ev) {
+    clearTimeout(deb);
+    deb = setTimeout(function() { state.q = ev.target.value.trim().toLowerCase(); apply(); }, 120);
+  });
+
+  /* ---- 복사 (clipboard + 폴백) ---- */
+  var toast = document.getElementById("toast"), toastT;
+  function showToast() {
+    toast.classList.add("show");
+    clearTimeout(toastT);
+    toastT = setTimeout(function() { toast.classList.remove("show"); }, 1600);
+  }
+  function flash(btn) {
+    var old = btn.textContent;
+    btn.textContent = "복사됨 ✓"; btn.classList.add("ok");
+    setTimeout(function() { btn.textContent = old; btn.classList.remove("ok"); }, 1400);
+    showToast();
+  }
+  function fallbackCopy(text, btn) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) {}
+    document.body.removeChild(ta);
+    if (ok) { flash(btn); return; }
+    // 최종 폴백: 카드의 트리거 텍스트를 선택 상태로 만들어 준다
+    var tid = btn.dataset.tid;
+    var el = tid ? document.getElementById(tid) : null;
+    if (el && window.getSelection) {
+      var r = document.createRange();
+      r.selectNodeContents(el);
+      var sel = window.getSelection();
+      sel.removeAllRanges(); sel.addRange(r);
+      toast.textContent = "자동 복사가 막혔어요 선택된 문장을 ⌘C로 복사하세요";
+      showToast();
+      setTimeout(function() { toast.textContent = "복사됐습니다 붙여넣어 보세요!"; }, 3000);
+    }
+  }
+  document.addEventListener("click", function(ev) {
+    var btn = ev.target.closest(".copy");
+    if (!btn) return;
+    var text = btn.dataset.copy;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() { flash(btn); },
+        function() { fallbackCopy(text, btn); });
+    } else {
+      fallbackCopy(text, btn);
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "marketplaceVersion": "1",
+  "name": "marketor-os",
+  "description": "마케팅 OS — 우리 회사에 맞는 사람+AI 마케팅팀을 구축하는 오픈 플러그인 마켓플레이스.",
+  "plugins": [
+    {
+      "name": "marketor-os",
+      "description": "마케팅 OS — AI 에이전트 71 + 방법론 100스킬로 회사 맞춤 마케팅팀을 구축하는 오픈 시스템.",
+      "category": "productivity",
+      "version": "0.1.0",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/steveaimkt/marketor-os.git",
+        "path": ".",
+        "ref": "main"
+      },
+      "author": "사용자 ",
+      "homepage": "https://github.com/steveaimkt/marketor-os"
+    }
+  ]
+}

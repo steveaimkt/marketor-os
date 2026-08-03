@@ -1,0 +1,15 @@
+{
+  "name": "marketor-os",
+  "description": "마케팅 OS — AI 에이전트 71 + 방법론 100스킬로 우리 회사에 맞는 마케팅팀을 구축하는 오픈 시스템. 조직 진단 → 사람+AI 하이브리드 팀 구성. (MIT)",
+  "version": "0.1.0",
+  "author": {
+    "name": "사용자 ",
+    "email": "대표 메일"
+  },
+  "homepage": "https://github.com/steveaimkt/marketor-os",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/steveaimkt/marketor-os.git"
+  },
+  "license": "MIT"
+}

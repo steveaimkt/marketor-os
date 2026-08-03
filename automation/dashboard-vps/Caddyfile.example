@@ -1,0 +1,31 @@
+# Caddy 로 HTTPS 씌우기 (인증서 자동 발급·갱신)
+#
+#   1. VPS 에 Caddy 설치
+#   2. 아래를 /etc/caddy/Caddyfile 로 복사하고 도메인을 바꾼다
+#   3. systemctl reload caddy
+#   4. .env 에 아래 두 줄을 맞춘다
+#        DASHBOARD_ALLOWED_HOSTS=dash.example.com
+#        DASHBOARD_SECURE_COOKIE=true
+#   5. systemctl restart marketing-os-dashboard
+#
+# ⚠️ 대시보드는 명령을 실행하는 도구다. 비밀번호(DASHBOARD_PASSWORD_HASH) 없이
+#    외부에 열면 서버가 아예 뜨지 않는다. 그 안전장치를 우회하지 말 것.
+
+dash.example.com {
+	reverse_proxy 127.0.0.1:3737 {
+		header_up X-Forwarded-Proto {scheme}
+	}
+
+	# 접속 기록 (누가 언제 들어왔는지)
+	log {
+		output file /var/log/caddy/dashboard.log
+		format console
+	}
+
+	# 브라우저에 최소한의 방어선
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "same-origin"
+	}
+}

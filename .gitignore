@@ -1,0 +1,121 @@
+# 환경 변수
+.env
+.env.local
+*.env
+.env.bak*
+
+# 백업 파일 (.mcp.json.bak 등 평문 키가 남을 수 있음)
+*.bak
+.mcp.json.bak*
+
+# 인증 파일
+*.json.key
+*.key
+*.pem
+private_*.key
+service-account*.json
+**/credentials/
+mcp-server/oauth_credentials.json
+mcp-server/token.json
+
+# 산출물 (감사용으로 로컬 유지, 커밋은 하지 않음)
+outputs/
+logs/
+**/.DS_Store
+
+# 임시 파일
+tmp/
+*.tmp
+*.log
+
+# Node / Python (Remotion 등에서 사용)
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# 추가 민감·개인 파일 (2026-07-16 안정화)
+mcp-server/ga4_user_token.json
+.claude/settings.local.json
+hyperframes/renders/
+
+# ===== VPS git 대비 (2026-07-19) =====
+# 심링크 (맥 로컬 전용 · VPS clone 시 맥 경로라 깨짐 → 제외)
+/강의
+/유튜브-이미지제작
+/운영전략
+/msk
+# curriculum = 교육 자산 (2026-07-23 배포/강의 분리 · 밖으로 이동 후 심링크). 배포판은 mcp-setup/만 포함
+/curriculum
+# gbrain 로컬 브레인·볼트 (맥 전용·파생 복제)
+**/brain.pglite/
+**/.gbrain/
+gbrain-vault/
+# 실제 키 참조 .mcp.json (VPS는 vps-bot/.mcp.json 사용) — 필요시 주석 해제
+# /.mcp.json
+
+# ===== 배포 경계 (2026-07-23 배포/로컬 분리) =====
+# 배포판(남의 회사)에 가면 안 되는 것 · 로컬엔 유지. 배포 코어 = agents·skills·commands·mcp-setup·brand·commands
+# 이 회사 전용 (내부 전략·봇 유출 방지)
+/strategy
+/vps-bot
+# 강의·영상 자산 (강의 중단 2026-07-23) · 단 대시보드는 배포 코어 (2026-07-30)
+/tools/*
+!/tools/dashboard/
+/hyperframes
+# 각 회사가 자체 구축/설치 (mcp-setup/ 가이드로 대체)
+/discord-bot
+# automation은 로컬 전용(launchd plist 등) · 단 VPS 이식 자산 2개는 추적
+/automation/*
+!/automation/vps-이관-링크드인쓰레드.md
+!/automation/dashboard-vps/
+!/automation/dashboard-vps/**
+!/automation/linkedin-morning.sh
+!/automation/claude-watch
+/automation/claude-watch/*
+!/automation/claude-watch/linkedin.sh
+/sample-data
+# 샘플 브랜드(A 브랜드) 실습 자산은 배포한다 · 책 "브랜드 정보 없어도 100% 체험" 약속의 실물
+!/sample-data/
+!/sample-data/README.md
+!/sample-data/profile-sample.md
+!/sample-data/A브랜드-2026-06-매출.xlsx
+!/sample-data/naver-ads-sample-report.csv
+.gstack/
+
+# 세컨드브레인 볼트 백업 · 2026-08-04 사고
+# 2.4MB tar.gz 안에 운영플랜·강의피드백·채널성장로그가 통째로 들어 있었고
+# 배포 감사가 텍스트만 훑어서 공개 저장소에 그대로 올라갔다. 압축은 아예 추적하지 않는다.
+gbrain-vault-backup-*.tar.gz
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite
+*.db
+
+# MCP 자체 호스팅 서버 자격증명 · 2026-08-04 (mcp-server → mcp-servers/google-sheets 이동)
+# ⚠️ 경로가 아니라 파일명으로 막는다. 폴더를 옮겨도 따라온다.
+**/oauth_credentials.json
+**/token.json
+**/ga4_user_token.json
+**/*_token.json
+**/service-account*.json
+mcp-servers/*/node_modules/
+
+# 제3자 저작물·개인 화면 녹화 · 2026-08-04
+# 남의 전자책(폰트·이미지 31MB)과 개인 화면 녹화가 정본에 추적되고 있었다.
+# 배포판은 build-dist.sh 가 이미 빼고 있었지만, 정본 .git 이 273MB 로 부풀었다.
+# 디스크에는 남기고 추적만 끊는다.
+참고자료/
+
+# 팀 로그는 무시하되 형식 템플릿은 배포에 넣는다 (2026-08-04)
+!logs/team-run/_템플릿.md

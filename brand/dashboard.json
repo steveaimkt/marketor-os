@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "owner": "",
+  "areas": [
+    {
+      "icon": "cap",
+      "name": "AI 교육",
+      "rows": [],
+      "status": ""
+    },
+    {
+      "icon": "case",
+      "name": "컨설팅",
+      "rows": [],
+      "status": ""
+    },
+    {
+      "icon": "mega",
+      "name": "매체 운영",
+      "rows": [],
+      "status": ""
+    }
+  ],
+  "channels": [
+    {
+      "key": "newsletter"
+    }
+  ],
+  "publishBoard": {},
+  "bookingPages": [
+    {
+      "len": "60분",
+      "url": "https://calendar.app.google/noPd472VPg5G1zrw7",
+      "name": "기업 교육 상담",
+      "open": ""
+    },
+    {
+      "len": "30분",
+      "url": "",
+      "name": "컨설팅 문의",
+      "open": ""
+    },
+    {
+      "len": "15분",
+      "url": "",
+      "name": "짧은 통화",
+      "open": ""
+    }
+  ],
+  "bookingRules": {
+    "hours": "",
+    "exclude": "",
+    "buffer": "",
+    "maxPerDay": "",
+    "notice": ""
+  },
+  "runners": [
+    {
+      "key": "local",
+      "kind": "local",
+      "name": "내 맥",
+      "enabled": true
+    },
+    {
+      "key": "vps",
+      "host": "",
+      "kind": "ssh",
+      "name": "VPS 봇",
+      "note": "밤과 주말 업무 · 24시간 대기",
+      "path": "",
+      "port": 22,
+      "user": "",
+      "enabled": false
+    },
+    {
+      "key": "macmini",
+      "host": "",
+      "kind": "ssh",
+      "name": "맥미니 봇",
+      "note": "무거운 영상 작업",
+      "path": "",
+      "port": 22,
+      "user": "",
+      "enabled": false
+    }
+  ],
+  "decisionsHidden": [],
+  "pillars": [],
+  "moneyEntries": [],
+  "weekGoals": [],
+  "deptWork": {},
+  "deptOff": [],
+  "skillMap": {},
+  "teamRules": {},
+  "flows": [],
+  "presets": [],
+  "skillsOff": [],
+  "setup": {
+    "done": false,
+    "answers": {},
+    "savedAt": null
+  },
+  "savedAt": 1785787315242,
+  "deptTeams": [],
+  "deptRoster": {}
+}
